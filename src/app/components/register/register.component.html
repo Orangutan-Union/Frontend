@@ -1,0 +1,22 @@
+<p>register works!</p>
+
+<div>
+    <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" #userName="ngModel" [(ngModel)]="user.username" required>
+    
+        <label for="displayName">Display Name:</label>
+        <input type="text" id="displayName" name="displayName" #displayName="ngModel" [(ngModel)]="user.displayName" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" #email="ngModel" [(ngModel)]="user.email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" #password="ngModel" [(ngModel)]="user.password" required>
+
+        <label for="verifyPassword">Password:</label>
+        <input type="password" id="verifyPassword" name="verifyPassword" #verifyPassword="ngModel" [(ngModel)]="user.verifyPassword" required>
+    
+        <button type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid || user.password !== user.verifyPassword">Create</button>
+      </form>
+</div>
