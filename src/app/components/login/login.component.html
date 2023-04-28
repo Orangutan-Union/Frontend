@@ -1,0 +1,14 @@
+<p>login works!</p>
+
+<div>
+    <form (ngSubmit)="submitLogin()">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" #userName="ngModel" [(ngModel)]="login.username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" #password="ngModel" [(ngModel)]="login.password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+<button routerLink="/register">Create Account</button>
