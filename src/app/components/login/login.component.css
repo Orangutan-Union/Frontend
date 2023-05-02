@@ -1,0 +1,43 @@
+.logo{
+    margin-top: 10px;
+    width: 250px;
+}
+
+.OuterPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.InnerPage{
+    background-color: white;
+    height: 550px;
+    width: 450px;
+    justify-content: space-between;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.InnerPage > span > input{
+    width: 100%;
+    height: 35px;
+}
+
+.InnerPage > span{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+button{
+    width: 25%;
+}

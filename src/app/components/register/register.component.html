@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <p>register works!</p>
 
 <div>
@@ -20,3 +21,32 @@
         <button type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid || user.password !== user.verifyPassword">Create</button>
       </form>
 </div>
+=======
+  <div class="OuterPage" >
+      <form class="InnerPage" (ngSubmit)="onSubmit()" #myForm="ngForm">
+          <img class="logo" src="../../../assets/Udklip.PNG" alt="">
+        <span>
+          <!-- <label for="username">Username:</label> -->
+          <input placeholder="Username" type="text" id="username" name="username" #userName="ngModel" [(ngModel)]="user.username" required>
+        </span>
+        <span>
+          <!-- <label for="displayName">Display Name:</label> -->
+          <input placeholder="Display Name" type="text" id="displayName" name="displayName" #displayName="ngModel" [(ngModel)]="user.displayName" required>          
+        </span>
+        <span>
+          <!-- <label for="email">Email:</label> -->
+          <input placeholder="Email" type="email" id="email" name="email" #email="ngModel" [(ngModel)]="user.email" required>
+        </span>
+        <span>
+          <!-- <label for="password">Password:</label> -->
+          <input placeholder="Password" type="password" id="password" name="password" #password="ngModel" [(ngModel)]="user.password" required>
+        </span>
+        <span>
+          <!-- <label for="verifyPassword">Confirm Password:</label> -->
+          <input placeholder="Confirm Password" type="password" id="verifyPassword" name="verifyPassword" #verifyPassword="ngModel" [(ngModel)]="user.verifyPassword" required>
+        </span>
+          <button type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid || user.password !== user.verifyPassword">Create</button>
+          <a routerLink="/login">already have an account? <u>click here</u></a>
+        </form>
+  </div>
+>>>>>>> Stashed changes
