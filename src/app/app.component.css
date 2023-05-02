@@ -1,5 +1,5 @@
 .TopHeader{
-    background-image: linear-gradient( rgb(31, 31, 31), rgb(44, 44, 44));
+    /* background-image: linear-gradient( rgb(31, 31, 31), rgb(44, 44, 44)); */
     justify-content: space-around;
     height: 15vh;
     align-items: center;
@@ -16,17 +16,17 @@
 }
 
 .CompanyName{
-    background-color: rgb(183, 180, 180);
+    background: teal;
     border-radius: 5%;
     transform: rotate(10deg);
-    
+    outline: white 1px solid;
 }
 .CompanyName h1{
     color: whitesmoke;
     font-size: 5vmin;
     width: 15vmin;
     text-align: center;
-    
+    margin-top: 13px;
     transform: rotate(-20deg);
 }
 .CotainerSearch{
