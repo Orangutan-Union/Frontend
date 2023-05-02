@@ -1,0 +1,53 @@
+.TopHeader{
+    /* background-image: linear-gradient( rgb(31, 31, 31), rgb(44, 44, 44)); */
+    justify-content: space-around;
+    height: 15vh;
+    align-items: center;
+    display: flex;
+}
+
+
+.ProfilImg{
+    width: 12vmin;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: 50% center;
+}
+
+.CompanyName{
+    /* background: teal; */
+    border-radius: 5%;
+    transform: rotate(10deg);
+    outline: white 1px solid;
+}
+.CompanyName h1{
+    color: whitesmoke;
+    font-size: 5vmin;
+    width: 15vmin;
+    text-align: center;
+    margin-top: 13px;
+    transform: rotate(-20deg);
+}
+.CotainerSearch{
+    box-shadow: 5px 5px 5px #535151;
+    position: relative;
+    height: 2vmax;
+    background-color: white;
+    border-radius: 6px;
+}
+.CotainerSearch input{
+    position: relative;
+    height: 100%;
+    width: 50vmin;
+    padding: 0 15px;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+}
+
+.divider{
+    width: 90vmax;
+    border: solid rgba(21, 20, 20, 0.8) 1px;
+    margin:5px auto;;
+}
