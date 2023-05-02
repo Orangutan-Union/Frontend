@@ -1,32 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<p>register works!</p>
 
-<div>
-    <form (ngSubmit)="onSubmit()" #myForm="ngForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" #userName="ngModel" [(ngModel)]="user.username" required>
-    
-        <label for="displayName">Display Name:</label>
-        <input type="text" id="displayName" name="displayName" #displayName="ngModel" [(ngModel)]="user.displayName" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" #email="ngModel" [(ngModel)]="user.email" required>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" #password="ngModel" [(ngModel)]="user.password" required>
-
-        <label for="verifyPassword">Password:</label>
-        <input type="password" id="verifyPassword" name="verifyPassword" #verifyPassword="ngModel" [(ngModel)]="user.verifyPassword" required>
-    
-        <button type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid || user.password !== user.verifyPassword">Create</button>
-      </form>
-</div>
-=======
-  <div class="OuterPage" >
-=======
   <div class="OuterPage">
->>>>>>> 13ad8d25cadad3677971582b01f364df5e704f7c
       <form class="InnerPage" (ngSubmit)="onSubmit()" #myForm="ngForm">
           <img class="logo" src="../../../assets/Udklip.PNG" alt="">
         <span>
@@ -52,9 +25,4 @@
           <button type="submit" mat-raised-button color="primary" [disabled]="myForm.invalid || user.password !== user.verifyPassword">Create</button>
           <a routerLink="/login">already have an account? <u>click here</u></a>
         </form>
-<<<<<<< HEAD
-  </div>
->>>>>>> Stashed changes
-=======
-  </div>
->>>>>>> 13ad8d25cadad3677971582b01f364df5e704f7c
+
