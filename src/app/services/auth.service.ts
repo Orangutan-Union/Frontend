@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/loginrequest';
 import { RegisterRequest } from '../models/registerrequest';
+import { User } from '../models/user';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -26,5 +27,13 @@ export class AuthService {
 
   login(login: LoginRequest): Observable<LoginRequest>{
     return this.http.post<LoginRequest>(this.baseApiUrl + 'users/login', login, httpOptions);
+  }
+
+  uploadImage(id: number, formData: FormData){
+    return this.http.put(this.baseApiUrl + 'users/' + id + '/uploadimage', formData);
+  }
+
+  getUserById(id: number): Observable<User>{
+    return this.http.get<User>(this.baseApiUrl + 'users/' + id);
   }
 }
