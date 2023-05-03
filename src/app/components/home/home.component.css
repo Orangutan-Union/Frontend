@@ -16,6 +16,7 @@
 .LogoImg{
     width: 6vw;
     height: 6vh;
+    cursor: pointer;
 } 
 
 .TopSeachBar{
@@ -33,6 +34,9 @@
     object-position: center;
 }
 
+.feed{
+    height: 100%;
+}
 .feed{
     height: 100%;
 }

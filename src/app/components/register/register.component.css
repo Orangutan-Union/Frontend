@@ -1,6 +1,6 @@
 .logo{
+    margin-top: 10px;
     width: 250px;
-    margin: 0px 0px 15px 0px;
 }
 
 .OuterPage{
@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    
 }
 
 .InnerPage{
