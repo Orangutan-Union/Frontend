@@ -8,5 +8,14 @@
     <div class="divider"></div>
 
     <div class="feed">
-        
+        <span>
+            <input id="file" type="file" (change)="fileChange($any($event).target.files)">
+          </span>
+          <div>
+            <button (click)="onUpload()">Upload</button>
+          </div>
+          <div>
+            <h1>User Profile pic:</h1>
+            <img src="data:image/png;base64,{{user.picture.imageData}}"/>
+          </div>
     </div>
