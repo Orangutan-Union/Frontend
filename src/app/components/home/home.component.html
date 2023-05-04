@@ -1,21 +1,39 @@
-   <div class="homeFeed">
-        <img class="LogoImg" routerLink="/login" src="../../../assets/Udklip.PNG" alt="">
-        <div class="ContainerSearch">
-            <input class="TopSeachBar" type="text" placeholder="Search..">
-        </div>
-        <img class="ProfilImg" src="data:image/png;base64,{{user.picture.imageData}}" alt="">
-    </div>
-    <div class="divider"></div>
+<div class="homeFeed">
+  <img class="LogoImg" routerLink="/login" src="../../../assets/Udklip.PNG" alt="">
+  <div class="ContainerSearch">
+    <input class="TopSeachBar" type="text" placeholder="Search..">
+  </div>
+  <img class="ProfilImg" src="data:image/png;base64,{{user.picture.imageData}}" alt="">
+</div>
+<div class="divider"></div>
 
-    <div class="feed">
-        <span>
-            <input id="file" type="file" (change)="fileChange($any($event).target.files)">
-          </span>
-          <div>
-            <button (click)="onUpload()">Upload</button>
-          </div>
-          <div>
-            <h1>User Profile pic:</h1>
-            <img src="data:image/png;base64,{{user.picture.imageData}}"/>
-          </div>
-    </div>
+<div class="feed">
+  <span>
+    <input id="file" type="file" (change)="fileChange($any($event).target.files)">
+  </span>
+  <div>
+    <button (click)="onUpload()">Upload</button>
+  </div>
+  <div>
+    <h1>User Profile pic:</h1>
+    <img src="data:image/png;base64,{{user.picture.imageData}}" />
+  </div>
+
+  <div>
+    <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+      <div>
+        <label for="displayName">Display Name: </label>
+        <input type="text" id="displayName" name="displayName" #displayName="ngModel" [(ngModel)]="user.displayName"
+          required>
+      </div>
+      <div>
+      <label for="email">Email: </label>
+        <input type="text" id="email" name="email" #email="ngModel" [(ngModel)]="user.email"
+          required>
+      </div>
+      <div>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
