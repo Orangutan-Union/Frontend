@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/loginrequest';
 import { RegisterRequest } from '../models/registerrequest';
 import { User } from '../models/user';
+import { ChangePassword } from '../models/changepassword';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -39,5 +40,9 @@ export class AuthService {
 
   updateUser(user: User): Observable<User>{
     return this.http.put<User>(this.baseApiUrl + 'users/update/' + user.userId, user);
+  }
+
+  changePassword(password: ChangePassword): Observable<boolean>{
+    return this.http.put<boolean>(this.baseApiUrl + 'users/changepassword', password);
   }
 }

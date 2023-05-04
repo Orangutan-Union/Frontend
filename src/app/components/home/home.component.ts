@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ChangePassword } from 'src/app/models/changepassword';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
@@ -12,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-
+  tt: ChangePassword = new ChangePassword;
   user: User = new User;
   userId: number = 0;
   formData = new FormData();
@@ -52,5 +53,10 @@ export class HomeComponent implements OnInit {
 
   onSubmit(): void{
     this.authService.updateUser(this.user).subscribe();
+  }
+
+  changePassword(): void{
+    this.tt.userId = Number(localStorage.getItem('userid'));
+    this.authService.changePassword(this.tt).subscribe();
   }
 }
