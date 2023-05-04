@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   user: User = new User;
   userId: number = 0;
   formData = new FormData();
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private route: Router) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -31,7 +32,12 @@ export class HomeComponent implements OnInit {
 
   onUpload(){
     console.log("In Upload method");
-    this.authService.uploadImage(Number(localStorage.getItem('userid')), this.formData).subscribe();
+    this.authService.uploadImage(Number(localStorage.getItem('userid')), this.formData).subscribe(() => {
+      this.getUser();
+      this.formData.delete('file')
+      this.formData.delete('filename')
+      this.route.navigate(['/home'])
+    });
   }
 
   getUser(): void{
@@ -42,5 +48,9 @@ export class HomeComponent implements OnInit {
         console.log(this.user);
       })
     });
+  }
+
+  onSubmit(): void{
+    this.authService.updateUser(this.user).subscribe();
   }
 }
