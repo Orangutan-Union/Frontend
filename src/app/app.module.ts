@@ -9,7 +9,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
-import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component';
+import { ProfilComponent } from './components/profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { ChangeEmailDisplaynameComponent } from './components/change-email-displ
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    ChangeEmailDisplaynameComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
