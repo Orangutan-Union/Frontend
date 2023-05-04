@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { ProfilComponent } from './components/profil/profil.component';
+import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProfilComponent } from './components/profil/profil.component';
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    ProfilComponent
+    ProfilComponent,
+    ChangeEmailDisplaynameComponent
   ],
   imports: [
     BrowserModule,
