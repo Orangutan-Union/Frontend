@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfilComponent } from './components/profil/profil.component';
+import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'profil', component: ProfilComponent },
+  { path: 'changeDisplay', component: ChangeEmailDisplaynameComponent},
 ];
 
 @NgModule({

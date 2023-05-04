@@ -1,11 +1,16 @@
-<div class="homeFeed">
-  <img class="LogoImg" routerLink="/login" src="../../../assets/Udklip.PNG" alt="">
-  <div class="ContainerSearch">
-    <input class="TopSeachBar" type="text" placeholder="Search..">
+<div style="position: sticky; top:0px; background-color: whitesmoke;">
+  <div class="homeFeedHeader" style="background-color: whitesmoke;">
+    <img class="LogoImg" routerLink="/login" src="../../../assets/Udklip.PNG" alt="">
+    <div class="ContainerSearch">
+      <input class="TopSeachBar" type="text" placeholder="Search..">
+    </div>
+      <span class="settingsProfil">
+        <img class="ProfilImg" routerLink="/profil" src="data:image/png;base64,{{user.picture.imageData}}" alt="">
+        <mat-icon style="margin-left: 15px;">settings</mat-icon>
+      </span>
   </div>
-  <img class="ProfilImg" src="data:image/png;base64,{{user.picture.imageData}}" alt="">
+  <div class="divider"></div>
 </div>
-<div class="divider"></div>
 
 <div class="feed">
   <span>
@@ -14,12 +19,13 @@
   <div>
     <button (click)="onUpload()">Upload</button>
   </div>
-  <div>
+  <div >
     <h1>User Profile pic:</h1>
-    <img src="data:image/png;base64,{{user.picture.imageData}}" />
+    <img  style="width: 35vmin;" src="data:image/png;base64,{{user.picture.imageData}}" />
+    <H1 style="font-weight: bolder; font-size: 2rem; height: 5rem;">Casper er du en myre!? eller er du en støvle!?</H1>
   </div>
 
-  <div>
+  <div style="height: 100%;">
     <form (ngSubmit)="onSubmit()" #myForm="ngForm">
       <div>
         <label for="displayName">Display Name: </label>
