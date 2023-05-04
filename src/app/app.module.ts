@@ -9,13 +9,15 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
+import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ChangeEmailDisplaynameComponent,
   ],
   imports: [
     BrowserModule,
