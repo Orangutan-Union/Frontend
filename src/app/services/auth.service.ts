@@ -48,8 +48,12 @@ export class AuthService {
     return this.http.put<boolean>(this.baseApiUrl + 'users/changepassword', password);
   }
 
+
+  getToken(){
+    return localStorage.getItem('jwt');
+  }
+
   isLoggedIn(): boolean{
-    console.log("ISLOGGEDIN METHOD FROM AUTH SERVICE CALLED");
     return !!localStorage.getItem("jwt");
   }
 
