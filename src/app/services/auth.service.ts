@@ -6,6 +6,7 @@ import { LoginRequest } from '../models/loginrequest';
 import { RegisterRequest } from '../models/registerrequest';
 import { User } from '../models/user';
 import { ChangePassword } from '../models/changepassword';
+import { AuthenticatedResponse } from '../models/authenticatedresponse';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -26,8 +27,8 @@ export class AuthService {
     return this.http.post<RegisterRequest>(this.baseApiUrl + 'users/register', register, httpOptions)
   }
 
-  login(login: LoginRequest): Observable<LoginRequest>{
-    return this.http.post<LoginRequest>(this.baseApiUrl + 'users/login', login, httpOptions);
+  login(login: LoginRequest): Observable<AuthenticatedResponse>{
+    return this.http.post<AuthenticatedResponse>(this.baseApiUrl + 'users/login', login, httpOptions);
   }
 
   uploadImage(id: number, formData: FormData){
