@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { ProfilComponent } from './components/profil/profil.component';
 import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component';
+import { SettingsComponent } from './components/setting/settings.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ChangeEmailDisplaynameComponent } from './components/change-email-displ
     LoginComponent,
     HomeComponent,
     ProfilComponent,
-    ChangeEmailDisplaynameComponent
+    ChangeEmailDisplaynameComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

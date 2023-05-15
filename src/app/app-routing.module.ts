@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component';
+import { SettingsComponent } from './components/setting/settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'profil', component: ProfilComponent },
   { path: 'changeDisplay', component: ChangeEmailDisplaynameComponent},
+  { path: 'settings', component: SettingsComponent}
 ];
 
 @NgModule({
