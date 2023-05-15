@@ -7,6 +7,7 @@ import { RegisterRequest } from '../models/registerrequest';
 import { User } from '../models/user';
 import { ChangePassword } from '../models/changepassword';
 import { AuthenticatedResponse } from '../models/authenticatedresponse';
+import { Router } from '@angular/router';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -20,7 +21,7 @@ const httpOptions={
 export class AuthService {
 
   baseApiUrl: string = environment.baseApiUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: Router) { }
 
 
   register(register: RegisterRequest): Observable<RegisterRequest>{
@@ -45,5 +46,15 @@ export class AuthService {
 
   changePassword(password: ChangePassword): Observable<boolean>{
     return this.http.put<boolean>(this.baseApiUrl + 'users/changepassword', password);
+  }
+
+  isLoggedIn(): boolean{
+    console.log("ISLOGGEDIN METHOD FROM AUTH SERVICE CALLED");
+    return !!localStorage.getItem("jwt");
+  }
+
+  logout(){
+    localStorage.clear();
+    this.route.navigate(['/login'])
   }
 }

@@ -10,6 +10,11 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { ProfilComponent } from './components/profil/profil.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() { 
+  return localStorage.getItem("jwt"); 
+}
 
 @NgModule({
   declarations: [
@@ -24,7 +29,13 @@ import { ProfilComponent } from './components/profil/profil.component';
     AppRoutingModule,
     MatIconModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
