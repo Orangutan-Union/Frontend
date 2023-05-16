@@ -39,6 +39,11 @@
     background: red;
 }
 
+.settingsProfil{
+    display: flex; 
+    align-items: top;
+}
+
 .profil{
     height: 100%;  
     display: flex;
