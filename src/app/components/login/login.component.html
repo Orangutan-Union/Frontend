@@ -1,6 +1,7 @@
 <div class="OuterPage">
     <form class="InnerPage" (ngSubmit)="submitLogin()">
         <img class="logo" src="../../../assets/Udklip.PNG" alt="">
+        <div *ngIf="invalidLogin">Invalid username or password.</div>
         <span>
             <!-- <label for="username">Username:</label> -->
             <input placeholder="Username" type="text" id="username" name="username" #userName="ngModel" [(ngModel)]="login.username" required>

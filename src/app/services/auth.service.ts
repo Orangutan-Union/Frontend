@@ -6,6 +6,8 @@ import { LoginRequest } from '../models/loginrequest';
 import { RegisterRequest } from '../models/registerrequest';
 import { User } from '../models/user';
 import { ChangePassword } from '../models/changepassword';
+import { AuthenticatedResponse } from '../models/authenticatedresponse';
+import { Router } from '@angular/router';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -19,15 +21,15 @@ const httpOptions={
 export class AuthService {
 
   baseApiUrl: string = environment.baseApiUrl;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: Router) { }
 
 
   register(register: RegisterRequest): Observable<RegisterRequest>{
     return this.http.post<RegisterRequest>(this.baseApiUrl + 'users/register', register, httpOptions)
   }
 
-  login(login: LoginRequest): Observable<LoginRequest>{
-    return this.http.post<LoginRequest>(this.baseApiUrl + 'users/login', login, httpOptions);
+  login(login: LoginRequest): Observable<AuthenticatedResponse>{
+    return this.http.post<AuthenticatedResponse>(this.baseApiUrl + 'users/login', login, httpOptions);
   }
 
   uploadImage(id: number, formData: FormData){
@@ -44,5 +46,19 @@ export class AuthService {
 
   changePassword(password: ChangePassword): Observable<boolean>{
     return this.http.put<boolean>(this.baseApiUrl + 'users/changepassword', password);
+  }
+
+
+  getToken(){
+    return localStorage.getItem('jwt');
+  }
+
+  isLoggedIn(): boolean{
+    return !!localStorage.getItem("jwt");
+  }
+
+  logout(){
+    localStorage.clear();
+    this.route.navigate(['/login'])
   }
 }

@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticatedResponse } from 'src/app/models/authenticatedresponse';
 import { LoginRequest } from 'src/app/models/loginrequest';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,31 +12,25 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  invalidLogin: boolean = false;
   login: LoginRequest = new LoginRequest;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  navigate(): void{
-    this.router.navigate(['/home'])
-  }
-
   submitLogin(): void{
     this.authService.login(this.login)
     .subscribe({
-      next: (login => {
-        this.login = login;
-        console.log(this.login);
-        this.verify();
-      })
+      next: (response: AuthenticatedResponse) => {
+        const token = response.token;
+        localStorage.setItem('jwt', token);
+        localStorage.setItem('userid', response.userId.toString());
+        this.invalidLogin = false;
+        console.log(response);
+        this.router.navigate(['/home'])
+      },
+      error: (err: HttpErrorResponse) => this.invalidLogin = true
     })
-  }
-
-  verify(): void{
-    if (this.login.username !== '') {
-      localStorage.setItem('userid', this.login.userId.toString());
-      this.navigate();
-    }
   }
 }
