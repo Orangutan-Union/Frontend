@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'profil', component: ProfilComponent },
   { path: 'changeDisplay', component: ChangeEmailDisplaynameComponent},
   { path: 'settings', component: SettingsComponent}
-];
+]; 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
