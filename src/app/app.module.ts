@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { ProfilComponent } from './components/profil/profil.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component'
+import { SettingsComponent } from './components/setting/settings.component'
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
