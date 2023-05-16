@@ -59,4 +59,8 @@ export class HomeComponent implements OnInit {
     this.tt.userId = Number(localStorage.getItem('userid'));
     this.authService.changePassword(this.tt).subscribe();
   }
+
+  onLogout(){
+    this.authService.logout();
+  }
 }
