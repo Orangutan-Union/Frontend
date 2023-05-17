@@ -53,6 +53,22 @@ export class AuthService {
     return localStorage.getItem('jwt');
   }
 
+  getRefreshToken(){
+    return localStorage.getItem('refreshToken');
+  }
+
+  storeToken(tokenValue: string){
+    localStorage.setItem('jwt', tokenValue);
+  }
+
+  storeRefreshToken(tokenValue: string){
+    localStorage.setItem('refreshToken', tokenValue);
+  }
+
+  renewToken(auth: AuthenticatedResponse){
+    return this.http.post<any>(this.baseApiUrl + "users/refresh", auth, httpOptions)
+  }
+
   isLoggedIn(): boolean{
     return !!localStorage.getItem("jwt");
   }
