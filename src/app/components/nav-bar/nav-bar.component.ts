@@ -4,12 +4,11 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-profil',
-  templateUrl: './profil.component.html',
-  styleUrls: ['./profil.component.css']
+  selector: 'app-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrls: ['./nav-bar.component.css']
 })
-export class ProfilComponent implements OnInit {
-
+export class NavBarComponent implements OnInit {
   user: User = new User;
   userId: number = 0;
   formData = new FormData();
