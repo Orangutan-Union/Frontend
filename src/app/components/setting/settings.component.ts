@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit {
       this.getUser();
       this.formData.delete('file')
       this.formData.delete('filename')
-      this.route.navigate(['/home'])
+      this.route.navigate(['/settings'])
     });
   }
 
