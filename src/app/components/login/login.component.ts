@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.login)
     .subscribe({
       next: (response: AuthenticatedResponse) => {
-        const token = response.token;
-        localStorage.setItem('jwt', token);
+        this.authService.storeToken(response.accessToken);
+        this.authService.storeRefreshToken(response.refreshToken);
         localStorage.setItem('userid', response.userId.toString());
         this.invalidLogin = false;
         console.log(response);
