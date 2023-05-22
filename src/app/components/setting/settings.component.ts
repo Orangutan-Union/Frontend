@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SettingsComponent implements OnInit {
 
+  rerender = false;
   tt: ChangePassword = new ChangePassword;
   user: User = new User;
   userId: number = 0;
@@ -26,6 +27,7 @@ export class SettingsComponent implements OnInit {
       let file = files[0];
       this.formData.append('file', file);
       this.formData.append('filename', file.filename);
+      this.onUpload(); 
     }
   }
 
@@ -56,5 +58,15 @@ export class SettingsComponent implements OnInit {
   changePassword(): void{
     this.tt.userId = Number(localStorage.getItem('userid'));
     this.authService.changePassword(this.tt).subscribe();
+  }
+
+  onSubmitCheck(): void{
+    if(this.tt.newPassword != "" && this.tt.oldPassword != ""){
+      console.log("Hello Jimmy");
+      
+      this.changePassword();
+    }
+
+    this.onSubmit();
   }
 }

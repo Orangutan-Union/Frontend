@@ -6,8 +6,15 @@
 }
 
 .settingsProfil{
+    cursor: pointer;
     display: flex; 
     align-items: top;
+}
+
+.Icons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .divider{
@@ -32,9 +39,10 @@
 } 
 
 .ProfilImg{
+    cursor: pointer;
     width: 4vw;
     height: 4vw;
-    border-radius: 50%;
+    border-radius: 50% 50px;
     object-fit: cover;
     object-position: center;
 }

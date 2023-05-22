@@ -14,7 +14,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component'
 import { SettingsComponent } from './components/setting/settings.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component'
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ProfilTestingComponent } from './profil-testing/profil-testing.component'
+
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -29,7 +31,8 @@ export function tokenGetter() {
     ProfilComponent,
     ChangeEmailDisplaynameComponent,
     SettingsComponent,
-    NavBarComponent
+    NavBarComponent,
+    ProfilTestingComponent
   ],
   imports: [
     BrowserModule,
