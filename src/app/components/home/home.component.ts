@@ -1,10 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangePassword } from 'src/app/models/changepassword';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +29,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onUpload(){
+  onUpload() {
     console.log("In Upload method");
     this.authService.uploadImage(Number(localStorage.getItem('userid')), this.formData).subscribe(() => {
       this.getUser();
@@ -41,7 +39,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getUser(): void{
+  getUser(): void {
     this.userId = Number(localStorage.getItem('userid'));
     this.authService.getUserById(this.userId).subscribe({
       next: (usr => {
@@ -51,16 +49,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onSubmit(): void{
+  onSubmit(): void {
     this.authService.updateUser(this.user).subscribe();
   }
 
-  changePassword(): void{
+  changePassword(): void {
     this.tt.userId = Number(localStorage.getItem('userid'));
     this.authService.changePassword(this.tt).subscribe();
   }
 
-  onLogout(){
+  onLogout() {
     this.authService.logout();
   }
 }
