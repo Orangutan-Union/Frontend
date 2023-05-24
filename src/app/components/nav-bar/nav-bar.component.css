@@ -46,3 +46,14 @@
     object-fit: cover;
     object-position: center;
 }
+
+.search-results{
+    margin: 1px auto 1px auto;
+    display: flex;
+    width: 30vw;
+    background-color: white;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    cursor:pointer;    
+}

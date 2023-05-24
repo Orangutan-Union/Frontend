@@ -40,6 +40,10 @@ export class AuthService {
     return this.http.get<User>(this.baseApiUrl + 'users/' + id);
   }
 
+  getUsersBySearch(query: string): Observable<User[]>{
+    return this.http.get<User[]>(this.baseApiUrl + 'users/search/' + query);
+  }
+
   updateUser(user: User): Observable<User>{
     return this.http.put<User>(this.baseApiUrl + 'users/update/' + user.userId, user);
   }
