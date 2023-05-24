@@ -15,7 +15,7 @@
   </div>
   <div class="divider"></div>
 </div>
-<div style="justify-self: center;" *ngFor="let user of searchUsers index as i">
+<div style="justify-self: center;" *ngFor="let user of searchUsers">
   <span class="search-results" (click)="logOff()">
     <img class="ProfilImg" src="data:image/png;base64,{{user.picture.imageData}}">
     <p>{{user.displayName}}</p>

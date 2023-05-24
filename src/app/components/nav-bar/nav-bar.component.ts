@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
+  search: string = '';
   user: User = new User;
   userId: number = 0;
   formData = new FormData();
@@ -40,23 +41,27 @@ export class NavBarComponent implements OnInit {
   onSearchQueryInput(event: Event) {
     const searchQuery = (event.target as HTMLInputElement).value;
     if (searchQuery.trim().length > 2) {
+      this.search = searchQuery;
       this.searchSubject.next(searchQuery?.trim());
     }
-    else{
+    else if (searchQuery.trim().length <= 2){
       this.searchUsers = [];
+      this.search = '';
     }
   }
 
   searchWithDelay(): void {
     this.searchSubscription = this.searchSubject
       .pipe(
-        debounceTime(1000), // Miliseconds after last input before searching starts
-        distinctUntilChanged(), // Prevents re-sending requests if input was changed and then changed back within debounce time limit.
+        debounceTime(500), // Miliseconds after last input before searching starts
         switchMap(term => this.authService.getUsersBySearch(term!.trim()))
       )
       .subscribe(res => {
-        this.searchUsers = res.slice(0, 4);
-        console.log(this.searchUsers);
+        if (this.search !== '') { // If statement prevents results from not matching query which could happen if you used backspace fast
+          this.searchUsers = res.slice(0, 4);
+          console.log(this.searchUsers);
+          console.log('SENDING API REQUEST'); 
+        }                
       })
   }
 
