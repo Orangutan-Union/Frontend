@@ -59,8 +59,6 @@ export class NavBarComponent implements OnInit {
       .subscribe(res => {
         if (this.search !== '') { // If statement prevents results from not matching query which could happen if you used backspace fast
           this.searchUsers = res.slice(0, 4);
-          console.log(this.searchUsers);
-          console.log('SENDING API REQUEST'); 
         }                
       })
   }
