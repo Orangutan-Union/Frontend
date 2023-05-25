@@ -15,7 +15,12 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component'
 import { SettingsComponent } from './components/setting/settings.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { ProfilTestingComponent } from './profil-testing/profil-testing.component'
+import { ProfilTestingComponent } from './profil-testing/profil-testing.component';
+import { FollowerFeedComponent } from './components/feeds/follower-feed/follower-feed.component';
+import { FriendFeedComponent } from './components/feeds/friend-feed/friend-feed.component';
+import { FeedComponent } from './components/feeds/feed/feed.component';
+import { ProfileFeedComponent } from './components/feeds/profile-feed/profile-feed.component';
+import { FullPostComponent } from './components/feeds/full-post/full-post.component'
 
 
 export function tokenGetter() { 
@@ -32,7 +37,12 @@ export function tokenGetter() {
     ChangeEmailDisplaynameComponent,
     SettingsComponent,
     NavBarComponent,
-    ProfilTestingComponent
+    ProfilTestingComponent,
+    FollowerFeedComponent,
+    FriendFeedComponent,
+    FeedComponent,
+    ProfileFeedComponent,
+    FullPostComponent
   ],
   imports: [
     BrowserModule,

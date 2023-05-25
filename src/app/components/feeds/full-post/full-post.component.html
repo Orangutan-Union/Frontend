@@ -1,0 +1,27 @@
+<app-nav-bar></app-nav-bar>
+<div class="postContainer">
+    <div class="postContent">
+        <img class="ProfilImg" src="data:image/png;base64,{{post.user.picture.imageData}}" alt="Profile Image">
+        <span class="postName"> {{post.user.displayName}}    </span>
+        <span class="groupPost" *ngIf="post.group != null" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}} </span>        
+        <span class="timeSteamp">{{post.timeStamp}}</span>
+        <div>{{post.content}}</div>
+        <div>
+            <button (click)="likePost(post)">Like {{likeCounter[0]}}</button>
+            <button (click)="dislikePost(post)">Dislike {{dislikeCounter[0]}}</button>
+            <button>Comments {{commentCounter[0]}}</button>
+        </div>
+    </div>
+    <div *ngFor="let comment of post.comments, let i = index">
+        <div>
+            <img src="data:image/png;base64,{{comment.user.picture.imageData}}" alt="">
+            <span>{{comment.user.displayName}} </span>
+            <span>{{comment.timeStamp}}</span>
+            <div>{{comment.content}}</div>
+        <div>
+            <button (click)="likeComment(comment, i)">Like {{commentLikeCounter[i]}}</button>
+            <button (click)="dislikeComment(comment, i)">Dislike {{commentDislikeCounter[i]}}</button>
+        </div>
+        </div>
+    </div>
+</div>

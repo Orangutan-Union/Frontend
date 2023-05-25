@@ -1,0 +1,7 @@
+.ProfilImg {
+    width: 4vw;
+    height: 4vw;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}

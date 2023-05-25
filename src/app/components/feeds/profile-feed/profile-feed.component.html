@@ -1,0 +1,16 @@
+<div class="postContainer">
+    <div class="posts" *ngFor="let post of posts; let i = index">
+        <div class="postContent">
+            <img class="ProfilImg" src="data:image/png;base64,{{post.user.picture.imageData}}" alt="Profile Image">
+            <span class="postName">{{post.user.displayName}}</span>
+            <span class="groupPost" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}}</span>
+            <span class="timeSteamp">{{post.timeStamp}}</span>
+            <div>{{post.content}}</div>
+            <div >
+                <button>Like    {{likeCounter[i]}}</button>
+                <button>Dislike {{dislikeCounter[i]}}</button>
+                <button (click)="goToFullPost(post.postId)">Comments</button>
+            </div>
+        </div>
+    </div>
+</div>
