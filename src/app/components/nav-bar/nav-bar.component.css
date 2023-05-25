@@ -1,6 +1,6 @@
 .homeFeedHeader{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding-top: 15px;
     align-items: center;
 }
@@ -42,18 +42,33 @@
     cursor: pointer;
     width: 4vw;
     height: 4vw;
-    border-radius: 50% 50px;
+    border-radius: 50%;
     object-fit: cover;
     object-position: center;
 }
 
 .search-results{
-    margin: 1px auto 1px auto;
+    position: relative;
     display: flex;
     width: 30vw;
-    background-color: white;
     border-width: 1px;
     border-color: black;
     border-style: solid;
-    cursor:pointer;    
+    cursor:pointer;  
+    background-color: white; 
+}
+
+.SearchResult > ul > li{
+    overflow: hidden;
+}
+
+.SearchResult{
+    display: flex;
+    left: 50%;
+    transform: translate(-50%);
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10000;
 }
