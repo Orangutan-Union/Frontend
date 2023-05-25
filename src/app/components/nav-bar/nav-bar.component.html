@@ -6,7 +6,7 @@
     </div>
     <span class="settingsProfil">
       <img style="border: 1px solid black;" class="ProfilImg" routerLink="/profil"
-        src="data:image/png;base64,{{user.picture.imageData}}" alt="">
+        src="{{user.picture.imageUrl}}" alt="">
       <span class="Icons">
         <mat-icon routerLink="/settings" style="margin-left: 15px;">settings</mat-icon>
         <mat-icon (click)="logOff()" style="margin-left: 15px;">exit_to_app</mat-icon>
@@ -19,7 +19,7 @@
   <ul *ngFor="let user of searchUsers">
     <li >        
       <span class="search-results" (click)="logOff()">
-        <img class="ProfilImg" src="data:image/png;base64,{{user.picture.imageData}}">
+        <img class="ProfilImg" src="{{user.picture.imageUrl}}">
         <p>{{user.displayName}}</p>
       </span>
     </li>
