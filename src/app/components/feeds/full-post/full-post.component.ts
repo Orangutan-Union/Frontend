@@ -189,7 +189,6 @@ export class FullPostComponent implements OnInit {
       post.comments.forEach(comment => {
         console.log(comment.likes);
         comment.likes.forEach(like => {
-          //console.log(like);
           if (like.isLiked == true) { this.commentLikeCount++ }
           if (like.isDisliked == true) { this.commentDislikeCount++ }
         })
