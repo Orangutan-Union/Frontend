@@ -11,8 +11,10 @@ import { FeedService } from 'src/app/services/feed.service';
 export class ProfileFeedComponent implements OnInit {
   posts: Post[] = [];
   userId: number = 0;
+  commentCount: number = 0;
   likeCount: number = 0;
   dislikeCount: number = 0;
+  commentCounter: number[] = [];
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
   constructor(private feedService: FeedService, private route: Router) { }
@@ -39,19 +41,22 @@ export class ProfileFeedComponent implements OnInit {
   }
 
   counter(posts: Post[]): void {
-    posts.forEach(element => {
-      element.likes.forEach(element => {
-        if (element.isLiked == true) { this.likeCount++ }
-        if (element.isDisliked == true) { this.dislikeCount++ }
+    posts.forEach(post => {
+      post.likes.forEach(like => {
+        if (like.isLiked == true) { this.likeCount++ }
+        if (like.isDisliked == true) { this.dislikeCount++ }
       });
+      this.likeCounter.push(this.likeCount);
+      this.dislikeCounter.push(this.dislikeCount);
+      
+      post.comments.forEach(comment => {
+        this.commentCount++
+      });
+      this.commentCounter.push(this.commentCount);
 
-      if (this.likeCount != 0) { this.likeCounter.push(this.likeCount) }
-      else { this.likeCounter.push(0) }
-
-      if (this.dislikeCount != 0) { this.dislikeCounter.push(this.dislikeCount) }
-      else { this.dislikeCounter.push(0) }
       this.likeCount = 0;
       this.dislikeCount = 0;
+      this.commentCount = 0;
     });
   }
 }

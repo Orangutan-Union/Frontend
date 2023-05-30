@@ -1,11 +1,3 @@
-.ProfilImg {
-    width: 4vw;
-    height: 4vw;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-}
-
 .container {
     height: 100%;
     width: 100%;

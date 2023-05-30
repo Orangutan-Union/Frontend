@@ -22,14 +22,14 @@ export class FeedComponent implements OnInit {
   constructor(private feedService: FeedService, private route: Router) { }
 
   ngOnInit(): void {
-    this.getUserPosts();    
+    this.getFeed();    
   }
 
   likePost(post: Post, i: number): void {
     this.like.userId = Number(localStorage.getItem('userid'));
     this.like.postId = post.postId;
     this.like.isLiked = true;
-
+    
     post.likes.forEach(element => {
       if (element.userId == this.like.userId && element.postId == post.postId) {
         this.like.isLiked = !element.isLiked
@@ -97,7 +97,7 @@ export class FeedComponent implements OnInit {
     this.route.navigate([])
   }
 
-  getUserPosts(): void {
+  getFeed(): void {
     this.userId = Number(localStorage.getItem('userid'));
     this.feedService.getUserFeed(this.userId).subscribe(data => {
       this.posts = data;
