@@ -1,8 +1,13 @@
-.homeFeed{
+.homeFeedHeader{
     display: flex;
     justify-content: space-around;
     padding-top: 15px;
     align-items: center;
+}
+
+.settingsProfil{
+    display: flex; 
+    align-items: top;
 }
 
 .divider{

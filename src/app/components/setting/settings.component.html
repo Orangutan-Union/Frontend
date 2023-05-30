@@ -1,0 +1,53 @@
+ <app-nav-bar> </app-nav-bar>
+ 
+ <div class="OuterLayer" style="overflow-y: hidden;">
+  <div class="InnerLayer" >
+
+    <span class="profilPictureEditor">
+      <p>Change profil picture</p>
+      <img  class="ProfilPicture" src="{{user.picture.imageUrl}}"/>
+      <label for="file">
+      <mat-icon class="profilPictureEdit" >edit</mat-icon>        
+      </label>
+      <input id="file" type="file" (change)="fileChange($any($event).target.files)">
+    </span>
+
+    <span class="ChangeNameAndEmailAndPassword">  
+      <div class="innerChangeNameAndEmailAndPassword">
+        <form (ngSubmit)="onSubmitCheck()" #myForm="ngForm">
+          <div>
+            <label for="displayName">Display Name: </label>
+            <input type="text" id="displayName" name="displayName" #displayName="ngModel" [(ngModel)]="user.displayName"
+              required>
+
+          <label for="email">Email: </label>
+            <input type="text" id="email" name="email" #email="ngModel" [(ngModel)]="user.email"
+              required>
+          </div>
+          <div>
+            <label for="oldPassword">Old Password:</label>
+            <input type="password" id="oldPassword" name="oldPassword" #oldPassword="ngModel" [(ngModel)]="tt.oldPassword"
+              >
+          </div>
+          <div>
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword" #newPassword="ngModel" [(ngModel)]="tt.newPassword"
+              >
+          </div>
+          <div>
+            <input type="submit" value="Submit" [disabled]="myForm.invalid">
+          </div>
+        </form>
+      </div>
+    </span>
+
+    <!-- <span class="ChangeNameAndEmailAndPassword">  
+      <div class="innerChangeNameAndEmailAndPassword">
+        <form (ngSubmit)="onSubmitCheck()" #myForm="ngForm">
+          
+        </form>
+      </div>
+    </span> -->
+  </div>
+ </div>
+ 

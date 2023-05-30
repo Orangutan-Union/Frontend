@@ -1,0 +1,74 @@
+.homeFeedHeader{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 15px;
+    align-items: center;
+}
+
+.settingsProfil{
+    cursor: pointer;
+    display: flex; 
+    align-items: top;
+}
+
+.Icons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.divider{
+    height: 2px;
+    width: 90vw;
+    border: solid black 2px;
+    margin: 3px auto;
+    border-radius: 100%;
+}
+
+.LogoImg{
+    width: 6vw;
+    height: 6vh;
+    cursor: pointer;
+} 
+
+.TopSeachBar{
+    font-size: 1.3rem;
+    color: black;
+    width: 30vw;
+    height: 5vh;
+} 
+
+.ProfilImg{
+    cursor: pointer;
+    width: 4vw;
+    height: 4vw;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.search-results{
+    position: relative;
+    display: flex;
+    width: 30vw;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    cursor:pointer;  
+    background-color: white; 
+}
+
+.SearchResult > ul > li{
+    overflow: hidden;
+}
+
+.SearchResult{
+    display: flex;
+    left: 50%;
+    transform: translate(-50%);
+    flex-direction: column;
+    position: absolute;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10000;
+}
