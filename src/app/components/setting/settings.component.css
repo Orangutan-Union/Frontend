@@ -1,3 +1,7 @@
+.OuterLayer{
+    position: relative;
+    z-index: 1;
+}
 
 .InnerLayer{
     display:grid;
@@ -16,7 +20,7 @@
     border: 1px solid black;
 }
 
-.profilPictureEditor:hover .ProfilPicture{ filter: brightness(20%); }
+.ProfilPicture:hover{ filter: brightness(20%); }
 
 .profilPictureEditor{
     position: relative;
