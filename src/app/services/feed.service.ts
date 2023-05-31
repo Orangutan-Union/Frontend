@@ -7,7 +7,6 @@ import { Like } from '../models/addLike';
 import { NewComment } from '../models/newComment';
 import { NewPost } from '../models/newPost';
 import { Post } from '../models/post';
-import { NewPost } from '../models/newPost';
 
 const httpOptions={
   headers: new HttpHeaders({
