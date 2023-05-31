@@ -13,6 +13,8 @@ import { FeedService } from 'src/app/services/feed.service';
 export class ProfileFeedComponent implements OnInit {
   posts: Post[] = [];  
   like: Like = new Like;
+  edit: boolean = true;
+  editPostId: number = 0;
   userId: number = 0;
   commentCount: number = 0;
   likeCount: number = 0;
@@ -24,6 +26,13 @@ export class ProfileFeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserPosts();
+  }
+
+  toggleEdit(id: number) {
+    if (this.editPostId == id) {
+      this.edit = !this.edit;
+    }
+    this.editPostId = id;
   }
 
   goToFullPost(id: number) {

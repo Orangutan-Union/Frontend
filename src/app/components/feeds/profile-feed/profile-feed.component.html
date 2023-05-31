@@ -5,9 +5,9 @@
             <span class="postName">{{post.user.displayName}}</span>
             <span class="groupPost" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}}</span>
             <span class="timeSteamp">{{post.timeStamp | date: 'medium'}}</span>
-            <mat-icon (click)="toggleEdit()">edit</mat-icon>
+            <mat-icon (click)="toggleEdit(post.postId)">edit</mat-icon>
             <div>{{post.content}}</div>
-            <textarea></textarea>
+            <app-create-post *ngIf="edit == true && editPostId == post.postId"></app-create-post>
             <div >
                 <button>Like    {{likeCounter[i]}}</button>
                 <button>Dislike {{dislikeCounter[i]}}</button>
