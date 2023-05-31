@@ -10,6 +10,12 @@
     justify-content: center;
 }
 
+textarea {
+    resize: horizontal;
+    overflow: hidden;
+    width: 100%
+}
+
 .grid {
     margin-top: 10vh;
     display: flex;

@@ -4,6 +4,7 @@ import { Like } from 'src/app/models/addLike';
 import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { FeedService } from 'src/app/services/feed.service';
+import { NewComment } from 'src/app/models/newComment';
 
 @Component({
   selector: 'app-full-post',
@@ -11,8 +12,10 @@ import { FeedService } from 'src/app/services/feed.service';
   styleUrls: ['./full-post.component.css']
 })
 export class FullPostComponent implements OnInit {
+  item={text:""}
   post: Post = new Post;
   like: Like = new Like;
+  comment: NewComment = new NewComment
   userId: number = 0;
   commentCount: number = 0;
   commentLikeCount: number = 0;
@@ -24,6 +27,10 @@ export class FullPostComponent implements OnInit {
   commentCounter: number[] = [];
   commentLikeCounter: number[] = [];
   commentDislikeCounter: number[] = [];
+  
+
+  formdata = FormData;
+
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -34,9 +41,24 @@ export class FullPostComponent implements OnInit {
     });
   }
 
-  likePost(post: Post): void {
-    if (post.userId != Number(localStorage.getItem('userid'))) {
+  onSubmit(): void{
+    if (!this.comment.content.match(/^\s*$/)) {
 
+      console.log(this.comment.content);
+      
+      // this.authService.register(this.user)
+      // .subscribe({
+      //   next: (reg => {
+      //     this.user = reg;
+      //     console.log(this.user);
+      //     this.router.navigate(['/login']);
+      //   })
+      // });
+
+    }
+  }  
+
+  likePost(post: Post): void {
       this.like.userId = Number(localStorage.getItem('userid'));
       this.like.postId = post.postId;
       this.like.isLiked = true;
@@ -65,12 +87,9 @@ export class FullPostComponent implements OnInit {
       this.feedService.addLike(this.like).subscribe(data => {
         console.log(data)
       })
-    }
   }
 
   dislikePost(post: Post): void {
-    if (post.userId != Number(localStorage.getItem('userid'))) {
-
       this.like.userId = Number(localStorage.getItem('userid'));
       this.like.postId = post.postId;
       this.like.isDisliked = true;
@@ -101,12 +120,9 @@ export class FullPostComponent implements OnInit {
       this.feedService.addLike(this.like).subscribe(data => {
         console.log(data)
       })
-    }
   }
 
   likeComment(comment: Comment, i: number): void {
-    if (comment.userId != Number(localStorage.getItem('userid'))) {
-
       this.like.userId = Number(localStorage.getItem('userid'));
       this.like.commentId = comment.commentId;
       this.like.isDisliked = true;
@@ -137,12 +153,9 @@ export class FullPostComponent implements OnInit {
       this.feedService.addLike(this.like).subscribe(data => {
         console.log(data)
       })
-    }
   }
 
   dislikeComment(comment: Comment, i: number): void {
-    if (comment.userId != Number(localStorage.getItem('userid'))) {
-
       this.like.userId = Number(localStorage.getItem('userid'));
       this.like.commentId = comment.commentId;
       this.like.isDisliked = true;
@@ -173,7 +186,6 @@ export class FullPostComponent implements OnInit {
       this.feedService.addLike(this.like).subscribe(data => {
         console.log(data)
       })
-    }
   }
 
   goToGroup(id: number) {

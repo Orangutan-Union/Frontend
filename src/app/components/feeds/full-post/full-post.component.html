@@ -15,6 +15,15 @@
             </div>
         </div>
         <div class="commentContainer">
+            <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+                <span>
+                  <textarea autosize placeholder="Comment" type="text" id="content" name="content" #userName="ngModel" pattern="[a-zA-Z0-9][a-zA-Z0-9\s]*"
+                    [(ngModel)]="comment.content" required>
+                </textarea>
+                </span>                
+                <button type="submit" mat-raised-button color="primary"
+                  [disabled]="myForm.invalid || comment.content == null">Create</button>
+              </form>
         <div class="comment" *ngFor="let comment of post.comments, let i = index">
                 <div>
                     <img class="ProfilImg" routerLink="/profil" src="{{post.user.picture.imageUrl}}"

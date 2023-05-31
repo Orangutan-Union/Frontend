@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Like } from 'src/app/models/addLike';
+import { NewPost } from 'src/app/models/newPost';
 import { Post } from 'src/app/models/post';
 import { FeedService } from 'src/app/services/feed.service';
 
@@ -9,7 +11,8 @@ import { FeedService } from 'src/app/services/feed.service';
   styleUrls: ['./profile-feed.component.css']
 })
 export class ProfileFeedComponent implements OnInit {
-  posts: Post[] = [];
+  posts: Post[] = [];  
+  like: Like = new Like;
   userId: number = 0;
   commentCount: number = 0;
   likeCount: number = 0;
@@ -29,6 +32,69 @@ export class ProfileFeedComponent implements OnInit {
 
   goToGroup(id: number) {
     this.route.navigate([])
+  }
+  likePost(post: Post, i: number): void {
+    this.like.userId = Number(localStorage.getItem('userid'));
+    this.like.postId = post.postId;
+    this.like.isLiked = true;
+    
+    post.likes.forEach(element => {
+      if (element.userId == this.like.userId && element.postId == post.postId) {
+        this.like.isLiked = !element.isLiked
+        element.isLiked = this.like.isLiked
+        this.like.isDisliked = element.isDisliked;
+        element.isDisliked = false
+      }
+    });
+
+    if (this.like.isDisliked == true && this.dislikeCounter[i] != 0) {
+      this.dislikeCounter[i]--
+      this.like.isDisliked = false;
+    }
+
+    if (this.like.isLiked == true) {
+      this.likeCounter[i]++
+    }
+    else {
+      this.likeCounter[i]--
+    }
+
+    this.feedService.addLike(this.like).subscribe(data => {
+      console.log(data)
+    })
+  }
+
+  dislikePost(post: Post, i: number): void {
+    this.like.userId = Number(localStorage.getItem('userid'));
+    this.like.postId = post.postId;
+    this.like.isDisliked = true;
+
+    post.likes.forEach(element => {
+      if (element.userId == this.like.userId && element.postId == post.postId) {
+        this.like.isDisliked = !element.isDisliked
+        element.isDisliked = this.like.isDisliked
+        this.like.isLiked = element.isLiked;    
+        element.isLiked = false    
+      }
+    });
+    
+    if (this.like.isLiked == true && this.likeCounter[i] != 0) {
+      this.likeCounter[i]--
+      this.like.isLiked = false;
+    }
+    console.log(this.like.isLiked);   
+
+    if (this.like.isDisliked == true) {
+      this.dislikeCounter[i]++
+
+    }
+    else {
+      this.dislikeCounter[i]--
+    }
+
+    this.feedService.addLike(this.like).subscribe(data => {
+      console.log(data)
+    })
   }
 
   getUserPosts(): void {
