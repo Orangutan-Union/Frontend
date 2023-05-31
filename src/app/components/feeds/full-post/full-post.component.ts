@@ -12,7 +12,6 @@ import { NewComment } from 'src/app/models/newComment';
   styleUrls: ['./full-post.component.css']
 })
 export class FullPostComponent implements OnInit {
-  item={text:""}
   post: Post = new Post;
   like: Like = new Like;
   comment: NewComment = new NewComment

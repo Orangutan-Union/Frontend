@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Like } from '../models/addLike';
+import { NewComment } from '../models/newComment';
+import { NewPost } from '../models/newPost';
 import { Post } from '../models/post';
 import { NewPost } from '../models/newPost';
 
