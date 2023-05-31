@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Like } from '../models/addLike';
 import { Post } from '../models/post';
+import { NewPost } from '../models/newPost';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -38,6 +39,10 @@ export class FeedService {
 
   getUsersFriendFeed(id: number): Observable<Post[]>{
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/friendfeed/' + id);
+  }
+
+  addPost(newPost: NewPost): Observable<NewPost>{
+    return this.http.post<NewPost>(this.baseApiUrl + 'Post', newPost)
   }
 
   addLike(like: Like): Observable<Like> {

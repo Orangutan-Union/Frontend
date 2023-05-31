@@ -58,6 +58,11 @@
     background-color: white; 
 }
 
+.search-results >p{
+    width: 100%;
+    margin: 0;
+}
+
 .SearchResult > ul > li{
     overflow: hidden;
 }
