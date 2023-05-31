@@ -2,7 +2,7 @@
 <div class="postContainer">
     <div class="grid">
         <div class="postContent">
-            <img class="ProfilImg" routerLink="/profil" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
+            <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
             <span class="postName"> {{post.user.displayName}} </span>
             <span class="groupPost" *ngIf="post.group != null"
                 (click)="goToGroup(post.group.groupId)">{{post.group.groupName}} </span>
@@ -26,7 +26,7 @@
               </form>
         <div class="comment" *ngFor="let comment of post.comments, let i = index">
                 <div>
-                    <img class="ProfilImg" routerLink="/profil" src="{{post.user.picture.imageUrl}}"
+                    <img class="ProfilImg" routerLink="/visitingProfil/{{comment.userId}}" src="{{comment.user.picture.imageUrl}}"
                         alt="Profile Image">
                     <span>{{comment.user.displayName}} </span>
                     <span>{{comment.timeStamp | date: 'medium'}}</span>

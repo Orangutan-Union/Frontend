@@ -18,7 +18,7 @@
 <span class="SearchResult">
   <ul *ngFor="let user of searchUsers">
     <li >        
-      <span class="search-results" (click)="logOff()">
+      <span class="search-results" routerLink="/visitingProfil/{{user.userId}}">
         <img class="ProfilImg" src="{{user.picture.imageUrl}}">
         <p>{{user.displayName}}</p>
       </span>
