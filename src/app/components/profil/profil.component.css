@@ -34,7 +34,6 @@
     object-position: center;
 }
 .profilFeed{
-    height: 100%;
     width: 800px;
     background: rgb(58, 58, 58);
 }
@@ -44,7 +43,8 @@
     align-items: top;
 }
 
-.profil{
+.OuterLayer{
+    margin-top: 5px;
     height: 100%;  
     display: flex;
     justify-content: space-between;

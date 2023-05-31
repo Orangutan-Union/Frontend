@@ -68,5 +68,6 @@ export class SettingsComponent implements OnInit {
     }
 
     this.onSubmit();
+    window.location.reload();
   }
 }

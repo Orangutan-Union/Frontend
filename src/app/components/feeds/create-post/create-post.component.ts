@@ -17,8 +17,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   onSubmit(): void{
-    if (!this.post.content.match(/^\s*$/)) {
-
+      // this.feedService.
       console.log(this.post.content);
       
       // this.authService.register(this.user)
@@ -29,8 +28,6 @@ export class CreatePostComponent implements OnInit {
       //     this.router.navigate(['/login']);
       //   })
       // });
-
-    }
   } 
 
 }

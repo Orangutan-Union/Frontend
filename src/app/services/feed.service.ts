@@ -42,6 +42,10 @@ export class FeedService {
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/friendfeed/' + id);
   }
 
+  addPost(newPost: NewPost): Observable<NewPost>{
+    return this.http.post<NewPost>(this.baseApiUrl + 'Post', newPost)
+  }
+
   addLike(like: Like): Observable<Like> {
     return this.http.post<Like>(this.baseApiUrl + 'Like', like, httpOptions)
   }
