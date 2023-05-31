@@ -1,3 +1,4 @@
+import { FriendRequest } from "./friendrequest";
 import { Picture } from "./picture";
 
 export class User{
@@ -5,4 +6,6 @@ export class User{
     displayName: string = '';
     email?: string = '';
     picture: Picture = new Picture;
+    sentFriendRequests: FriendRequest[] = [];
+    receivedFriendRequests: FriendRequest[] = [];
 }

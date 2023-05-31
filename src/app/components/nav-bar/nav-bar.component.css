@@ -56,6 +56,27 @@
     border-style: solid;
     cursor:pointer;  
     background-color: white; 
+    height: 100%;
+}
+
+.search-results > p{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    align-items: center;
+}
+.search-results > img{
+    min-width: 64px;
+}
+
+.search-results > button{
+    background-color: rgb(145, 145, 255);
+    cursor: pointer;
+    width: 40%;
+}
+
+.search-results > button:hover{
+    background-color: rgb(100, 100, 255);
 }
 
 .SearchResult > ul > li{

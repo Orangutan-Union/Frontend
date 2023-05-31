@@ -18,9 +18,11 @@
 <span class="SearchResult">
   <ul *ngFor="let user of searchUsers">
     <li >        
-      <span class="search-results" (click)="logOff()">
+      <span class="search-results">
         <img class="ProfilImg" src="{{user.picture.imageUrl}}">
         <p>{{user.displayName}}</p>
+        <button *ngIf="userId !== user.userId && !friendRequestPending(user.userId)" (click)="sendFriendRequest(user.userId)">Add Friend</button>
+        <button [disabled]="true" *ngIf="userId !== user.userId && friendRequestPending(user.userId)">Sent</button>
       </span>
     </li>
   </ul>
