@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {MatIconModule} from '@angular/material/icon';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AutosizeModule } from 'ngx-autosize';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +15,13 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { SettingsComponent } from './components/setting/settings.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { ProfilTestingComponent } from './profil-testing/profil-testing.component'
+import { ProfilTestingComponent } from './profil-testing/profil-testing.component';
+import { FollowerFeedComponent } from './components/feeds/follower-feed/follower-feed.component';
+import { FriendFeedComponent } from './components/feeds/friend-feed/friend-feed.component';
+import { FeedComponent } from './components/feeds/feed/feed.component';
+import { ProfileFeedComponent } from './components/feeds/profile-feed/profile-feed.component';
+import { FullPostComponent } from './components/feeds/full-post/full-post.component';
+import { CreatePostComponent } from './components/feeds/create-post/create-post.component'
 
 
 export function tokenGetter() { 
@@ -30,7 +37,13 @@ export function tokenGetter() {
     ProfilComponent,
     SettingsComponent,
     NavBarComponent,
-    ProfilTestingComponent
+    ProfilTestingComponent,
+    FollowerFeedComponent,
+    FriendFeedComponent,
+    FeedComponent,
+    ProfileFeedComponent,
+    FullPostComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +51,7 @@ export function tokenGetter() {
     MatIconModule,
     HttpClientModule,
     FormsModule,
+    AutosizeModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ProfilComponent } from './components/profil/profil.component';
 import { SettingsComponent } from './components/setting/settings.component';
 import { AuthGuard } from './guards/auth.guard';
+import { FullPostComponent } from './components/feeds/full-post/full-post.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -13,7 +14,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
   { path: 'profil', component: ProfilComponent, canActivate:[AuthGuard] },
-  { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard]}
+  { path: 'changeDisplay', component: ChangeEmailDisplaynameComponent, canActivate:[AuthGuard]},
+  { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard]},
+  { path: 'fullPost/:id', component: FullPostComponent, canActivate:[AuthGuard]},
 ]; 
 
 @NgModule({

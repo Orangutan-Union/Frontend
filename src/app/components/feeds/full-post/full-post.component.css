@@ -1,0 +1,44 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+textarea {
+    resize: horizontal;
+    overflow: hidden;
+    width: 100%
+}
+
+.grid {
+    margin-top: 10vh;
+    display: flex;
+    height: auto;
+    width: 100%;
+    justify-content: center;
+}
+
+.postContent {
+    display: block;
+    width: 50%;
+    margin-top: 10vh;
+}
+
+.comment {
+    width: 100%;
+    margin-top: 5%;
+    position: relative;
+}
+
+.commentContent {
+    display: block;
+    width: 100%;
+    margin-top: 10vh;
+    justify-content: center;
+}
