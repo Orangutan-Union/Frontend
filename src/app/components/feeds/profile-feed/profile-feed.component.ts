@@ -11,14 +11,16 @@ import { FeedService } from 'src/app/services/feed.service';
   styleUrls: ['./profile-feed.component.css']
 })
 export class ProfileFeedComponent implements OnInit {
-  posts: Post[] = [];  
-  like: Like = new Like;
-  edit: boolean = true;
   editPostId: number = 0;
   userId: number = 0;
   commentCount: number = 0;
   likeCount: number = 0;
   dislikeCount: number = 0;
+  newContent: string;
+  edit: boolean = true;
+  like: Like = new Like;
+  uPost: Post = new Post;
+  posts: Post[] = [];
   commentCounter: number[] = [];
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
@@ -28,11 +30,19 @@ export class ProfileFeedComponent implements OnInit {
     this.getUserPosts();
   }
 
-  toggleEdit(id: number) {
-    if (this.editPostId == id) {
+  onSubmit(i: number): void{    
+    this.posts[i].content = this.newContent;
+    this.feedService.updatePost(this.posts[i]).subscribe(data => {
+    })
+    this.editPostId = 0;
+} 
+
+  toggleEdit(post: Post) {
+    if (this.editPostId == post.postId) {
       this.edit = !this.edit;
     }
-    this.editPostId = id;
+    this.editPostId = post.postId;
+    this.newContent = post.content;
   }
 
   goToFullPost(id: number) {

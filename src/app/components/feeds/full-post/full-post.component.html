@@ -6,7 +6,7 @@
             <span class="postName"> {{post.user.displayName}} </span>
             <span class="groupPost" *ngIf="post.group != null"
                 (click)="goToGroup(post.group.groupId)">{{post.group.groupName}} </span>
-            <span class="timeSteamp">{{post.timeStamp | date: 'medium'}}</span>
+            <span class="timeSteamp">{{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
             <div>{{post.content}}</div>
             <div>
                 <button (click)="likePost(post)">Like {{likeCounter[0]}}</button>
@@ -16,20 +16,18 @@
         </div>
         <div class="commentContainer">
             <form (ngSubmit)="onSubmit()" #myForm="ngForm">
-                <span>
-                  <textarea autosize placeholder="Comment" type="text" id="content" name="content" #userName="ngModel" pattern="[a-zA-Z0-9][a-zA-Z0-9\s]*"
-                    [(ngModel)]="comment.content" required>
+                <textarea autosize placeholder="Comment" type="text" id="content" name="content" #userName="ngModel"
+                     [(ngModel)]="comment.content" required>
                 </textarea>
-                </span>                
-                <button type="submit" mat-raised-button color="primary"
-                  [disabled]="myForm.invalid || comment.content == null">Create</button>
-              </form>
+                <button style="float: right;" type="submit" mat-raised-button color="primary"
+                    [disabled]="myForm.invalid || comment.content.trim() == ''">Create</button>
+            </form>
         <div class="comment" *ngFor="let comment of post.comments, let i = index">
                 <div>
                     <img class="ProfilImg" routerLink="/visitingProfil/{{comment.userId}}" src="{{comment.user.picture.imageUrl}}"
                         alt="Profile Image">
                     <span>{{comment.user.displayName}} </span>
-                    <span>{{comment.timeStamp | date: 'medium'}}</span>
+                    <span>{{comment.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
                     <div>{{comment.content}}</div>
                     <div>
                         <button (click)="likeComment(comment, i)">Like {{commentLikeCounter[i]}}</button>

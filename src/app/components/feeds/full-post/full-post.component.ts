@@ -5,6 +5,7 @@ import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { FeedService } from 'src/app/services/feed.service';
 import { NewComment } from 'src/app/models/newComment';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-full-post',
@@ -12,9 +13,10 @@ import { NewComment } from 'src/app/models/newComment';
   styleUrls: ['./full-post.component.css']
 })
 export class FullPostComponent implements OnInit {
-  post: Post = new Post;
+  comment: Comment = new Comment;
   like: Like = new Like;
-  comment: NewComment = new NewComment
+  newComment: NewComment = new NewComment;
+  post: Post = new Post;
   userId: number = 0;
   commentCount: number = 0;
   commentLikeCount: number = 0;
@@ -27,7 +29,6 @@ export class FullPostComponent implements OnInit {
   commentLikeCounter: number[] = [];
   commentDislikeCounter: number[] = [];
   
-
   formdata = FormData;
 
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
@@ -35,26 +36,23 @@ export class FullPostComponent implements OnInit {
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params) => {
       const id = Number(params.get('id'))
-      //console.log(id);      
       this.getFullPost(id);
     });
   }
 
-  onSubmit(): void{
-    if (!this.comment.content.match(/^\s*$/)) {
+  onSubmit(): void {
+    this.newComment.userId = Number(localStorage.getItem('userid'));
+    this.newComment.postId = this.post.postId;
 
-      console.log(this.comment.content);
-      
-      // this.authService.register(this.user)
-      // .subscribe({
-      //   next: (reg => {
-      //     this.user = reg;
-      //     console.log(this.user);
-      //     this.router.navigate(['/login']);
-      //   })
-      // });
+    this.feedService.addComment(this.newComment).subscribe(comment => {
+      //this.authService
+      this.comment.commentId = comment.commentId;
+      this.comment.userId = comment.userId;
+      this.comment.content = comment.content;
+      //this.comment.user = 
+      this.post.comments.push(this.comment)
+    });
 
-    }
   }  
 
   likePost(post: Post): void {
