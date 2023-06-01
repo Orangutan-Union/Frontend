@@ -43,7 +43,8 @@
     display:block; 
     margin-left: auto; 
     margin-right: auto; 
-    width: 33%; 
+    width: 33vw;
+    /* max-width: ;  */
     margin-top: 1vh; 
     position: relative;
 }

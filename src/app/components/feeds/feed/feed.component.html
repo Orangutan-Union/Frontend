@@ -1,12 +1,18 @@
 <div class="postContainer">
     <div class="posts" *ngFor="let post of posts; let i = index">
         <div class="postContent">
-            <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
-            <span class="postName">{{post.user.displayName}}    </span>
-            <span class="groupPost" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}}    </span>
-            <span type="" class="timeSteamp">{{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
-            <div>{{post.content}}</div>
-            <div >
+            <span class="PostHeader">
+                <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
+                <span class="PostHeaderInfo">
+                    <span style="display: flex; justify-content: space-between;">
+                        <p (click)="testtest()">{{post.user.displayName}}</p>
+                        <p class="groupPost" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}}</p>
+                    </span>
+                    <span type="">{{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
+                </span>
+            </span>
+            <div class="Content">{{post.content}}</div>
+            <div>
                 <button (click)="likePost(post, i)">Like    {{likeCounter[i]}}</button>
                 <button (click)="dislikePost(post, i)">Dislike {{dislikeCounter[i]}}</button>
                 <button (click)="goToFullPost(post.postId)">Comments {{commentCounter[i]}}</button>

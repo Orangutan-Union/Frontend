@@ -1,0 +1,29 @@
+.postContainer{
+   
+}
+
+.posts{
+    /* background: red; */
+    outline: 2px solid black;
+    margin: 13px;
+}
+.Content{
+    /* background-color: yellow; */
+    margin: 5px 1%;
+    min-height: 5vh;    
+    border: 2px rgba(0, 0, 0, 0.5) solid;
+}
+
+.PostHeader{
+    width: 100%;
+    display: flex;
+    /* background: green; */
+}
+
+p:hover{
+    cursor: pointer;
+}
+
+.PostHeader > .PostHeaderInfo{
+    width: 60%;
+}
