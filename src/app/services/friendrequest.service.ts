@@ -29,4 +29,12 @@ export class FriendrequestService {
   sendFriendRequest(request: FriendRequest): Observable<FriendRequest>{
     return this.http.post<FriendRequest>(this.baseApiUrl + 'friendrequests', request, httpOptions);
   }
+
+  acceptFriendRequest(request: FriendRequest): Observable<FriendRequest>{
+    return this.http.post<FriendRequest>(this.baseApiUrl + 'friendrequests/accept', request, httpOptions);
+  }
+
+  declineFriendRequest(request: FriendRequest): Observable<FriendRequest>{
+    return this.http.post<FriendRequest>(this.baseApiUrl + 'friendrequests/decline', request, httpOptions);
+  }
 }

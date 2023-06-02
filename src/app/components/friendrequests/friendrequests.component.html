@@ -1,0 +1,12 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="OuterPage">
+    <div class="InnerPage">
+        <span class="FriendRequest" *ngFor="let request of friendRequests">
+            <img src="{{request.sender.picture.imageUrl}}">
+            <p>{{request.sender.displayName}}</p>
+            <mat-icon class="Accept">checkmark</mat-icon>
+            <mat-icon class="Decline">delete</mat-icon>
+        </span>
+    </div>
+</div>

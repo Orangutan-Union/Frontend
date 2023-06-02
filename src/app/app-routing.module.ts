@@ -8,6 +8,7 @@ import { ChangeEmailDisplaynameComponent } from './components/change-email-displ
 import { SettingsComponent } from './components/setting/settings.component';
 import { AuthGuard } from './guards/auth.guard';
 import { FullPostComponent } from './components/feeds/full-post/full-post.component';
+import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'changeDisplay', component: ChangeEmailDisplaynameComponent, canActivate:[AuthGuard]},
   { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard]},
   { path: 'fullPost/:id', component: FullPostComponent, canActivate:[AuthGuard]},
+  { path: 'friendrequests', component: FriendrequestsComponent, canActivate:[AuthGuard]},
 ]; 
 
 @NgModule({
