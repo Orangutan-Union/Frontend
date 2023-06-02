@@ -3,19 +3,28 @@
         <div class="postContent">
             <span class="PostHeader">
                 <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
-                <span class="PostHeaderInfo">
-                    <span style="display: flex; justify-content: space-between;">
-                        <p (click)="testtest()">{{post.user.displayName}}</p>
-                        <p class="groupPost" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}}</p>
+                <span>
+                    <span style="display: flex;">
+                        <p style="width: 100%;"> <span (click)="testtest()"> <span class="OnHover">{{post.user.displayName}}</span></span>  
+                            <i *ngIf="post.group.groupName!=null">
+                                <b style="color: rgba(0,0,0,0.7);">
+                                    i gruppen:   
+                                    <span class="groupPost OnHover" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}}</span> 
+                                </b>
+                            </i> 
+                        </p>
                     </span>
-                    <span type="">{{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
+                    <span style="color: rgba(0, 0, 0, 0.7)" type="">{{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
                 </span>
             </span>
             <div class="Content">{{post.content}}</div>
-            <div>
-                <button (click)="likePost(post, i)">Like    {{likeCounter[i]}}</button>
-                <button (click)="dislikePost(post, i)">Dislike {{dislikeCounter[i]}}</button>
-                <button (click)="goToFullPost(post.postId)">Comments {{commentCounter[i]}}</button>
+            <div class="likeContent">
+                <p class="interatctive OnHover" (click)="likePost(post, i)"><mat-icon class="icon">thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
+                <p class="interatctive OnHover" (click)="dislikePost(post, i)"><mat-icon class="icon">thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</p>
+                <p class="interatctive OnHover" (click)="goToFullPost(post.postId)"><mat-icon class="icon">comment</mat-icon> Comments {{commentCounter[i]}}</p>
+                <!-- <span class="interatctive OnHover" (click)="likePost(post, i)"><mat-icon >thumb_up</mat-icon> Like {{likeCounter[i]}}</span>
+                <span class="interatctive OnHover" (click)="dislikePost(post, i)"><mat-icon >thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</span>
+                <span class="interatctive OnHover" (click)="goToFullPost(post.postId)"><mat-icon >comment</mat-icon> Comments {{commentCounter[i]}}</span> -->
             </div>
         </div>
     </div>
