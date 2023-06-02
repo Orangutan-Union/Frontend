@@ -1,17 +1,28 @@
-.postContainer{
-   
-}
-
 .posts{
     /* background: red; */
     outline: 2px solid black;
     margin: 13px;
 }
+.ProfilImg{
+    margin-right: 15px;
+}
+
+p{
+    margin: 0px;
+}
+
 .Content{
     /* background-color: yellow; */
     margin: 5px 1%;
     min-height: 5vh;    
     border: 2px rgba(0, 0, 0, 0.5) solid;
+    display: flex;
+}
+
+.likeContent{
+    margin: 5px 1%;
+    display:flex;
+    padding: 1px;
 }
 
 .PostHeader{
@@ -20,10 +31,28 @@
     /* background: green; */
 }
 
-p:hover{
+.OnHover{
     cursor: pointer;
+    /* background-color: red; */
 }
 
 .PostHeader > .PostHeaderInfo{
     width: 60%;
 }
+
+.icon{
+    vertical-align: bottom;
+    /* color: rgba(78, 72, 72, 0.5); */
+    color: rgba(78, 72, 72, 0.5);
+}
+.interatctive:hover{
+    background-color: rgba(78, 72, 72, 0.1);
+    outline: rgba(78, 72, 72, 0.4) solid 1px;
+    border-radius: 5px;
+}
+
+.interatctive{
+    margin: auto 15px;
+    vertical-align: bottom;
+}
+

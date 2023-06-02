@@ -51,9 +51,7 @@
     position: relative;
     display: flex;
     width: 30vw;
-    border-width: 1px;
-    border-color: black;
-    border-style: solid;
+    border: black solid 1px;
     cursor:pointer;  
     background-color: white; 
 }
@@ -68,12 +66,12 @@
 }
 
 .SearchResult{
+    /* Grunden til at den er offset lidt, er fordi den tager ikke højde for scrollbaren! det er gør andet */
     display: flex;
     left: 50%;
     transform: translate(-50%);
     flex-direction: column;
     position: absolute;
-    justify-content: center;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 10000;
 }
