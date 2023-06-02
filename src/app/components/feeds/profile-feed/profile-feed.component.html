@@ -6,6 +6,7 @@
             <span class="groupPost" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}}</span>
             <span class="timeSteamp"> {{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
             <mat-icon (click)="toggleEdit(post)">edit</mat-icon>
+            <mat-icon (click)="deletePost(i)">delete</mat-icon>
             <div>{{post.content}}</div>
             <form *ngIf="edit == true && editPostId == post.postId" (ngSubmit)="onSubmit(i)" #myForm="ngForm">
                 <textarea autosize placeholder="Comment" type="text" id="content" name="content" #userName="ngModel"

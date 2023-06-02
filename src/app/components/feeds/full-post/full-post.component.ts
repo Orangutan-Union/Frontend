@@ -5,7 +5,6 @@ import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { FeedService } from 'src/app/services/feed.service';
 import { NewComment } from 'src/app/models/newComment';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-full-post',
@@ -17,6 +16,9 @@ export class FullPostComponent implements OnInit {
   like: Like = new Like;
   newComment: NewComment = new NewComment;
   post: Post = new Post;
+  edit: boolean = true;
+  newContent: string;
+  editCommentId: number = 0;
   userId: number = 0;
   commentCount: number = 0;
   commentLikeCount: number = 0;
@@ -29,8 +31,6 @@ export class FullPostComponent implements OnInit {
   commentLikeCounter: number[] = [];
   commentDislikeCounter: number[] = [];
   
-  formdata = FormData;
-
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -40,19 +40,31 @@ export class FullPostComponent implements OnInit {
     });
   }
 
+  deletePost(i: number): void {
+    this.feedService.deletComment(this.post.comments[i].commentId).subscribe(data => {
+      console.log(data);
+    })
+    this.post.comments.splice(i, 1);
+  }
+
+  toggleEdit(post: Post) {
+    if (this.editCommentId == post.postId) {
+      this.edit = !this.edit;
+    }
+    this.editCommentId = post.postId;
+    this.newContent = post.content;
+  }
+
   onSubmit(): void {
     this.newComment.userId = Number(localStorage.getItem('userid'));
     this.newComment.postId = this.post.postId;
 
-    this.feedService.addComment(this.newComment).subscribe(comment => {
-      //this.authService
-      this.comment.commentId = comment.commentId;
-      this.comment.userId = comment.userId;
-      this.comment.content = comment.content;
-      //this.comment.user = 
-      this.post.comments.push(this.comment)
+    this.feedService.addComment(this.newComment).subscribe(newComment => {
+      this.feedService.getCommentById(newComment.commentId).subscribe(comment => {
+        this.post.comments.push(comment)
+      })
     });
-
+    this.newComment.content = '';
   }  
 
   likePost(post: Post): void {
