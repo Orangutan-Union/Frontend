@@ -40,10 +40,21 @@
 }
 
 .feed{
+    /* width: 100px; */
     display:block; 
     margin-left: auto; 
     margin-right: auto; 
-    width: 33%; 
+    width: 50vw;
+    /* max-width: 45vw; */
+    min-width: 650px ;
+    /* width: 600px; */
     margin-top: 1vh; 
     position: relative;
 }
+
+@media only screen and (max-width: 650px) {
+    .feed{
+        width: 100%;
+        min-width: 100%;
+    }
+  }

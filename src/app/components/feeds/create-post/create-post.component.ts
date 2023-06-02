@@ -16,21 +16,12 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(): void{
-    if (!this.post.content.match(/^\s*$/)) {
+  onSubmit(): void {
+    this.post.userId = Number(localStorage.getItem('userid'));
 
-      console.log(this.post.content);
-      
-      // this.authService.register(this.user)
-      // .subscribe({
-      //   next: (reg => {
-      //     this.user = reg;
-      //     console.log(this.user);
-      //     this.router.navigate(['/login']);
-      //   })
-      // });
-
-    }
-  } 
+    this.feedService.addPost(this.post).subscribe(data => {
+      console.log(data);
+    })
+  }
 
 }

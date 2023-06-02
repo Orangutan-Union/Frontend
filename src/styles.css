@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 *{margin: 0; padding: 0;  box-sizing: border-box; overflow-x: hidden;
-color-scheme: light}
+color-scheme: light;}
 body{
     background: whitesmoke;
     height: 100vh;
@@ -14,9 +14,11 @@ input{
 }
 
 .ProfilImg {
-    width: 4vw;
-    height: 4vw;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
+    outline: solid black 1px;
+    margin: 1%;
 }

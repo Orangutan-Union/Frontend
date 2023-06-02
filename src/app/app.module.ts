@@ -13,7 +13,6 @@ import { FormsModule } from '@angular/forms';
 import { ProfilComponent } from './components/profil/profil.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { ChangeEmailDisplaynameComponent } from './components/change-email-displayname/change-email-displayname.component'
 import { SettingsComponent } from './components/setting/settings.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ProfilTestingComponent } from './profil-testing/profil-testing.component';
@@ -23,7 +22,8 @@ import { FeedComponent } from './components/feeds/feed/feed.component';
 import { ProfileFeedComponent } from './components/feeds/profile-feed/profile-feed.component';
 import { FullPostComponent } from './components/feeds/full-post/full-post.component';
 import { CreatePostComponent } from './components/feeds/create-post/create-post.component';
-import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component'
+import { VisitingProfilComponent } from './components/visiting-profil/visiting-profil.component';
+import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';
 
 
 export function tokenGetter() { 
@@ -37,7 +37,6 @@ export function tokenGetter() {
     LoginComponent,
     HomeComponent,
     ProfilComponent,
-    ChangeEmailDisplaynameComponent,
     SettingsComponent,
     NavBarComponent,
     ProfilTestingComponent,
@@ -47,6 +46,7 @@ export function tokenGetter() {
     ProfileFeedComponent,
     FullPostComponent,
     CreatePostComponent,
+    VisitingProfilComponent,
     FriendrequestsComponent
   ],
   imports: [

@@ -1,48 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Like } from 'src/app/models/addLike';
-import { NewPost } from 'src/app/models/newPost';
+import { NewComment } from 'src/app/models/newComment';
 import { Post } from 'src/app/models/post';
 import { FeedService } from 'src/app/services/feed.service';
 
 @Component({
-  selector: 'app-profile-feed',
-  templateUrl: './profile-feed.component.html',
-  styleUrls: ['./profile-feed.component.css']
+  selector: 'app-visiting-profil',
+  templateUrl: './visiting-profil.component.html',
+  styleUrls: ['./visiting-profil.component.css']
 })
-export class ProfileFeedComponent implements OnInit {
-  editPostId: number = 0;
-  userId: number = 0;
+export class VisitingProfilComponent implements OnInit {
+  posts: Post[] = [];  
+  like: Like = new Like;
   commentCount: number = 0;
   likeCount: number = 0;
   dislikeCount: number = 0;
-  newContent: string;
-  edit: boolean = true;
-  like: Like = new Like;
-  uPost: Post = new Post;
-  posts: Post[] = [];
   commentCounter: number[] = [];
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
-  constructor(private feedService: FeedService, private route: Router) { }
+
+  constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getUserPosts();
-  }
-
-  onSubmit(i: number): void{    
-    this.posts[i].content = this.newContent;
-    this.feedService.updatePost(this.posts[i]).subscribe(data => {
-    })
-    this.editPostId = 0;
-} 
-
-  toggleEdit(post: Post) {
-    if (this.editPostId == post.postId) {
-      this.edit = !this.edit;
-    }
-    this.editPostId = post.postId;
-    this.newContent = post.content;
+    this.aRoute.paramMap.subscribe((params) => {
+      const id = Number(params.get('id'))
+      console.log(id);      
+      this.getUserPosts(id);
+    });
   }
 
   goToFullPost(id: number) {
@@ -52,6 +37,7 @@ export class ProfileFeedComponent implements OnInit {
   goToGroup(id: number) {
     this.route.navigate([])
   }
+
   likePost(post: Post, i: number): void {
     this.like.userId = Number(localStorage.getItem('userid'));
     this.like.postId = post.postId;
@@ -116,9 +102,8 @@ export class ProfileFeedComponent implements OnInit {
     })
   }
 
-  getUserPosts(): void {
-    this.userId = Number(localStorage.getItem('userid'));
-    this.feedService.getUserPosts(this.userId).subscribe(data => {
+  getUserPosts(id: number): void {
+    this.feedService.getUserPosts(id).subscribe(data => {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);

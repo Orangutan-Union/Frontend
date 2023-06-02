@@ -17,7 +17,6 @@ export class ProfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser()
-
   }
 
   getUser(): void{
