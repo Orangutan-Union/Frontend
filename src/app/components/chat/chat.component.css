@@ -1,0 +1,30 @@
+.container {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-gap: 10px;
+}
+
+.chatColumn {
+    display: grid;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.messageColumn {
+    display: grid;
+    grid-auto-rows: minmax(100px, auto);
+    width: 90%;
+    overflow: hidden;
+}
+
+.chatList {
+    background-color: #f2f2f2;
+    height: auto;
+    padding: 10px;
+}
+
+textarea {
+    resize: horizontal;
+    overflow: hidden;
+    width: 100%;
+    min-height: 30px;
+}

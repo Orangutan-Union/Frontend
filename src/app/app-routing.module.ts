@@ -8,9 +8,11 @@ import { SettingsComponent } from './components/setting/settings.component';
 import { AuthGuard } from './guards/auth.guard';
 import { FullPostComponent } from './components/feeds/full-post/full-post.component';
 import { VisitingProfilComponent } from './components/visiting-profil/visiting-profil.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'chat', component: ChatComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },

@@ -1,0 +1,31 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+    <div class="chatColumn">
+        <div class="chatList" *ngFor="let chat of chatList">
+            <div (click)="selectChat(chat.chatId)">
+                {{ chat.chatName }}
+            </div>
+        </div>
+    </div>
+
+    <div class="messageColumn">
+        <div class="messageList" *ngFor="let message of chat.messages">
+            <div *ngIf="message.userId == loggedInUser" style="float: right;">
+                <div>{{message.user.displayName}}</div>
+                <li>{{message.content}}</li>
+            </div>
+            <div *ngIf="message.userId != loggedInUser" style="float: left;">
+                <div>{{message.user.displayName}}</div>
+                <li>{{message.content}}</li>
+            </div>
+        </div>
+        <form (ngSubmit)="sendMessage()" #myForm="ngForm">
+            <textarea autosize placeholder="Message" type="text" id="content" name="content" #userName="ngModel"
+                [(ngModel)]="newMessage" required>
+        </textarea>
+        <br>
+            <button style="float: right;" type="submit" mat-raised-button color="primary"
+                [disabled]="myForm.invalid || newMessage.trim() == ''">Create</button>
+        </form>
+    </div>
+</div>
