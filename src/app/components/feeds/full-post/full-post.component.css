@@ -1,3 +1,96 @@
+.OuterLayer{
+    /* width: 100px; */
+    display:block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 50vw;
+    /* max-width: 45vw; */
+    min-width: 650px ;
+    /* width: 600px; */
+    margin-top: 1vh; 
+    position: relative;
+}
+
+.interatctive:hover{
+    background-color: rgba(78, 72, 72, 0.1);
+    outline: rgba(78, 72, 72, 0.4) solid 1px;
+    border-radius: 5px;
+}
+
+.interatctive{
+    margin: auto 15px;
+    vertical-align: bottom;
+}
+
+.icon{
+    vertical-align: bottom;
+    /* color: rgba(78, 72, 72, 0.5); */
+    color: rgba(78, 72, 72, 0.5);
+}
+
+@media only screen and (max-width: 650px) {
+    .OuterLayer{
+        width: 100%;
+        min-width: 100%;
+    }
+  }
+  
+  .posts{
+    /* background: red; */
+    outline: 2px solid black;
+    margin: 13px;
+}
+.ProfilImg{
+    margin-right: 15px;
+}
+
+p{
+    margin: 0px;
+}
+
+
+.ContentPost{
+    outline: 2px solid black;
+    margin: 13px;
+}
+.Content{
+    /* background-color: yellow; */
+    margin: 5px 1%;
+    min-height: 5vh;    
+    border: 2px rgba(0, 0, 0, 0.5) solid;
+    display: flex;
+}
+
+.Content > p{
+    margin: 10px;
+    /* outline: solid red 1px; */
+}
+
+.likeContent{
+    margin: 5px 1%;
+    display:flex;
+    padding: 1px;
+}
+
+.PostHeader{
+    width: 100%;
+    display: flex;
+    /* background: green; */
+}
+
+.OnHover{
+    cursor: pointer;
+    /* background-color: red; */
+}
+
+.PostHeader > .PostHeaderInfo{
+    width: 60%;
+}
+
+
+
+
+/* 
 .container {
     height: 100%;
     width: 100%;
@@ -41,4 +134,4 @@ textarea {
     width: 100%;
     margin-top: 10vh;
     justify-content: center;
-}
+} */
