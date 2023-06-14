@@ -7,8 +7,9 @@ import { Like } from '../models/addLike';
 import { NewComment } from '../models/newComment';
 import { NewPost } from '../models/newPost';
 import { Post } from '../models/post';
+import { Comment } from '../models/comment';
 
-const httpOptions={
+const httpOptions = {
   headers: new HttpHeaders({
     'content-type': 'application/json'
   })
@@ -22,31 +23,31 @@ export class FeedService {
   baseApiUrl: string = environment.baseApiUrl;
   constructor(private http: HttpClient, private route: Router) { }
 
-  getFullPost(id: number): Observable<Post>{
+  getFullPost(id: number): Observable<Post> {
     return this.http.get<Post>(this.baseApiUrl + 'Post/' + id)
   }
 
-  getUserPosts(id: number): Observable<Post[]>{
+  getUserPosts(id: number): Observable<Post[]> {
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/user/' + id);
   }
 
-  getUserFeed(id: number): Observable<Post[]>{
+  getUserFeed(id: number): Observable<Post[]> {
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/feed/' + id);
   }
 
-  getUsersFollowerFeed(id: number): Observable<Post[]>{
+  getUsersFollowerFeed(id: number): Observable<Post[]> {
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/followerfeed/' + id);
   }
 
-  getUsersFriendFeed(id: number): Observable<Post[]>{
+  getUsersFriendFeed(id: number): Observable<Post[]> {
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/friendfeed/' + id);
   }
 
-  addPost(newPost: NewPost): Observable<NewPost>{
+  addPost(newPost: NewPost): Observable<NewPost> {
     return this.http.post<NewPost>(this.baseApiUrl + 'Post', newPost, httpOptions)
   }
 
-  updatePost(post: Post): Observable<Post>{
+  updatePost(post: Post): Observable<Post> {
     return this.http.put<Post>(this.baseApiUrl + 'Post/update', post)
   }
 
@@ -58,16 +59,19 @@ export class FeedService {
     return this.http.post<Like>(this.baseApiUrl + 'Like', like, httpOptions)
   }
 
-  addComment(newComment: NewComment): Observable<NewComment>{
+  addComment(newComment: NewComment): Observable<NewComment> {
     return this.http.post<NewComment>(this.baseApiUrl + 'Comment', newComment, httpOptions)
   }
 
-  updateComment(comment: Comment): Observable<Comment>{
-    return this.http.post<Comment>(this.baseApiUrl + 'Comment', comment, httpOptions)
+  updateComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(this.baseApiUrl + 'Comment/', comment, httpOptions)
   }
 
   deletComment(id: number): Observable<Comment> {
-    return this.http.post<Comment>(this.baseApiUrl + 'Comment/' + id, httpOptions)
+    return this.http.delete<Comment>(this.baseApiUrl + 'Comment/' + id, httpOptions)
   }
 
+  getCommentById(id: number): Observable<Comment> {
+    return this.http.get<Comment>(this.baseApiUrl + 'Comment/' + id, httpOptions)
+  }
 }

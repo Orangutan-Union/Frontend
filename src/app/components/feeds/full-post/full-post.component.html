@@ -52,10 +52,10 @@
         <div class="commentContainer">
             <form (ngSubmit)="onSubmit()" #myForm="ngForm">
                 <textarea autosize placeholder="Comment" type="text" id="content" name="content" #userName="ngModel"
-                     [(ngModel)]="comment.content" required>
+                     [(ngModel)]="newComment.content" required>
                 </textarea>
                 <button style="float: right;" type="submit" mat-raised-button color="primary"
-                    [disabled]="myForm.invalid || comment.content.trim() == ''">Create</button>
+                    [disabled]="myForm.invalid || newComment.content.trim() == ''">Create</button>
             </form>
         <div class="comment" *ngFor="let comment of post.comments, let i = index">
                 <div>
@@ -63,6 +63,7 @@
                         alt="Profile Image">
                     <span>{{comment.user.displayName}} </span>
                     <span>{{comment.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
+                    <mat-icon (click)="deletePost(i)">delete</mat-icon>
                     <div>{{comment.content}}</div>
                     <div>
                         <button (click)="likeComment(comment, i)">Like {{commentLikeCounter[i]}}</button>
