@@ -40,16 +40,14 @@ export class CommentsComponent implements OnInit {
   onSubmit(): void {
     this.newComment.userId = Number(localStorage.getItem('userid'));
     this.newComment.postId = this.post.postId;
-    this.feedService.addComment(this.newComment).subscribe(comment => {
-      //this.authService
-      this.comment.commentId = comment.commentId;
-      this.comment.userId = comment.userId;
-      this.comment.content = comment.content;
-      //this.comment.user = 
-      this.post.comments.push(this.comment)
-    });
 
-  }  
+    this.feedService.addComment(this.newComment).subscribe(newComment => {
+      this.feedService.getCommentById(newComment.commentId).subscribe(comment => {
+        this.post.comments.unshift(comment)
+      })
+    });
+    this.newComment.content = '';
+  }    
 
   likePost(post: Post): void {
       this.like.userId = Number(localStorage.getItem('userid'));

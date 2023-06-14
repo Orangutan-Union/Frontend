@@ -4,11 +4,11 @@
         <div class="Comments">
             <form (ngSubmit)="onSubmit()" #myForm="ngForm">
                 <textarea autosize style="width: 90%;" placeholder="Comment" type="text" id="content" name="content" #userName="ngModel"
-                    [(ngModel)]="comment.content" required>
+                    [(ngModel)]="newComment.content" required>
                 </textarea>
         
                 <button style="float: right; width: 9%;" type="submit" mat-raised-button color="primary"
-                [disabled]="myForm.invalid || comment.content.trim() == ''">
+                [disabled]="myForm.invalid || newComment.content.trim() == ''">
                     Create
                 </button>
             </form>
