@@ -1,0 +1,69 @@
+<div>
+    
+    <div class="commentContainer">
+        <div class="Comments">
+            <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+                <textarea autosize style="width: 90%;" placeholder="Comment" type="text" id="content" name="content" #userName="ngModel"
+                    [(ngModel)]="comment.content" required>
+                </textarea>
+        
+                <button style="float: right; width: 9%;" type="submit" mat-raised-button color="primary"
+                [disabled]="myForm.invalid || comment.content.trim() == ''">
+                    Create
+                </button>
+            </form>
+        </div>
+        <div *ngFor="let comment of post.comments, let i = index">
+            <span class="CommentsHeader">
+                <img class="ProfilImg" routerLink="/visitingProfil/{{comment.userId}}" src="{{comment.user.picture.imageUrl}}" alt="Profile Image">
+                <span style=" margin-top: 1%;"><span><p style="width: 100%;"><span class="OnHover">{{comment.user.displayName}}</span></p></span>
+                    <span style="color: rgba(0, 0, 0, 0.7)" type="">{{comment.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
+                </span>
+            </span>
+            <div class="SpecificComment">
+                {{comment.content}}
+            </div>
+            <div class="likeComment">
+                <p class="interatctive OnHover" (click)="likeComment(comment, i)"><mat-icon class="icon">thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
+                <p class="interatctive OnHover" (click)="dislikeComment(comment, i)"><mat-icon class="icon">thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</p>
+             </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    <!-- <div class="Comments">
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+            <textarea autosize placeholder="Comment" type="text" id="content" name="content" #userName="ngModel"
+                [(ngModel)]="comment.content" required>
+            </textarea>
+
+            <button style="float: right;" type="submit" mat-raised-button color="primary"
+            [disabled]="myForm.invalid || comment.content.trim() == ''">
+                Create
+            </button>
+        </form>
+    </div> -->
+    <!-- <div class="commentContainer">
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+
+
+        </form>
+            <div class="comment" *ngFor="let comment of post.comments, let i = index">
+            <div>
+                <img class="ProfilImg" routerLink="/visitingProfil/{{comment.userId}}" src="{{comment.user.picture.imageUrl}}"
+                    alt="Profile Image">
+                <span>{{comment.user.displayName}} </span>
+                <span>{{comment.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
+    
+                <div>
+                    <button class="interatctive OnHover" (click)="likeComment(comment, i)">Like {{commentLikeCounter[i]}}</button>
+                    <button class="interatctive OnHover" (click)="dislikeComment(comment, i)">Dislike {{commentDislikeCounter[i]}}</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    

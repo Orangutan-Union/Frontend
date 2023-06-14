@@ -1,0 +1,35 @@
+.likeComment{
+    display: flex;
+}
+.CommentsHeader{
+    width: 100%;
+    display: flex;
+}
+
+.OnHover{
+    cursor: pointer;
+}
+
+.icon{
+    vertical-align: bottom;
+    /* color: rgba(78, 72, 72, 0.5); */
+    color: rgba(78, 72, 72, 0.5);
+}
+.interatctive:hover{
+    background-color: rgba(78, 72, 72, 0.1);
+    outline: rgba(78, 72, 72, 0.4) solid 1px;
+    border-radius: 5px;
+}
+
+.interatctive{
+    margin: auto 15px;
+    vertical-align: bottom;
+}
+
+
+.SpecificComment{
+    outline: red solid 1px;
+    width: auto;
+    margin: 2px;
+}
+
