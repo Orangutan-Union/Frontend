@@ -85,11 +85,9 @@ export class NavBarComponent implements OnInit {
     // Check for friend requests sent by current user.
     for (const request of this.user.sentFriendRequests) {
       if (request.receiverId === receiverId) {
-        console.log('PENDING TRUE');        
         return true;
       }
     }
-    console.log('PENDING FALSE');    
     return false;
   }
 

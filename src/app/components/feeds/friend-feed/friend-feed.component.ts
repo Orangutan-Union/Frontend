@@ -22,6 +22,8 @@ export class FriendFeedComponent implements OnInit {
   constructor(private feedService: FeedService, private route: Router) { }
 
   ngOnInit(): void {
+    console.log('yoooo thats crazy');
+    
     this.getFriendFeed();    
   }
 

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Like } from 'src/app/models/addLike';
+import { FriendFollower } from 'src/app/models/friendfollower';
 import { NewComment } from 'src/app/models/newComment';
 import { Post } from 'src/app/models/post';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { FeedService } from 'src/app/services/feed.service';
+import { FriendfollowerService } from 'src/app/services/friendfollower.service';
 
 @Component({
   selector: 'app-visiting-profil',
@@ -11,6 +15,10 @@ import { FeedService } from 'src/app/services/feed.service';
   styleUrls: ['./visiting-profil.component.css']
 })
 export class VisitingProfilComponent implements OnInit {
+  currentUserFollowing: FriendFollower[] = [];
+  user: User = new User;
+  friends: boolean = false;
+  following: boolean = false;
   posts: Post[] = [];  
   like: Like = new Like;
   commentCount: number = 0;
@@ -20,13 +28,14 @@ export class VisitingProfilComponent implements OnInit {
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
 
-  constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
+  constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute, private authService: AuthService, private ffService: FriendfollowerService) { }
 
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params) => {
       const id = Number(params.get('id'))
       console.log(id);      
       this.getUserPosts(id);
+      this.getUser(id);
     });
   }
 
@@ -128,5 +137,66 @@ export class VisitingProfilComponent implements OnInit {
       this.dislikeCount = 0;
       this.commentCount = 0;
     });
+  }
+
+  getUser(id: number){
+    this.authService.getUserById(id).subscribe(res => {
+      this.user = res;
+      this.isFriend();
+   });
+  }
+
+  isFriend(){    
+    let userId: number = Number(localStorage.getItem('userid'));
+
+    // Check if there are any friends
+    if (this.user.userFriendFollowers.filter(x => x.type === 1).length === 0 || this.user.otherUserFriendFollowers.filter(x => x.type === 1).length === 0) {
+      this.friends = false;      
+      return
+    }
+    
+    // Check if current user is in the left side of the friends table
+    for (const friend of this.user.userFriendFollowers) {
+      if (userId === friend.otherUserId && friend.type === 1 || userId === friend.userId && friend.type === 1) {        
+        this.friends = true;
+        return;
+      }
+      else{
+        this.friends = false;        
+      }
+    }
+
+    // Check if current user is in the right side of hte friends table
+    for (const friend of this.user.otherUserFriendFollowers) {
+      if (userId === friend.otherUserId && friend.type === 1 || userId === friend.userId && friend.type === 1) {        
+        this.friends = true;
+        return;
+      }
+      else{
+        this.friends = false;
+      }
+    }    
+  }
+
+  getCurrentUserFollowers(){
+    this.ffService.getUserFollowers(Number(localStorage.getItem('userid'))).subscribe(res => {
+      this.currentUserFollowing = res;
+      console.log(this.currentUserFollowing);
+      this.isFollowing();
+    });
+  }
+
+  isFollowing(){
+    if (this.currentUserFollowing.filter(x => x.otherUserId === this.user.userId || x.userId === this.user.userId)) {
+      this.following = true;
+    }
+    else{
+      this.following = false;
+    }
+    // for (const follower of this.currentUserFollowing) {
+    //   if (condition) {
+        
+    //   }
+    // }
   }
 }
