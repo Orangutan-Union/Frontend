@@ -8,6 +8,7 @@
       <img style="border: 1px solid black;" class="ProfilImg" routerLink="/profil"
         src="{{user.picture.imageUrl}}" alt="">
       <span class="Icons">
+        <mat-icon routerLink="/friendrequests" style="margin-left: 15px;">notification_important_icon</mat-icon>
         <mat-icon routerLink="/settings" style="margin-left: 15px;">settings</mat-icon>
         <mat-icon (click)="logOff()" style="margin-left: 15px;">exit_to_app</mat-icon>
       </span>
@@ -21,18 +22,11 @@
       <span class="search-results" routerLink="/visitingProfil/{{user.userId}}">
         <img class="ProfilImg" src="{{user.picture.imageUrl}}">
         <p>{{user.displayName}}</p>
+        <mat-icon class="search-results-icon" *ngIf="userId !== user.userId && !sentFriendRequestPending(user.userId) && !isFriend(user.userId) && !receivedFriendRequestPending(user.userId)" (click)="sendFriendRequest(user.userId)">person_add_icon</mat-icon>
+        <mat-icon *ngIf="isFriend(user.userId)">person</mat-icon>
+        <button [disabled]="true" *ngIf="userId !== user.userId && sentFriendRequestPending(user.userId)">Sent</button>
+        <button [disabled]="true" *ngIf="userId !== user.userId && receivedFriendRequestPending(user.userId)">Pending</button>
       </span>
     </li>
   </ul>
 </span>
-
-
-
-
-
-<!-- <div class="SearchResult" *ngFor="let user of searchUsers">
-        <span class="search-results" (click)="logOff()">
-          <img class="ProfilImg" src="data:image/png;base64,{{user.picture.imageData}}">
-          <p>{{user.displayName}}</p>
-        </span>
-      </div> -->

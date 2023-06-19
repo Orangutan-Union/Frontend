@@ -8,6 +8,7 @@ import { SettingsComponent } from './components/setting/settings.component';
 import { AuthGuard } from './guards/auth.guard';
 import { FullPostComponent } from './components/feeds/full-post/full-post.component';
 import { VisitingProfilComponent } from './components/visiting-profil/visiting-profil.component';
+import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'profil', component: ProfilComponent, canActivate:[AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard]},
   { path: 'fullPost/:id', component: FullPostComponent, canActivate:[AuthGuard]},
+  { path: 'friendrequests', component: FriendrequestsComponent, canActivate:[AuthGuard]},
   { path: 'visitingProfil/:id', component: VisitingProfilComponent, canActivate:[AuthGuard] }
 ]; 
 
