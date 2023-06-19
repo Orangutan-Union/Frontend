@@ -1,6 +1,25 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="OuterPage">
+<div class="requestContainer">
+    <div class="requests" *ngFor="let request of friendRequests">
+        <span class="requestHeader">
+            <b>
+                <p>Request received:</p>
+            </b>
+            <p>{{request.dateSent | date: 'medium'}}</p>
+        </span>
+        <div class="Content">
+            <img routerLink="/visitingProfil/{{request.senderId}}" src="{{request.sender.picture.imageUrl}}" alt="" class="ProfilImg">
+            <p routerLink="/visitingProfil/{{request.senderId}}" style="font-size: larger;">{{request.sender.displayName}}</p>
+            <div class="actionButtons">
+                <mat-icon (click)="acceptFriendRequest(request)" style="margin-right: 5px;" class="Accept">checkmark</mat-icon>
+                <mat-icon (click)="declineFriendRequest(request)" class="Decline">delete</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="OuterPage">
     <div class="InnerPage">
         <span class="FriendRequest" *ngFor="let request of friendRequests">
             <img src="{{request.sender.picture.imageUrl}}">
@@ -9,4 +28,4 @@
             <mat-icon class="Decline">delete</mat-icon>
         </span>
     </div>
-</div>
+</div> -->
