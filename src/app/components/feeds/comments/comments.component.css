@@ -4,6 +4,7 @@
 .CommentsHeader{
     width: 100%;
     display: flex;
+    margin-bottom: 1%;
 }
 
 .OnHover{
@@ -30,5 +31,11 @@
 .SpecificComment{
     width: auto;
     margin: 2px;
+    margin-left: 5%;
+    font-weight: 500;
+}
+
+.commentContainer{
+    border: black 1px solid;
 }
 
