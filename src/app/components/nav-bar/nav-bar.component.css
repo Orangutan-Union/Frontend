@@ -73,7 +73,16 @@
     width: 40%;
 }
 
-.search-results > mat-icon{
+/* .search-results > mat-icon{
+    background-color: rgb(145, 145, 255);
+    margin: 6px 6px 0px 0px;
+    font-size: 50px;
+    height: 50px;
+    width: 15%;
+    outline: solid black 2px;
+} */
+
+.search-results-icon{
     background-color: rgb(145, 145, 255);
     margin: 6px 6px 0px 0px;
     font-size: 50px;
@@ -82,10 +91,15 @@
     outline: solid black 2px;
 }
 
-.search-results > mat-icon:hover{
+.search-results-icon:hover{
     background-color: rgb(77, 77, 255);
     cursor: pointer;
 }
+
+/* .search-results > mat-icon:hover{
+    background-color: rgb(77, 77, 255);
+    cursor: pointer;
+} */
 
 .search-results > button:hover{
     background-color: rgb(100, 100, 255);

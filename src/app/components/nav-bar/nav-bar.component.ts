@@ -5,6 +5,7 @@ import { FriendRequest } from 'src/app/models/friendrequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FriendrequestService } from 'src/app/services/friendrequest.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -31,7 +32,9 @@ export class NavBarComponent implements OnInit {
     this.authService.getUserById(this.userId).subscribe({
       next: (usr => {
         this.user = usr;
-        //console.log(this.user);
+        console.log('ayoooooooooo');
+        
+        console.log(this.user);
       })
     });
   }
@@ -78,9 +81,37 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-  friendRequestPending(receiverId: number): boolean{
+  sentFriendRequestPending(receiverId: number): boolean{
+    // Check for friend requests sent by current user.
     for (const request of this.user.sentFriendRequests) {
       if (request.receiverId === receiverId) {
+        console.log('PENDING TRUE');        
+        return true;
+      }
+    }
+    console.log('PENDING FALSE');    
+    return false;
+  }
+
+  receivedFriendRequestPending(senderId: number): boolean{
+    // Check for friend requests received by current user.
+    for (const request of this.user.receivedFriendRequests) {
+      if (request.senderId === senderId) {   
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isFriend(receiverId: number): boolean{
+    for (const request of this.user.userFriendFollowers) {
+      if (request.otherUserId === receiverId) {        
+        return true;
+      }
+    }
+
+    for (const request of this.user.otherUserFriendFollowers) {
+      if (request.userId === receiverId) {
         return true;
       }
     }
