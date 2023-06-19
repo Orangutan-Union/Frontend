@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { FriendRequest } from 'src/app/models/friendrequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { FriendrequestService } from 'src/app/services/friendrequest.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,7 +20,7 @@ export class NavBarComponent implements OnInit {
   private searchSubscription?: Subscription;
   private readonly searchSubject = new Subject<string | undefined>();
   searchUsers: User[] = [];
-  constructor(private authService: AuthService, private route: Router) { }
+  constructor(private authService: AuthService, private route: Router, private friendreqService: FriendrequestService) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -29,7 +32,9 @@ export class NavBarComponent implements OnInit {
     this.authService.getUserById(this.userId).subscribe({
       next: (usr => {
         this.user = usr;
-        //console.log(this.user);
+        console.log('ayoooooooooo');
+        
+        console.log(this.user);
       })
     });
   }
@@ -40,11 +45,11 @@ export class NavBarComponent implements OnInit {
 
   onSearchQueryInput(event: Event) {
     const searchQuery = (event.target as HTMLInputElement).value;
-    if (searchQuery.trim().length > 2) {
+    if (searchQuery.trim().length > 1) {
       this.search = searchQuery;
       this.searchSubject.next(searchQuery?.trim());
     }
-    else if (searchQuery.trim().length <= 2){
+    else if (searchQuery.trim().length <= 1){
       this.searchUsers = [];
       this.search = '';
     }
@@ -65,5 +70,51 @@ export class NavBarComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.searchSubscription?.unsubscribe();
+  }
+
+  sendFriendRequest(receiverId: number):void{
+    let request = new FriendRequest;
+    request.senderId = Number(localStorage.getItem('userid'));
+    request.receiverId = receiverId;
+    this.friendreqService.sendFriendRequest(request).subscribe(() => {
+      window.location.reload();
+    });
+  }
+
+  sentFriendRequestPending(receiverId: number): boolean{
+    // Check for friend requests sent by current user.
+    for (const request of this.user.sentFriendRequests) {
+      if (request.receiverId === receiverId) {
+        console.log('PENDING TRUE');        
+        return true;
+      }
+    }
+    console.log('PENDING FALSE');    
+    return false;
+  }
+
+  receivedFriendRequestPending(senderId: number): boolean{
+    // Check for friend requests received by current user.
+    for (const request of this.user.receivedFriendRequests) {
+      if (request.senderId === senderId) {   
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isFriend(receiverId: number): boolean{
+    for (const request of this.user.userFriendFollowers) {
+      if (request.otherUserId === receiverId) {        
+        return true;
+      }
+    }
+
+    for (const request of this.user.otherUserFriendFollowers) {
+      if (request.userId === receiverId) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -1,5 +1,40 @@
 <app-nav-bar></app-nav-bar>
-<div class="postContainer">
+<div class="OuterLayer">
+    <span>
+        <div class="ContentPost">
+            <span class="PostHeader">
+                <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
+                <span style=" margin-top: 1%;">
+                    <span style="display: flex;">
+                        <p style="width: 100%;"><span class="OnHover">{{post.user.displayName}}</span>
+                            <i *ngIf="post.group.groupName!=null">
+                                <b style="color: rgba(0,0,0,0.7);">
+                                    i gruppen:   
+                                    <span class="groupPost OnHover" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}} <span style="color: white;">.</span></span> 
+                                </b>
+                            </i> 
+                        </p>
+                    </span>
+                    <span style="color: rgba(0, 0, 0, 0.7)" type="">{{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
+                </span>
+            </span>
+            <div class="Content">
+                <p>
+                    {{post.content}}
+                </p>
+            </div>
+            <div class="likeContent">
+                <p class="interatctive OnHover" (click)="likePost(post)"><mat-icon class="icon">thumb_up</mat-icon> Like {{likeCounter}}</p>
+                <p class="interatctive OnHover" (click)="dislikePost(post)"><mat-icon class="icon">thumb_down</mat-icon> Dislike {{dislikeCounter}}</p>
+            </div>
+        </div>        
+    </span>
+    <app-comments></app-comments>
+</div>
+
+
+
+<!-- <div class="outerLayer">
     <div class="grid">
         <div class="postContent">
             <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
@@ -38,4 +73,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

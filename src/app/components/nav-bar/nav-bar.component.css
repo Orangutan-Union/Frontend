@@ -54,6 +54,55 @@
     border: black solid 1px;
     cursor:pointer;  
     background-color: white; 
+    height: 100%;
+}
+
+.search-results > p{
+    display: flex;
+    width: 100%;
+    margin: 0px;
+    align-items: center;
+}
+.search-results > img{
+    min-width: 64px;
+}
+
+.search-results > button{
+    background-color: rgb(145, 145, 255);
+    cursor: pointer;
+    width: 40%;
+}
+
+/* .search-results > mat-icon{
+    background-color: rgb(145, 145, 255);
+    margin: 6px 6px 0px 0px;
+    font-size: 50px;
+    height: 50px;
+    width: 15%;
+    outline: solid black 2px;
+} */
+
+.search-results-icon{
+    background-color: rgb(145, 145, 255);
+    margin: 6px 6px 0px 0px;
+    font-size: 50px;
+    height: 50px;
+    width: 15%;
+    outline: solid black 2px;
+}
+
+.search-results-icon:hover{
+    background-color: rgb(77, 77, 255);
+    cursor: pointer;
+}
+
+/* .search-results > mat-icon:hover{
+    background-color: rgb(77, 77, 255);
+    cursor: pointer;
+} */
+
+.search-results > button:hover{
+    background-color: rgb(100, 100, 255);
 }
 
 .search-results >p{
@@ -74,4 +123,11 @@
     position: absolute;
     /* overflow: hidden; */
     z-index: 10000;
+}
+
+@media only screen and (max-width: 1150px){
+    .ProfilImg{
+        width: 50px;
+        height: 50px;
+    }
 }

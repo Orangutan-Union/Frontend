@@ -26,7 +26,9 @@ import { VisitingProfilComponent } from './components/visiting-profil/visiting-p
 import { ChatComponent } from './components/chat/chat/chat.component';
 import { ChatSelectComponent } from './components/chat/chat-select/chat-select.component';
 import { MessagesComponent } from './components/chat/messages/messages.component';
-import { SendMessageComponent } from './components/chat/send-message/send-message.component'
+import { SendMessageComponent } from './components/chat/send-message/send-message.component';
+import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';
+import { CommentsComponent } from './components/feeds/comments/comments.component';
 
 
 export function tokenGetter() {
@@ -53,7 +55,9 @@ export function tokenGetter() {
     ChatComponent,
     ChatSelectComponent,
     MessagesComponent,
-    SendMessageComponent
+    SendMessageComponent,
+    CommentsComponent,
+    FriendrequestsComponent,
   ],
   imports: [
     BrowserModule,
