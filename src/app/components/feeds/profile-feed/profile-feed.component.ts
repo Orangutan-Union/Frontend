@@ -24,6 +24,7 @@ export class ProfileFeedComponent implements OnInit {
   commentCounter: number[] = [];
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
+  
   constructor(private feedService: FeedService, private route: Router) { }
 
   ngOnInit(): void {

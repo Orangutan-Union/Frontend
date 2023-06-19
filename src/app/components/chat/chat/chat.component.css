@@ -1,0 +1,38 @@
+.container {
+    display: grid;
+    grid-template-columns: minmax(auto, 25%) 75%;
+    grid-gap: 10px;
+    overflow: hidden;
+    height: 89vh;
+  }
+  
+  .chatColumn {
+    display: grid;
+    grid-auto-rows: minmax(100px, auto);
+    overflow-y: auto;
+  }
+  
+  .messageColumn {
+    display: grid;
+    grid-auto-rows: minmax(100px, auto);
+    width: 90%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .messageColumnRows {
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+  
+  .messages {
+    overflow-y: auto;
+    height: calc(100% - 30px);
+    scroll-behavior: smooth;
+  } 
+  
+  .textBox {
+    position: sticky;
+    bottom: 0;
+  }
+  

@@ -1,0 +1,8 @@
+<form (ngSubmit)="sendMessage()" #myForm="ngForm">
+    <textarea autosize placeholder="Message" type="text" id="content" name="content" #userName="ngModel"
+        [(ngModel)]="newMessage" required>
+</textarea>
+    <br>
+    <button style="float: right;" type="submit" mat-raised-button color="primary"
+        [disabled]="myForm.invalid || newMessage.trim() == ''">Create</button>
+</form>

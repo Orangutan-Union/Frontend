@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NewPost } from 'src/app/models/newPost';
 import { FeedService } from 'src/app/services/feed.service';
 
@@ -11,7 +10,7 @@ import { FeedService } from 'src/app/services/feed.service';
 export class CreatePostComponent implements OnInit {
   post: NewPost = new NewPost
   @Input() posts: any[] = []
-  constructor(private feedService: FeedService, private route: Router) { }
+  constructor(private feedService: FeedService) { }
 
   ngOnInit(): void {
     console.log(this.posts);    
