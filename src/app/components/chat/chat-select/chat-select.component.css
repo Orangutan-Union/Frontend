@@ -1,0 +1,14 @@
+.chatList {
+    background-color: #f2f2f2;
+    display: block;
+    height: auto;
+    width: auto;
+}
+
+.chat {    
+    font-size: x-large;
+}
+
+.selected {
+    background-color: #59deff; /* Set the background color for the selected chat */
+  }

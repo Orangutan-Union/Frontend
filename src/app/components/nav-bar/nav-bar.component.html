@@ -5,6 +5,7 @@
       <input class="TopSeachBar" type="search" placeholder="Search.." (input)="onSearchQueryInput($event)">
     </div>
     <span class="settingsProfil">
+      <mat-icon routerLink="/chat">chat</mat-icon>
       <img style="border: 1px solid black;" class="ProfilImg" routerLink="/profil"
         src="{{user.picture.imageUrl}}" alt="">
       <span class="Icons">

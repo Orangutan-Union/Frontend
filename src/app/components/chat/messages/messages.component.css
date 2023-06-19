@@ -1,0 +1,56 @@
+.messagecontainer {
+}
+
+.messageList {
+    height: fit-content;
+    margin: 5px;
+    /* display: flex; */
+    flex-direction: column-reverse;
+}
+
+.users {
+    float: right;
+    width: 52.5%;
+}
+
+.usersMessages {
+    background-color: lawngreen;
+}
+
+.usersMessages.firstMessage {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.usersMessages.lastMessage {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.usersMessages.onlyMessage {
+    border-radius: 10px;
+}
+
+.others {
+    float: left;
+    width: 52.5%;
+}
+
+.othersMessages {
+
+    background-color: red;
+}
+
+.othersMessages.firstMessage {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.othersMessages.lastMessage {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.othersMessages.onlyMessage {
+    border-radius: 10px;
+}
