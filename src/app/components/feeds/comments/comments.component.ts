@@ -48,75 +48,11 @@ export class CommentsComponent implements OnInit {
     });
     this.newComment.content = '';
   }    
-
-  likePost(post: Post): void {
-      this.like.userId = Number(localStorage.getItem('userid'));
-      this.like.postId = post.postId;
-      this.like.isLiked = true;
-
-      post.likes.forEach(element => {
-        if (element.userId == this.like.userId && element.postId == post.postId) {
-          this.like.isLiked = !element.isLiked
-          element.isLiked = this.like.isLiked
-          this.like.isDisliked = element.isDisliked;
-          element.isDisliked = false
-        }
-      });
-
-      if (this.like.isDisliked == true && this.dislikeCounter[0] != 0) {
-        this.dislikeCounter[0]--
-        this.like.isDisliked = false;
-      }
-
-      if (this.like.isLiked == true) {
-        this.likeCounter[0]++
-      }
-      else {
-        this.likeCounter[0]--
-      }
-
-      this.feedService.addLike(this.like).subscribe(data => {
-        console.log(data)
-      })
-  }
-
-  dislikePost(post: Post): void {
-      this.like.userId = Number(localStorage.getItem('userid'));
-      this.like.postId = post.postId;
-      this.like.isDisliked = true;
-
-      post.likes.forEach(element => {
-        if (element.userId == this.like.userId && element.postId == post.postId) {
-          this.like.isDisliked = !element.isDisliked
-          element.isDisliked = this.like.isDisliked
-          this.like.isLiked = element.isLiked;
-          element.isLiked = false
-        }
-      });
-
-      if (this.like.isLiked == true && this.likeCounter[0] != 0) {
-        this.likeCounter[0]--
-        this.like.isLiked = false;
-      }
-      console.log(this.like.isLiked);
-
-      if (this.like.isDisliked == true) {
-        this.dislikeCounter[0]++
-
-      }
-      else {
-        this.dislikeCounter[0]--
-      }
-
-      this.feedService.addLike(this.like).subscribe(data => {
-        console.log(data)
-      })
-  }
-
+  
   likeComment(comment: Comment, i: number): void {
       this.like.userId = Number(localStorage.getItem('userid'));
       this.like.commentId = comment.commentId;
-      this.like.isDisliked = true;
+      this.like.isLiked = true;
 
       comment.likes.forEach(element => {
         if (element.userId == this.like.userId && element.commentId == comment.commentId) {
@@ -177,10 +113,6 @@ export class CommentsComponent implements OnInit {
       this.feedService.addLike(this.like).subscribe(data => {
         console.log(data)
       })
-  }
-
-  goToGroup(id: number) {
-    this.route.navigate([])
   }
 
   getFullPost(id: number): void {
