@@ -4,6 +4,7 @@ import { User } from "./user";
 export class Comment{
     commentId: number = 0;
     userId: number = 0;
+    postId: number = 0;
     timeStamp: Date;
     content: string= '';
 

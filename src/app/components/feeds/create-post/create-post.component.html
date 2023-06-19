@@ -1,9 +1,7 @@
 <form (ngSubmit)="onSubmit()" #myForm="ngForm">
-    <textarea autosize placeholder="Comment" type="text" id="content" name="content" #userName="ngModel"
+    <textarea autosize placeholder="Whats on your mind?" type="text" id="content" name="content" #userName="ngModel"
          [(ngModel)]="post.content" required>
     </textarea>
-    <span>Friends Only </span>
-    <input type="checkbox" name="friendOnly" [(ngModel)]="post.friendOnly" [checked]="true">
     <button style="float: right;" type="submit" mat-raised-button color="primary"
         [disabled]="myForm.invalid || post.content.trim() == ''">Create</button>
 </form>

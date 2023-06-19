@@ -23,7 +23,9 @@ import { ProfileFeedComponent } from './components/feeds/profile-feed/profile-fe
 import { FullPostComponent } from './components/feeds/full-post/full-post.component';
 import { CreatePostComponent } from './components/feeds/create-post/create-post.component';
 import { VisitingProfilComponent } from './components/visiting-profil/visiting-profil.component';
-import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';
+import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';;
+import { CommentsComponent } from './components/feeds/comments/comments.component';
+
 
 
 export function tokenGetter() { 
@@ -47,7 +49,8 @@ export function tokenGetter() {
     FullPostComponent,
     CreatePostComponent,
     VisitingProfilComponent,
-    FriendrequestsComponent
+    CommentsComponent,
+    FriendrequestsComponent,
   ],
   imports: [
     BrowserModule,

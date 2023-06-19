@@ -30,12 +30,19 @@ export class ProfileFeedComponent implements OnInit {
     this.getUserPosts();
   }
 
-  onSubmit(i: number): void{    
+  deletePost(i: number): void {
+    this.feedService.deletePost(this.posts[i].postId).subscribe(data => {
+      console.log(data);
+    })
+    this.posts.splice(i, 1);
+  }
+
+  onSubmit(i: number): void {
     this.posts[i].content = this.newContent;
     this.feedService.updatePost(this.posts[i]).subscribe(data => {
     })
     this.editPostId = 0;
-} 
+  }
 
   toggleEdit(post: Post) {
     if (this.editPostId == post.postId) {
@@ -56,7 +63,7 @@ export class ProfileFeedComponent implements OnInit {
     this.like.userId = Number(localStorage.getItem('userid'));
     this.like.postId = post.postId;
     this.like.isLiked = true;
-    
+
     post.likes.forEach(element => {
       if (element.userId == this.like.userId && element.postId == post.postId) {
         this.like.isLiked = !element.isLiked
@@ -92,16 +99,16 @@ export class ProfileFeedComponent implements OnInit {
       if (element.userId == this.like.userId && element.postId == post.postId) {
         this.like.isDisliked = !element.isDisliked
         element.isDisliked = this.like.isDisliked
-        this.like.isLiked = element.isLiked;    
-        element.isLiked = false    
+        this.like.isLiked = element.isLiked;
+        element.isLiked = false
       }
     });
-    
+
     if (this.like.isLiked == true && this.likeCounter[i] != 0) {
       this.likeCounter[i]--
       this.like.isLiked = false;
     }
-    console.log(this.like.isLiked);   
+    console.log(this.like.isLiked);
 
     if (this.like.isDisliked == true) {
       this.dislikeCounter[i]++
@@ -133,7 +140,7 @@ export class ProfileFeedComponent implements OnInit {
       });
       this.likeCounter.push(this.likeCount);
       this.dislikeCounter.push(this.dislikeCount);
-      
+
       post.comments.forEach(comment => {
         this.commentCount++
       });

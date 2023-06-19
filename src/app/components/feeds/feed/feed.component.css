@@ -19,6 +19,10 @@ p{
     display: flex;
 }
 
+.Content > p{
+    margin: 10px;   
+}
+
 .likeContent{
     margin: 5px 1%;
     display:flex;
@@ -28,7 +32,6 @@ p{
 .PostHeader{
     width: 100%;
     display: flex;
-    /* background: green; */
 }
 
 .OnHover{
