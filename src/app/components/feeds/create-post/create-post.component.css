@@ -3,4 +3,5 @@ textarea {
     overflow: hidden;
     width: 100%;
     min-height: 5vh;
+    resize: none;
 }
