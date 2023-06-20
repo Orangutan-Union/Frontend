@@ -26,6 +26,10 @@ export class FriendfollowerService {
     return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/followers');
   }
 
+  getBlockedUsers(id: number): Observable<FriendFollower[]>{
+    return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/blocked');
+  }
+
   followUser(targetId: number): Observable<FriendFollower>{
     let friendFollower = new FriendFollower;
     friendFollower.userId = Number(localStorage.getItem('userid'));

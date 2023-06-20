@@ -1,9 +1,11 @@
 <app-nav-bar></app-nav-bar>
-<button *ngIf="!friends">Follow</button>
-<button *ngIf="!friends">Unfollow</button>
-<button>Block</button>
-<button>Unblock</button>
-<button *ngIf="friends">Unfriend</button>
+<button *ngIf="!friendRequestPending && !friends && !hasBlocked" (click)="sendFriendRequest()">Send Friend Request</button>
+<button *ngIf="friendRequestPending" [disabled]="true">Friend Request Pending</button>
+<button *ngIf="!friends && !following && !hasBlocked" (click)="followUser()">Follow</button>
+<button *ngIf="!friends && following" (click)="unfollowUser()">Unfollow</button>
+<button *ngIf="!hasBlocked" (click)="blockUser()">Block</button>
+<button *ngIf="hasBlocked" (click)="unblockUser()">Unblock</button>
+<button *ngIf="friends" (click)="unfriendUser()">Unfriend</button>
 
 <div>
     hejsa

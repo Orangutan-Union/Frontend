@@ -20,7 +20,7 @@
 <span class="SearchResult">
   <ul *ngFor="let user of searchUsers">
     <li >        
-      <span class="search-results" routerLink="/visitingProfil/{{user.userId}}">
+      <span class="search-results" (click)="goToProfile(user.userId)">
         <img class="ProfilImg" src="{{user.picture.imageUrl}}">
         <p>{{user.displayName}}</p>
         <mat-icon class="search-results-icon" *ngIf="userId !== user.userId && !sentFriendRequestPending(user.userId) && !isFriend(user.userId) && !receivedFriendRequestPending(user.userId)" (click)="sendFriendRequest(user.userId)">person_add_icon</mat-icon>
