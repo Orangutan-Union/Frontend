@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="OuterLayer">
-    <div class="profilFeed">
+    <div class="profilFeed">  
         <div>
             <span style="display: flex;">
                 <img class="MainImg" src="{{user.picture.imageUrl}}" alt="">
@@ -15,8 +15,7 @@
                         <br>
                         <b>TECPoints:</b> {{TECPoints}}
                     </p>
-                    <button *ngIf="!friendRequestPending && !friends && !hasBlocked" (click)="sendFriendRequest()">Send
-                        Friend Request</button>
+                    <button *ngIf="!friendRequestPending && !friends && !hasBlocked" (click)="sendFriendRequest()">Send Friend Request</button>
                     <button *ngIf="friendRequestPending" [disabled]="true">Friend Request Pending</button>
                     <button *ngIf="!friends && !following && !hasBlocked" (click)="followUser()">Follow</button>
                     <button *ngIf="!friends && following" (click)="unfollowUser()">Unfollow</button>
@@ -24,29 +23,24 @@
                     <button *ngIf="hasBlocked" (click)="unblockUser()">Unblock</button>
                     <button *ngIf="friends" (click)="unfriendUser()">Unfriend</button>
                 </span>
-            </span>
+            </span>            
             <div class="postContainer">
                 <div class="posts" *ngFor="let post of posts; let i = index">
                     <div class="postContent">
                         <span class="PostHeader">
-                            <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}"
-                                src="{{post.user.picture.imageUrl}}" alt="Profile Image">
+                            <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
                             <span style=" margin-top: 1%;">
                                 <span style="display: flex;">
-                                    <p style="width: 100%;"> <span> <span
-                                                class="OnHover">{{post.user.displayName}}</span></span>
+                                    <p style="width: 100%;"> <span> <span class="OnHover">{{post.user.displayName}}</span></span>  
                                         <i *ngIf="post.group.groupName!=null">
                                             <b style="color: rgba(0,0,0,0.7);">
-                                                i gruppen:
-                                                <span class="groupPost OnHover"
-                                                    (click)="goToGroup(post.group.groupId)">{{post.group.groupName}}
-                                                    <span style="color: white;">.</span></span>
+                                                i gruppen:   
+                                                <span class="groupPost OnHover" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}} <span style="color: white;">.</span></span> 
                                             </b>
-                                        </i>
+                                        </i> 
                                     </p>
                                 </span>
-                                <span style="color: rgba(0, 0, 0, 0.7)" type="">{{post.timeStamp | date: 'd/MM/yyyy
-                                    H:mm'}}</span>
+                                <span style="color: rgba(0, 0, 0, 0.7)" type="">{{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
                             </span>
                         </span>
                         <div class="Content">
@@ -55,12 +49,9 @@
                             </p>
                         </div>
                         <div class="likeContent">
-                            <p class="interatctive OnHover" (click)="likePost(post, i)"><mat-icon
-                                    class="icon">thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
-                            <p class="interatctive OnHover" (click)="dislikePost(post, i)"><mat-icon
-                                    class="icon">thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</p>
-                            <p class="interatctive OnHover" (click)="goToFullPost(post.postId)"><mat-icon
-                                    class="icon">comment</mat-icon> Comments {{commentCounter[i]}}</p>
+                            <p class="interatctive OnHover" (click)="likePost(post, i)"><mat-icon class="icon">thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
+                            <p class="interatctive OnHover" (click)="dislikePost(post, i)"><mat-icon class="icon">thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</p>
+                            <p class="interatctive OnHover" (click)="goToFullPost(post.postId)"><mat-icon class="icon">comment</mat-icon> Comments {{commentCounter[i]}}</p>
                             <!-- <span class="interatctive OnHover" (click)="likePost(post, i)"><mat-icon >thumb_up</mat-icon> Like {{likeCounter[i]}}</span>
                             <span class="interatctive OnHover" (click)="dislikePost(post, i)"><mat-icon >thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</span>
                             <span class="interatctive OnHover" (click)="goToFullPost(post.postId)"><mat-icon >comment</mat-icon> Comments {{commentCounter[i]}}</span> -->

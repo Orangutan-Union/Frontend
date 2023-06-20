@@ -44,7 +44,6 @@ export class VisitingProfilComponent implements OnInit {
     this.aRoute.paramMap.subscribe((params) => {
       const id = Number(params.get('id'))
       this.getUser(id);
-      console.log(id);      
       this.getUserPosts(id);
       this.getCurrentUserFollowers();
     });
@@ -233,15 +232,11 @@ export class VisitingProfilComponent implements OnInit {
   getCurrentUserFollowers(){
     this.ffService.getUserFollowers(Number(localStorage.getItem('userid'))).subscribe(res => {
       this.currentUserFollowing = res;
-      console.log(this.currentUserFollowing);
       this.isFollowing();
     });
   }
 
-  isFollowing(){
-    console.log('checking follows');
-    console.log(this.currentUserFollowing);
-    
+  isFollowing(){    
     if (this.currentUserFollowing.length === 0) {
       this.following = false;
       return;
