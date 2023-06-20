@@ -7,8 +7,6 @@
 <button *ngIf="hasBlocked" (click)="unblockUser()">Unblock</button>
 <button *ngIf="friends" (click)="unfriendUser()">Unfriend</button>
 
-<div>
-    hejsa
 <div class="OuterLayer">
     <div class="profilFeed">  
         <div>
@@ -64,30 +62,3 @@
         </div>
     </div>
 </div>
-
-
-<!-- <div class="profil">
-    <div class="reklame">
-    </div>
-    <div class="profilFeed">
-        <div class="postContainer">
-            <div class="posts" *ngFor="let post of posts; let i = index">
-                <div class="postContent">
-                    <img class="ProfilImg" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
-                    <span class="postName">{{post.user.displayName}}</span>
-                    <span class="groupPost" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}}</span>
-                    <span class="timeSteamp">{{post.timeStamp | date: 'medium'}}</span>
-                    <div>{{post.content}}</div>
-                    <div >
-                        <button>Like    {{likeCounter[i]}}</button>
-                        <button>Dislike {{dislikeCounter[i]}}</button>
-                        <button (click)="goToFullPost(post.postId)">Comments {{commentCounter[i]}}</button>
-                    </div>
-                </div>
-            </div>
-        </div>        
-    </div>
-    <div class="friends">
-    
-    </div>
-</div> -->
