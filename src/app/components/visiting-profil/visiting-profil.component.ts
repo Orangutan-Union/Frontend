@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Like } from 'src/app/models/addLike';
 import { NewComment } from 'src/app/models/newComment';
 import { Post } from 'src/app/models/post';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { FeedService } from 'src/app/services/feed.service';
 
 @Component({
@@ -12,6 +14,7 @@ import { FeedService } from 'src/app/services/feed.service';
 })
 export class VisitingProfilComponent implements OnInit {
   posts: Post[] = [];  
+  user: User = new User;
   like: Like = new Like;
   commentCount: number = 0;
   likeCount: number = 0;
@@ -19,14 +22,25 @@ export class VisitingProfilComponent implements OnInit {
   commentCounter: number[] = [];
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
+  TECPoints: number = 0;
+  postCount: number = 0;
 
-  constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
+  constructor(private GetAuth: AuthService, private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.aRoute.paramMap.subscribe((params) => {
       const id = Number(params.get('id'))
-      console.log(id);      
+      this.getUser(id);
       this.getUserPosts(id);
+    });
+  }
+
+  TecPointsCount(p: Post[]){    
+    p.forEach( element => {      
+      element.likes.forEach( element => {
+        if(element.isLiked){this.TECPoints += 1}
+        if(element.isDisliked){this.TECPoints -= 1}
+      })
     });
   }
 
@@ -107,6 +121,15 @@ export class VisitingProfilComponent implements OnInit {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
+      this.postCount = this.posts.length
+      this.TecPointsCount(data)
+    })
+  }
+
+  getUser(id: number): void{
+    this.GetAuth.getUserById(id).subscribe(data => {
+      this.user = data;      
+      console.log(this.user);
     })
   }
 
