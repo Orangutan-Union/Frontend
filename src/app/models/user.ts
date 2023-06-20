@@ -1,6 +1,6 @@
 import { FriendRequest } from "./friendrequest";
 import { Picture } from "./picture";
-import { UserFriendFollower } from "./userfriendfollower";
+import { FriendFollower } from "./friendfollower";
 
 export class User{
     userId: number = 0;
@@ -10,6 +10,6 @@ export class User{
     picture: Picture = new Picture;
     sentFriendRequests: FriendRequest[] = [];
     receivedFriendRequests: FriendRequest[] = [];
-    userFriendFollowers: UserFriendFollower[] = [];
-    otherUserFriendFollowers: UserFriendFollower[] = [];
+    userFriendFollowers: FriendFollower[] = [];
+    otherUserFriendFollowers: FriendFollower[] = [];
 }

@@ -21,7 +21,7 @@ export class FriendFeedComponent implements OnInit {
   dislikeCounter: number[] = [];
   constructor(private feedService: FeedService, private route: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.getFriendFeed();    
   }
 

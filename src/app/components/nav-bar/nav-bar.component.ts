@@ -83,11 +83,9 @@ export class NavBarComponent implements OnInit {
     // Check for friend requests sent by current user.
     for (const request of this.user.sentFriendRequests) {
       if (request.receiverId === receiverId) {
-        console.log('PENDING TRUE');        
         return true;
       }
     }
-    console.log('PENDING FALSE');    
     return false;
   }
 
@@ -103,16 +101,23 @@ export class NavBarComponent implements OnInit {
 
   isFriend(receiverId: number): boolean{
     for (const request of this.user.userFriendFollowers) {
-      if (request.otherUserId === receiverId) {        
+      if (request.otherUserId === receiverId && request.type === 1) {        
         return true;
       }
     }
 
     for (const request of this.user.otherUserFriendFollowers) {
-      if (request.userId === receiverId) {
+      if (request.userId === receiverId && request.type === 1) {
         return true;
       }
     }
     return false;
+  }
+
+  goToProfile(id: number){
+    this.route.navigate(['/visitingProfil/', id])
+    .then(() => {
+      window.location.reload();
+    });
   }
 }
