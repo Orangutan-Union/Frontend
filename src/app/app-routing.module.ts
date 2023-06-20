@@ -10,6 +10,7 @@ import { FullPostComponent } from './components/feeds/full-post/full-post.compon
 import { VisitingProfilComponent } from './components/visiting-profil/visiting-profil.component';
 import { ChatComponent } from './components/chat/chat/chat.component';
 import { FriendrequestsComponent } from './components/friendrequests/friendrequests.component';
+import { ProfilTestingComponent } from './profil-testing/profil-testing.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

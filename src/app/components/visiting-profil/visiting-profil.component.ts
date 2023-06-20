@@ -25,7 +25,7 @@ export class VisitingProfilComponent implements OnInit {
   hasBlocked: boolean = false;
   isBlocked: boolean = false;
   friendRequestPending: boolean = false;
-  posts: Post[] = [];  
+  posts: Post[] = [];
   like: Like = new Like;
   commentCount: number = 0;
   likeCount: number = 0;
@@ -33,6 +33,8 @@ export class VisitingProfilComponent implements OnInit {
   commentCounter: number[] = [];
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
+  TECPoints: number = 0;
+  postCount: number = 0;
 
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute,
     private authService: AuthService, private ffService: FriendfollowerService, private friendreqService: FriendrequestService) { }
@@ -45,6 +47,15 @@ export class VisitingProfilComponent implements OnInit {
       console.log(id);      
       this.getUserPosts(id);
       this.getCurrentUserFollowers();
+    });
+  }
+
+  TecPointsCount(p: Post[]){    
+    p.forEach( element => {      
+      element.likes.forEach( element => {
+        if(element.isLiked){this.TECPoints += 1}
+        if(element.isDisliked){this.TECPoints -= 1}
+      })
     });
   }
 
@@ -125,6 +136,8 @@ export class VisitingProfilComponent implements OnInit {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
+      this.postCount = this.posts.length
+      this.TecPointsCount(data)
     })
   }
 
