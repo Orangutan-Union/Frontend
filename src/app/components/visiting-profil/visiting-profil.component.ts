@@ -182,7 +182,7 @@ export class VisitingProfilComponent implements OnInit {
   getUser(id: number){
     this.authService.getUserById(id).subscribe(res => {
       this.user = res;
-      this.isFriend();
+      this.isFriend();      
       this.blockStatus();
       this.sentFriendRequestPending();
    });
@@ -195,25 +195,17 @@ export class VisitingProfilComponent implements OnInit {
       return;
     }
 
-    for (const ff of this.user.userFriendFollowers) {
-      // Check if current user has blocked the person
-      if (this.currentUserId === ff.userId && ff.type === 3) {
-        this.hasBlocked = true;
-      }
+    for (const ff of this.user.userFriendFollowers) {      
       // Check if the person has blocked current user
-      else if (this.user.userId === ff.userId && ff.type === 3){
+      if (this.user.userId === ff.userId && ff.type === 3  && ff.otherUserId === this.currentUserId){
         this.isBlocked = true;
       }
     }
 
-    for (const ff of this.user.otherUserFriendFollowers) {
+    for (const ff of this.user.otherUserFriendFollowers) {      
       // Check if current user has blocked the person
-      if (this.currentUserId === ff.userId && ff.type === 3) {
+      if (this.currentUserId === ff.userId && ff.type === 3 && ff.otherUserId === this.user.userId) {
         this.hasBlocked = true;
-      }
-      // Check if the person has blocked current user
-      else if (this.user.userId === ff.userId && ff.type === 3){
-        this.isBlocked = true;
       }
     }
   }
