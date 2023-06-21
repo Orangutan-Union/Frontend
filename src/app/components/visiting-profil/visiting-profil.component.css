@@ -6,7 +6,6 @@
 
 .OuterLayer{
     margin-top: 5px;
-    height: 100%;  
     display: flex;
     justify-content: space-between;
 }
