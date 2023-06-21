@@ -1,4 +1,4 @@
-<app-create-post [posts]="posts"></app-create-post>
+<app-create-post [posts]="posts" [commentCounter]="commentCounter" [likeCounter]="likeCounter" [dislikeCounter]="dislikeCounter"></app-create-post>
 <div class="postContainer">
     <div class="posts" *ngFor="let post of posts; let i = index">
         <div class="postContent">
