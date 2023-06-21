@@ -63,6 +63,15 @@ export class CommentsComponent implements OnInit {
         }
       });
 
+      if (comment.likes.filter(x => x.userId === this.like.userId).length === 0) {        
+        this.commentLikeCounter[i]++
+        this.feedService.addLike(this.like).subscribe(data => {
+          console.log(data)
+          this.getFullPost(this.post.postId);
+        })
+        return;
+      }
+
       if (this.like.isDisliked == true && this.commentDislikeCounter[i] != 0) {
         this.commentDislikeCounter[i]--
         this.like.isDisliked = false;
@@ -95,6 +104,15 @@ export class CommentsComponent implements OnInit {
           element.isLiked = false
         }
       });
+
+      if (comment.likes.filter(x => x.userId === this.like.userId).length === 0) {        
+        this.commentDislikeCounter[i]++
+        this.feedService.addLike(this.like).subscribe(data => {
+          console.log(data)
+          this.getFullPost(this.post.postId);
+        })
+        return;
+      }
 
       if (this.like.isLiked == true && this.commentLikeCounter[i] != 0) {
         this.commentLikeCounter[i]--

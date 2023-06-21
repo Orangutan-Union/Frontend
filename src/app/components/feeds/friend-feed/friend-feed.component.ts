@@ -39,6 +39,16 @@ export class FriendFeedComponent implements OnInit {
       }
     });
 
+    if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
+      console.log('hey there im testing');
+      this.likeCounter[i]++
+      this.feedService.addLike(this.like).subscribe(data => {
+        console.log(data)
+        this.getFriendFeed();
+      })
+      return;
+    }
+
     if (this.like.isDisliked == true && this.dislikeCounter[i] != 0) {
       this.dislikeCounter[i]--
       this.like.isDisliked = false;
@@ -69,6 +79,15 @@ export class FriendFeedComponent implements OnInit {
         element.isLiked = false    
       }
     });
+
+    if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
+      this.dislikeCounter[i]++
+      this.feedService.addLike(this.like).subscribe(data => {
+        console.log(data)
+        this.getFriendFeed();
+      })
+      return;
+    }
     
     if (this.like.isLiked == true && this.likeCounter[i] != 0) {
       this.likeCounter[i]--

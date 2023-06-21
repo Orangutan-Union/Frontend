@@ -81,6 +81,16 @@ export class FullPostComponent implements OnInit {
         }
       });
 
+      if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
+        console.log('hey there im testing');
+        this.likeCounter[0]++
+        this.feedService.addLike(this.like).subscribe(data => {
+          console.log(data)
+          this.getFullPost(this.post.postId);
+        })
+        return;
+      }
+
       if (this.like.isDisliked == true && this.dislikeCounter[0] != 0) {
         this.dislikeCounter[0]--
         this.like.isDisliked = false;
@@ -111,6 +121,15 @@ export class FullPostComponent implements OnInit {
           element.isLiked = false
         }
       });
+
+      if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
+        this.dislikeCounter[0]++
+        this.feedService.addLike(this.like).subscribe(data => {
+          console.log(data)
+          this.getFullPost(this.post.postId);
+        })
+        return;
+      }
 
       if (this.like.isLiked == true && this.likeCounter[0] != 0) {
         this.likeCounter[0]--
@@ -144,6 +163,22 @@ export class FullPostComponent implements OnInit {
           element.isDisliked = false
         }
       });
+
+      console.log('====');
+      console.log(comment.likes);
+      
+      console.log('====');
+      
+      if (comment.likes.filter(x => x.userId === this.like.userId).length === 0) {
+        console.log('eyyy oooo im testing over here');
+        
+        this.commentLikeCounter[i]++
+        this.feedService.addLike(this.like).subscribe(data => {
+          console.log(data)
+          this.getFullPost(this.post.postId);
+        })
+        return;
+      }
 
       if (this.like.isDisliked == true && this.commentDislikeCounter[i] != 0) {
         this.commentDislikeCounter[i]--
