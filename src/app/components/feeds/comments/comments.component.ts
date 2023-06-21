@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Like } from 'src/app/models/addLike';
 import { Post } from 'src/app/models/post';
@@ -14,6 +14,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class CommentsComponent implements OnInit {
 
+  @Input() commentLikeCounter: number[] = [];
+  @Input() commentDislikeCounter: number[] = [];
+
   comment: Comment = new Comment;
   like: Like = new Like;
   newComment: NewComment = new NewComment;
@@ -27,8 +30,6 @@ export class CommentsComponent implements OnInit {
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
   commentCounter: number[] = [];
-  commentLikeCounter: number[] = [];
-  commentDislikeCounter: number[] = [];
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -138,38 +139,7 @@ export class CommentsComponent implements OnInit {
   getFullPost(id: number): void {
     this.feedService.getFullPost(id).subscribe(data => {
       this.post = data;
-      this.counter(this.post);
       console.log(this.post);
     })
   }
-
-  counter(post: Post): void {
-    post.likes.forEach(like => {
-      if (like.isLiked == true) { this.likeCount++ }
-      if (like.isDisliked == true) { this.dislikeCount++ }
-    });
-    this.likeCounter.push(this.likeCount);
-    this.dislikeCounter.push(this.dislikeCount);
-
-    post.comments.forEach(comment => {
-      console.log(comment.likes);
-      comment.likes.forEach(like => {
-        if (like.isLiked == true) { this.commentLikeCount++ }
-        if (like.isDisliked == true) { this.commentDislikeCount++ }
-      })
-      this.commentCount++
-
-      this.commentLikeCounter.push(this.commentLikeCount);
-      this.commentDislikeCounter.push(this.commentDislikeCount);
-
-      this.commentLikeCount = 0;
-      this.commentDislikeCount = 0;
-    });
-
-    this.commentCounter.push(this.commentCount)
-
-    this.likeCount = 0;
-    this.dislikeCount = 0;
-  }
-
 }

@@ -72,6 +72,13 @@ export class FullPostComponent implements OnInit {
       this.like.postId = post.postId;
       this.like.isLiked = true;
 
+      console.log('============');
+      
+      console.log(this.commentLikeCounter);
+      console.log(this.commentDislikeCounter);
+      console.log('============');
+      
+
       post.likes.forEach(element => {
         if (element.userId == this.like.userId && element.postId == post.postId) {
           this.like.isLiked = !element.isLiked
