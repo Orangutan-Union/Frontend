@@ -44,6 +44,8 @@ export class CommentsComponent implements OnInit {
     this.feedService.addComment(this.newComment).subscribe(newComment => {
       this.feedService.getCommentById(newComment.commentId).subscribe(comment => {
         this.post.comments.push(comment)
+        this.commentLikeCounter.push(0);
+        this.commentDislikeCounter.push(0);
       })
     });
     this.newComment.content = '';
