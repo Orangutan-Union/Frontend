@@ -35,7 +35,6 @@ export class VisitingProfilComponent implements OnInit {
   dislikeCounter: number[] = [];
   TECPoints: number = 0;
   postCount: number = 0;
-
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute,
     private authService: AuthService, private ffService: FriendfollowerService, private friendreqService: FriendrequestService) { }
 
@@ -58,7 +57,7 @@ export class VisitingProfilComponent implements OnInit {
     });
   }
 
-  goToFullPost(id: number) {
+  goToFullPost(id: number) {  
     this.route.navigate(['/fullPost/', id])
   }
 
