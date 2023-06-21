@@ -24,7 +24,8 @@ export class VisitingProfilComponent implements OnInit {
   following: boolean = false;
   hasBlocked: boolean = false;
   isBlocked: boolean = false;
-  friendRequestPending: boolean = false;
+  sentRequestPending: boolean = false;
+  receivedRequestPending: boolean = false;
   posts: Post[] = [];
   like: Like = new Like;
   commentCount: number = 0;
@@ -312,14 +313,14 @@ export class VisitingProfilComponent implements OnInit {
     // Check if person has received a friendrequest from current user
     for (const request of this.user.receivedFriendRequests) {
       if (request.senderId === this.currentUserId) {
-        this.friendRequestPending = true;
+        this.sentRequestPending = true;
       }
     }
 
     // Check if current user has received a friendrequest from the person
     for (const request of this.user.sentFriendRequests) {
       if (request.receiverId === this.currentUserId) {
-        this.friendRequestPending = true;
+        this.receivedRequestPending = true;
       }
     }
   }
@@ -327,6 +328,24 @@ export class VisitingProfilComponent implements OnInit {
   unfriendUser(){
     this.ffService.unfriendUser(this.user.userId).subscribe(res => {
       console.log(res);
+      window.location.reload();
+    });
+  }
+
+  cancelFriendRequest(){
+    let request: FriendRequest = new FriendRequest
+    request.senderId = this.currentUserId;
+    request.receiverId = this.user.userId;
+    this.friendreqService.declineFriendRequest(request).subscribe(() => {
+      window.location.reload();
+    });
+  }
+
+  acceptFriendRequest(){
+    let request: FriendRequest = new FriendRequest
+    request.senderId = this.user.userId;
+    request.receiverId = this.currentUserId;
+    this.friendreqService.acceptFriendRequest(request).subscribe(() => {
       window.location.reload();
     });
   }

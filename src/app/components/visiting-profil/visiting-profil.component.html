@@ -1,6 +1,10 @@
 <app-nav-bar></app-nav-bar>
 
-<div class="OuterLayer">
+<div>
+    <h1 style="text-align: center;vertical-align: middle;line-height: 75vh;">This user has blocked you</h1>
+</div>
+
+<div class="OuterLayer" *ngIf="!isBlocked">
     <div class="profilFeed">  
         <div>
             <span style="display: flex;">
@@ -15,8 +19,9 @@
                         <br>
                         <b>TECPoints:</b> {{TECPoints}}
                     </p>
-                    <button *ngIf="!friendRequestPending && !friends && !hasBlocked" (click)="sendFriendRequest()">Send Friend Request</button>
-                    <button *ngIf="friendRequestPending" [disabled]="true">Friend Request Pending</button>
+                    <button *ngIf="!sentRequestPending && !friends && !hasBlocked && !receivedRequestPending" (click)="sendFriendRequest()">Send Friend Request</button>
+                    <button *ngIf="sentRequestPending" (click)="cancelFriendRequest()">Cancel Friend Request</button>
+                    <button *ngIf="receivedRequestPending" (click)="acceptFriendRequest()">Accept Friend Request</button>
                     <button *ngIf="!friends && !following && !hasBlocked" (click)="followUser()">Follow</button>
                     <button *ngIf="!friends && following" (click)="unfollowUser()">Unfollow</button>
                     <button *ngIf="!hasBlocked" (click)="blockUser()">Block</button>
