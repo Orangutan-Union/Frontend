@@ -124,10 +124,6 @@ export class FeedComponent implements OnInit {
     })
   }
 
-  testtest(): void{
-    
-  }
-
   counter(posts: Post[]): void {
     posts.forEach(post => {
       post.likes.forEach(like => {

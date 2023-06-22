@@ -5,6 +5,7 @@
 }
 .ProfilImg{
     margin-right: 15px;
+    cursor: pointer;
 }
 
 p{
@@ -37,6 +38,12 @@ p{
 .OnHover{
     cursor: pointer;
     /* background-color: red; */
+}
+
+.UserName:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 .PostHeader > .PostHeaderInfo{
