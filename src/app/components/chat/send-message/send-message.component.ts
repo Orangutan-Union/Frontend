@@ -19,7 +19,7 @@ export class SendMessageComponent implements OnInit {
   constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://192.168.20.33:83');
   }
 
   sendMessage() {
@@ -27,6 +27,8 @@ export class SendMessageComponent implements OnInit {
     this.message.content = this.newMessage;
     this.message.chatId = this.chat.chatId;
     this.newMessage = this.newMessage + '|' + Number(localStorage.getItem('userid')); 
+    console.log("sendComponent");
+    
 
     this.chatService.sendMessage(this.chat.chatId, this.newMessage);
     
