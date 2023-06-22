@@ -19,7 +19,7 @@ export class SendMessageComponent implements OnInit {
   constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
-    this.socket = io('http://192.168.20.33:83');
+    this.socket = io('https://localhost:3000');
   }
 
   sendMessage() {
