@@ -32,7 +32,11 @@ export class NavBarComponent implements OnInit {
     this.authService.getUserById(this.userId).subscribe({
       next: (usr => {
         this.user = usr;
+        console.log('THIS IS ME');
+        
+        
         console.log(this.user);
+        console.log('THIS IS ME');
       })
     });
   }
