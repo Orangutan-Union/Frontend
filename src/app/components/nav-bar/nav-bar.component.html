@@ -32,8 +32,7 @@
           (click)="sendFriendRequest(user.userId)">person_add_icon</mat-icon>
         <mat-icon *ngIf="isFriend(user.userId)">person</mat-icon>
         <button [disabled]="true" *ngIf="userId !== user.userId && sentFriendRequestPending(user.userId)">Sent</button>
-        <button [disabled]="true"
-          *ngIf="userId !== user.userId && receivedFriendRequestPending(user.userId)">Pending</button>
+        <button [disabled]="true" *ngIf="userId !== user.userId && receivedFriendRequestPending(user.userId)">Pending</button>
       </span>
     </li>
   </ul>
