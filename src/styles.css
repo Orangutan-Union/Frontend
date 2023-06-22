@@ -23,3 +23,13 @@ input{
     outline: solid black 1px;
     margin: 1%;
 }
+
+textarea::placeholder{
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+textarea{
+    padding-left: 2px;
+    /* padding-top: 2px; */
+}

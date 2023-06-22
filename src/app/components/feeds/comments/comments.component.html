@@ -6,7 +6,7 @@
                     [(ngModel)]="newComment.content" required>
                 </textarea>
         
-                <button style="float: right; width: 9%;" type="submit" mat-raised-button color="primary"
+                <button class="CreateComment" type="submit" mat-raised-button color="primary"
                 [disabled]="myForm.invalid || newComment.content.trim() == ''">
                     Create
                 </button>
@@ -18,7 +18,7 @@
                 <span style=" margin-top: 1%;">
                     <span>
                         <p style="width: 100%; margin:0px">
-                            <span class="OnHover">{{comment.user.displayName}}</span>
+                            <span class="UserName" routerLink="/visitingProfil/{{comment.userId}}">{{comment.user.displayName}}</span>
                         </p>
                     </span>
                     <span style="color: rgba(0, 0, 0, 0.7)" type="">{{comment.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
