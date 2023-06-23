@@ -26,8 +26,8 @@
 }
 
 .LogoImg{
-    width: 6vw;
-    height: 6vh;
+    width: 120px;
+    height: 65px;
     cursor: pointer;
 } 
 
@@ -131,3 +131,17 @@
         height: 50px;
     }
 }
+
+.NotificationContainer{
+    position: relative;
+    display: inline-block;
+}
+.notifications {
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    margin-top: -20px;
+    height: 8px;
+    width: 8px;
+    margin-left: 14px;
+  }

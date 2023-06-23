@@ -3,4 +3,10 @@ textarea {
     overflow: hidden;
     width: 100%;
     min-height: 5vh;
+    resize: none;
+}
+
+textarea::placeholder{
+    padding-left: 10px;
+    padding-top: 10px;
 }

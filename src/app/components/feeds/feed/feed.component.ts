@@ -39,6 +39,15 @@ export class FeedComponent implements OnInit {
       }
     });
 
+    if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
+      this.likeCounter[i]++
+      this.feedService.addLike(this.like).subscribe(data => {
+        console.log(data)
+        this.getFeed();
+      })
+      return;
+    }
+
     if (this.like.isDisliked == true && this.dislikeCounter[i] != 0) {
       this.dislikeCounter[i]--
       this.like.isDisliked = false;
@@ -69,6 +78,15 @@ export class FeedComponent implements OnInit {
         element.isLiked = false    
       }
     });
+
+    if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
+      this.dislikeCounter[i]++
+      this.feedService.addLike(this.like).subscribe(data => {
+        console.log(data)
+        this.getFeed();
+      })
+      return;
+    }
     
     if (this.like.isLiked == true && this.likeCounter[i] != 0) {
       this.likeCounter[i]--
@@ -104,10 +122,6 @@ export class FeedComponent implements OnInit {
       this.counter(this.posts);
       console.log(this.posts);
     })
-  }
-
-  testtest(): void{
-    
   }
 
   counter(posts: Post[]): void {

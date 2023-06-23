@@ -5,7 +5,7 @@
                 <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
                 <span style=" margin-top: 1%;">
                     <span style="display: flex;">
-                        <p style="width: 100%;"> <span (click)="testtest()"> <span class="OnHover">{{post.user.displayName}}</span></span>  
+                        <p style="width: 100%;"> <span routerLink="/visitingProfil/{{post.userId}}"> <span class="UserName">{{post.user.displayName}}</span></span>  
                             <i *ngIf="post.group.groupName!=null">
                                 <b style="color: rgba(0,0,0,0.7);">
                                     i gruppen:   

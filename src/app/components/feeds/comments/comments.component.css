@@ -4,6 +4,7 @@
 .CommentsHeader{
     width: 100%;
     display: flex;
+    margin-bottom: 1%;
 }
 
 .OnHover{
@@ -30,5 +31,37 @@
 .SpecificComment{
     width: auto;
     margin: 2px;
+    margin-left: 5%;
+    font-weight: 500;
+}
+
+.commentContainer{
+    border: black 1px solid;
+}
+
+textarea {
+    resize: horizontal;
+    overflow: hidden;
+    width: 90%;
+    min-height: 5vh;
+    resize: none;
+    
+}
+
+.CreateComment{
+    margin: 0px 3px 0px 0px;
+    height: 40px;
+    float: right; 
+    width: 9%;
+}
+
+.UserName:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.ProfilImg{
+    cursor: pointer;
 }
 

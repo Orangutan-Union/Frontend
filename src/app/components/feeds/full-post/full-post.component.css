@@ -42,6 +42,7 @@
 }
 .ProfilImg{
     margin-right: 15px;
+    cursor: pointer;
 }
 
 p{
@@ -85,6 +86,12 @@ p{
 
 .PostHeader > .PostHeaderInfo{
     width: 60%;
+}
+
+.UserName:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Like } from 'src/app/models/addLike';
 import { Post } from 'src/app/models/post';
@@ -14,6 +14,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class CommentsComponent implements OnInit {
 
+  @Input() commentLikeCounter: number[] = [];
+  @Input() commentDislikeCounter: number[] = [];
+
   comment: Comment = new Comment;
   like: Like = new Like;
   newComment: NewComment = new NewComment;
@@ -27,8 +30,6 @@ export class CommentsComponent implements OnInit {
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
   commentCounter: number[] = [];
-  commentLikeCounter: number[] = [];
-  commentDislikeCounter: number[] = [];
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -43,80 +44,18 @@ export class CommentsComponent implements OnInit {
 
     this.feedService.addComment(this.newComment).subscribe(newComment => {
       this.feedService.getCommentById(newComment.commentId).subscribe(comment => {
-        this.post.comments.unshift(comment)
+        this.post.comments.push(comment)
+        this.commentLikeCounter.push(0);
+        this.commentDislikeCounter.push(0);
       })
     });
     this.newComment.content = '';
   }    
-
-  likePost(post: Post): void {
-      this.like.userId = Number(localStorage.getItem('userid'));
-      this.like.postId = post.postId;
-      this.like.isLiked = true;
-
-      post.likes.forEach(element => {
-        if (element.userId == this.like.userId && element.postId == post.postId) {
-          this.like.isLiked = !element.isLiked
-          element.isLiked = this.like.isLiked
-          this.like.isDisliked = element.isDisliked;
-          element.isDisliked = false
-        }
-      });
-
-      if (this.like.isDisliked == true && this.dislikeCounter[0] != 0) {
-        this.dislikeCounter[0]--
-        this.like.isDisliked = false;
-      }
-
-      if (this.like.isLiked == true) {
-        this.likeCounter[0]++
-      }
-      else {
-        this.likeCounter[0]--
-      }
-
-      this.feedService.addLike(this.like).subscribe(data => {
-        console.log(data)
-      })
-  }
-
-  dislikePost(post: Post): void {
-      this.like.userId = Number(localStorage.getItem('userid'));
-      this.like.postId = post.postId;
-      this.like.isDisliked = true;
-
-      post.likes.forEach(element => {
-        if (element.userId == this.like.userId && element.postId == post.postId) {
-          this.like.isDisliked = !element.isDisliked
-          element.isDisliked = this.like.isDisliked
-          this.like.isLiked = element.isLiked;
-          element.isLiked = false
-        }
-      });
-
-      if (this.like.isLiked == true && this.likeCounter[0] != 0) {
-        this.likeCounter[0]--
-        this.like.isLiked = false;
-      }
-      console.log(this.like.isLiked);
-
-      if (this.like.isDisliked == true) {
-        this.dislikeCounter[0]++
-
-      }
-      else {
-        this.dislikeCounter[0]--
-      }
-
-      this.feedService.addLike(this.like).subscribe(data => {
-        console.log(data)
-      })
-  }
-
+  
   likeComment(comment: Comment, i: number): void {
       this.like.userId = Number(localStorage.getItem('userid'));
       this.like.commentId = comment.commentId;
-      this.like.isDisliked = true;
+      this.like.isLiked = true;
 
       comment.likes.forEach(element => {
         if (element.userId == this.like.userId && element.commentId == comment.commentId) {
@@ -126,6 +65,15 @@ export class CommentsComponent implements OnInit {
           element.isDisliked = false
         }
       });
+
+      if (comment.likes.filter(x => x.userId === this.like.userId).length === 0) {        
+        this.commentLikeCounter[i]++
+        this.feedService.addLike(this.like).subscribe(data => {
+          console.log(data)
+          this.getFullPost(this.post.postId);
+        })
+        return;
+      }
 
       if (this.like.isDisliked == true && this.commentDislikeCounter[i] != 0) {
         this.commentDislikeCounter[i]--
@@ -160,6 +108,15 @@ export class CommentsComponent implements OnInit {
         }
       });
 
+      if (comment.likes.filter(x => x.userId === this.like.userId).length === 0) {        
+        this.commentDislikeCounter[i]++
+        this.feedService.addLike(this.like).subscribe(data => {
+          console.log(data)
+          this.getFullPost(this.post.postId);
+        })
+        return;
+      }
+
       if (this.like.isLiked == true && this.commentLikeCounter[i] != 0) {
         this.commentLikeCounter[i]--
         this.like.isLiked = false;
@@ -179,45 +136,10 @@ export class CommentsComponent implements OnInit {
       })
   }
 
-  goToGroup(id: number) {
-    this.route.navigate([])
-  }
-
   getFullPost(id: number): void {
     this.feedService.getFullPost(id).subscribe(data => {
       this.post = data;
-      this.counter(this.post);
       console.log(this.post);
     })
   }
-
-  counter(post: Post): void {
-    post.likes.forEach(like => {
-      if (like.isLiked == true) { this.likeCount++ }
-      if (like.isDisliked == true) { this.dislikeCount++ }
-    });
-    this.likeCounter.push(this.likeCount);
-    this.dislikeCounter.push(this.dislikeCount);
-
-    post.comments.forEach(comment => {
-      console.log(comment.likes);
-      comment.likes.forEach(like => {
-        if (like.isLiked == true) { this.commentLikeCount++ }
-        if (like.isDisliked == true) { this.commentDislikeCount++ }
-      })
-      this.commentCount++
-
-      this.commentLikeCounter.push(this.commentLikeCount);
-      this.commentDislikeCounter.push(this.commentDislikeCount);
-
-      this.commentLikeCount = 0;
-      this.commentDislikeCount = 0;
-    });
-
-    this.commentCounter.push(this.commentCount)
-
-    this.likeCount = 0;
-    this.dislikeCount = 0;
-  }
-
 }

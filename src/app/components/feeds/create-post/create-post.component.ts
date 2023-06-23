@@ -9,7 +9,10 @@ import { FeedService } from 'src/app/services/feed.service';
 })
 export class CreatePostComponent implements OnInit {
   post: NewPost = new NewPost
-  @Input() posts: any[] = []
+  @Input() posts: any[] = [];
+  @Input() commentCounter: number[] = [];
+  @Input() likeCounter: number[] = [];
+  @Input() dislikeCounter: number[] = [];
   constructor(private feedService: FeedService) { }
 
   ngOnInit(): void {
@@ -21,7 +24,10 @@ export class CreatePostComponent implements OnInit {
 
     this.feedService.addPost(this.post).subscribe(newPost => {
       this.feedService.getFullPost(newPost.postId).subscribe(newPost => {
-        this.posts.unshift(newPost)
+        this.posts.unshift(newPost);
+        this.commentCounter.unshift(0);
+        this.likeCounter.unshift(0);
+        this.dislikeCounter.unshift(0);
       })
     })
 
