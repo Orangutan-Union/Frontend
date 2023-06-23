@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, } from '@angular/core';
 import { Chat } from 'src/app/models/chat';
+import { NewChat } from 'src/app/models/newChat';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -11,6 +12,8 @@ export class ChatSelectComponent implements OnInit {
   @Output() selectedChat: EventEmitter<Chat> = new EventEmitter<Chat>();
   @Output() chatList: EventEmitter<Chat[]> = new EventEmitter<Chat[]>();
   chats: Chat[] = [];
+  newChat: NewChat = new NewChat;
+  createChatBool: boolean = false;
   selectedChatId: number | null = null;
 
   constructor(private chatService: ChatService) { }
@@ -41,5 +44,15 @@ export class ChatSelectComponent implements OnInit {
 
   leaveRoom(roomId: number) {
     this.chatService.leaveRoom(roomId);
+  }
+
+  createChatBoolChange() {
+    console.log(this.createChatBool);    
+    this.createChatBool = !this.createChatBool
+    console.log(this.createChatBool);
+  }
+
+  createChat() {
+
   }
 }
