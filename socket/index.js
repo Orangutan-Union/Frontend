@@ -4,8 +4,7 @@ const io = require('socket.io')(httpServer, {
   cors: { origin: '*' }
 });
 
-const ipAddress = '192.168.20.33';
-const port = process.env.PORT || 83;
+const port = process.env.PORT || 3000;
 
 const rooms = new Map(); // Map to store the rooms
 
@@ -32,4 +31,4 @@ io.on('connection', (socket) => {
   });
 });
 
-httpServer.listen(port, ipAddress, () => console.log(`Listening on port ${port}`));
+httpServer.listen(port, () => console.log(`Listening on port ${port}`));
