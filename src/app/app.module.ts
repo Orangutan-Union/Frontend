@@ -30,6 +30,8 @@ import { SendMessageComponent } from './components/chat/send-message/send-messag
 import { FriendrequestsComponent } from './components/FriendsWithBenefits/friendrequests/friendrequests.component';
 import { CommentsComponent } from './components/feeds/comments/comments.component';
 import { PostHeaderComponent } from './components/feeds/post-header/post-header.component';
+import { FriendlistComponent } from './components/FriendsWithBenefits/friendlist/friendlist.component';
+import { FriendpageComponent } from './components/FriendsWithBenefits/friendpage/friendpage.component';
 
 
 export function tokenGetter() {
@@ -60,6 +62,8 @@ export function tokenGetter() {
     CommentsComponent,
     FriendrequestsComponent,
     PostHeaderComponent,
+    FriendlistComponent,
+    FriendpageComponent,
   ],
   imports: [
     BrowserModule,
