@@ -5,7 +5,7 @@ import { FriendRequest } from 'src/app/models/friendrequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FriendrequestService } from 'src/app/services/friendrequest.service';
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from '../../LoginPage/login/login.component';
 
 @Component({
   selector: 'app-nav-bar',

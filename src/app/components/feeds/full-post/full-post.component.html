@@ -2,22 +2,7 @@
 <div class="OuterLayer">
     <span>
         <div class="ContentPost">
-            <span class="PostHeader">
-                <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
-                <span style=" margin-top: 1%;">
-                    <span style="display: flex;">
-                        <p style="width: 100%;"><span class="UserName" routerLink="/visitingProfil/{{post.userId}}">{{post.user.displayName}}</span>
-                            <i *ngIf="post.group.groupName!=null">
-                                <b style="color: rgba(0,0,0,0.7);">
-                                    i gruppen:   
-                                    <span class="groupPost OnHover" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}} <span style="color: white;">.</span></span> 
-                                </b>
-                            </i> 
-                        </p>
-                    </span>
-                    <span style="color: rgba(0, 0, 0, 0.7)" type="">{{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
-                </span>
-            </span>
+            <app-post-header [post]="post"></app-post-header>
             <div class="Content">
                 <p>
                     {{post.content}}

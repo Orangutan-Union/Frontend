@@ -1,58 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <div class="feed">
   <app-create-post></app-create-post>
-  <!-- <img src="https://media.tenor.com/Fl6m3zSv3XgAAAAC/monkey-spinning.gif" alt="he doign it backkflap"  width="auto" style="position: absolute;"/> -->
-  <!-- <h1 style="position: absolute;color: white;font: bold;font-size: 180%;text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;">ME WHEN IM A BOOT AND NOT AN ANT</h1> -->
+  <!-- <app-friend-feed></app-friend-feed> -->
+  <!-- <app-follower-feed></app-follower-feed> -->
   <app-feed></app-feed>
-  <!-- <span>
-    <span>
-      <input id="file" type="file" (change)="fileChange($any($event).target.files)">
-    </span>
-    <div>
-      <button (click)="onUpload()">Upload</button>
-    </div>
-    <div >
-      <h1>User Profile pic:</h1>
-      <img  style="width: 35vmin;" src="data:image/png;base64,{{user.picture.imageData}}" />
-    </div>
-
-    <div style="height: 100%;">
-      <form (ngSubmit)="onSubmit()" #myForm="ngForm">
-        <div>
-          <label for="displayName">Display Name: </label>
-          <input type="text" id="displayName" name="displayName" #displayName="ngModel" [(ngModel)]="user.displayName"
-            required>
-        </div>
-        <div>
-        <label for="email">Email: </label>
-          <input type="text" id="email" name="email" #email="ngModel" [(ngModel)]="user.email"
-            required>
-        </div>
-        <div>
-          <button type="submit">Save</button>
-        </div>
-      </form>
-    </div>
-
-  <div>
-    <h1>CHANGE PASSWORD</h1>
-    <form (ngSubmit)="changePassword()" #myForm="ngForm">
-      <div>
-        <label for="oldPassword">Old Password:</label>
-        <input type="password" id="oldPassword" name="oldPassword" #oldPassword="ngModel" [(ngModel)]="tt.oldPassword"
-          required>
-      </div>
-      <div>
-        <label for="newPassword">New Password:</label>
-        <input type="password" id="newPassword" name="newPassword" #newPassword="ngModel" [(ngModel)]="tt.newPassword"
-          required>
-      </div>
-      <div>
-        <button type="submit" [disabled]="myForm.invalid">Save</button>
-      </div>
-    </form>
-    <br>
-    <button (click)="onLogout()">Logout</button>
-  </div>
-</div> -->
 </div>
