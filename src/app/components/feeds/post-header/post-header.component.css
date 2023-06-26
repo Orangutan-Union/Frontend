@@ -1,0 +1,31 @@
+.ProfilImg{
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+p{
+    margin: 0px;
+}
+
+.PostHeader{
+    width: 100%;
+    display: flex;
+}
+
+
+.UserName:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.PostHeader > .PostHeaderInfo{
+    width: 60%;
+}
+
+.interatctive:hover{
+    background-color: rgba(78, 72, 72, 0.1);
+    outline: rgba(78, 72, 72, 0.4) solid 1px;
+    border-radius: 5px;
+}
+

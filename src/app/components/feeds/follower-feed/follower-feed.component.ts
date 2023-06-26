@@ -118,7 +118,7 @@ export class FollowerFeedComponent implements OnInit {
 
   getFollowerFeed(): void {
     this.userId = Number(localStorage.getItem('userid'));
-    this.feedService.getUserFeed(this.userId).subscribe(data => {
+    this.feedService.getUsersFollowerFeed(this.userId).subscribe(data => {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
