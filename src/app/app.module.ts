@@ -21,7 +21,7 @@ import { FriendFeedComponent } from './components/feeds/friend-feed/friend-feed.
 import { FeedComponent } from './components/feeds/feed/feed.component';
 import { ProfileFeedComponent } from './components/Profile/profile-feed/profile-feed.component';
 import { FullPostComponent } from './components/feeds/full-post/full-post.component';
-import { CreatePostComponent } from './components/feeds/post-create/create-post.component';
+import { CreatePostComponent } from './components/feeds/Post-Feed-componentsFolder/post-create/create-post.component';
 import { VisitingProfilComponent } from './components/Profile/visiting-profil/visiting-profil.component';
 import { ChatComponent } from './components/chat/chat/chat.component';
 import { ChatSelectComponent } from './components/chat/chat-select/chat-select.component';
@@ -29,7 +29,8 @@ import { MessagesComponent } from './components/chat/messages/messages.component
 import { SendMessageComponent } from './components/chat/send-message/send-message.component';
 import { FriendrequestsComponent } from './components/FriendsWithBenefits/friendrequests/friendrequests.component';
 import { CommentsComponent } from './components/feeds/comments/comments.component';
-import { PostHeaderComponent } from './components/feeds/post-header/post-header.component';
+import { PostHeaderComponent } from './components/feeds/Post-Feed-componentsFolder/post-header/post-header.component';
+import { FeedComponentComponent } from './components/feeds/Post-Feed-componentsFolder/post-feed-component/feed-component.component';
 
 
 export function tokenGetter() {
@@ -60,6 +61,7 @@ export function tokenGetter() {
     CommentsComponent,
     FriendrequestsComponent,
     PostHeaderComponent,
+    FeedComponentComponent,
   ],
   imports: [
     BrowserModule,
