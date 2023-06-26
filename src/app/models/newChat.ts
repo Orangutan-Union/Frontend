@@ -1,5 +1,6 @@
-export class Chat{
+export class NewChat{
     chatId: number = 0;
     chatName: string = '';
-    timeCreated: Date;
+    lastMessageSent: Date;
+    isPrivate: boolean = false;
 }
