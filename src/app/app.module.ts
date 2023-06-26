@@ -21,7 +21,7 @@ import { FriendFeedComponent } from './components/feeds/friend-feed/friend-feed.
 import { FeedComponent } from './components/feeds/feed/feed.component';
 import { ProfileFeedComponent } from './components/Profile/profile-feed/profile-feed.component';
 import { FullPostComponent } from './components/feeds/full-post/full-post.component';
-import { CreatePostComponent } from './components/feeds/create-post/create-post.component';
+import { CreatePostComponent } from './components/feeds/post-create/create-post.component';
 import { VisitingProfilComponent } from './components/Profile/visiting-profil/visiting-profil.component';
 import { ChatComponent } from './components/chat/chat/chat.component';
 import { ChatSelectComponent } from './components/chat/chat-select/chat-select.component';

@@ -3,10 +3,6 @@
     outline: 2px solid black;
     margin: 13px;
 }
-.ProfilImg{
-    margin-right: 15px;
-    cursor: pointer;
-}
 
 p{
     margin: 0px;
@@ -30,35 +26,17 @@ p{
     padding: 1px;
 }
 
-.PostHeader{
-    width: 100%;
-    display: flex;
-}
-
-.OnHover{
-    cursor: pointer;
-    /* background-color: red; */
-}
-
-.UserName:hover{
-    cursor: pointer;
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-.PostHeader > .PostHeaderInfo{
-    width: 60%;
-}
-
 .icon{
     vertical-align: bottom;
     /* color: rgba(78, 72, 72, 0.5); */
     color: rgba(78, 72, 72, 0.5);
 }
+
 .interatctive:hover{
     background-color: rgba(78, 72, 72, 0.1);
     outline: rgba(78, 72, 72, 0.4) solid 1px;
     border-radius: 5px;
+    cursor: progress;
 }
 
 .interatctive{
