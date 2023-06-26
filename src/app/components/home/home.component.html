@@ -1,7 +1,11 @@
 <app-nav-bar></app-nav-bar>
 <div class="feed">
+  <div class="changeFeedButtons">
+    <button (click)="FriendsFeed()">Friends</button>
+    <button (click)="FollowerFeed()">Follower</button>
+  </div>
   <app-create-post></app-create-post>
-  <!-- <app-friend-feed></app-friend-feed> -->
-  <!-- <app-follower-feed></app-follower-feed> -->
-  <app-feed></app-feed>
+  <app-friend-feed  *ngIf="FriendsBoolean && !FollowerBoolean ">  </app-friend-feed>
+  <app-follower-feed  *ngIf="FollowerBoolean && !FriendsBoolean"></app-follower-feed>
+  <app-feed  *ngIf="(FriendsBoolean && FollowerBoolean) || (!FriendsBoolean && !FollowerBoolean) "></app-feed>
 </div>
