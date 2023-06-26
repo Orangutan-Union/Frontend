@@ -25,8 +25,6 @@ const routes: Routes = [
   { path: 'fullPost/:id', component: FullPostComponent, canActivate:[AuthGuard]},
   { path: 'friendrequests', component: FriendrequestsComponent, canActivate:[AuthGuard]},
   { path: 'visitingProfil/:id', component: VisitingProfilComponent, canActivate:[AuthGuard] },
-  { path: 'followFeed', component: FollowerFeedComponent, canActivate: [AuthGuard] },
-  { path: 'friendFeed', component: FriendFeedComponent, canActivate: [AuthGuard] },
 ]; 
 
 @NgModule({
