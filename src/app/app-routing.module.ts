@@ -10,7 +10,6 @@ import { FullPostComponent } from './components/feeds/full-post/full-post.compon
 import { VisitingProfilComponent } from './components/Profile/visiting-profil/visiting-profil.component';
 import { ChatComponent } from './components/chat/chat/chat.component';
 import { FriendrequestsComponent } from './components/FriendsWithBenefits/friendrequests/friendrequests.component';
-
 import { FriendpageComponent } from './components/FriendsWithBenefits/friendpage/friendpage.component';
 
 const routes: Routes = [
