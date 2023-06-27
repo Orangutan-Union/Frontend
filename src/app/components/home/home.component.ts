@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangePassword } from 'src/app/models/changepassword';
 import { User } from 'src/app/models/user';
@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   tt: ChangePassword = new ChangePassword;
   user: User = new User;
   userId: number = 0;

@@ -72,7 +72,19 @@ export class ChatService {
     return this.http.post<NewMessage>(this.baseApiUrl + 'Message', message, httpOptions);
   }
 
-  createGroupChat(chat: NewChat): Observable<NewChat> {
-    return this.http.post<NewChat>(this.baseApiUrl + 'Chat/Group', chat, httpOptions)
+  createGroupChat(userId: number, chat: NewChat): Observable<Chat> {
+    return this.http.post<Chat>(this.baseApiUrl + 'Chat/' + userId, chat, httpOptions)
+  }
+  
+  addUser(chat: Chat): Observable<Chat> {
+    return this.http.put<Chat>(this.baseApiUrl + 'Chat/AddUser', chat, httpOptions)
+  }
+
+  leaveChat(userId: number, chatId: number): Observable<Chat> {
+    return this.http.put<Chat>(this.baseApiUrl + 'Chat/Leave/'+ userId + '/' + chatId, httpOptions)
+  }
+
+  updateChat(chat: Chat): Observable<Chat> {
+    return this.http.put<Chat>(this.baseApiUrl + 'Chat/Update', chat, httpOptions)
   }
 }

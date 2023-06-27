@@ -1,8 +1,8 @@
-<button onclick="createChatBoolChange()" >Create Chat</button>
+<button (click)="createChatBoolChange()" >Create Chat</button>
 <div *ngIf="createChatBool">
     <form (ngSubmit)="createChat()" #myForm="ngForm">
-        <textarea autosize placeholder="Message" type="text" id="content" name="content" #userName="ngModel"
-        [(ngModel)]="newChat" required>
+        <textarea autosize placeholder="Chat Name" type="text" id="chatName" name="chatName" #userName="ngModel"
+        [(ngModel)]="newChat.chatName" required>
     </textarea>
     <br>
     <button style="float: right;" type="submit" mat-raised-button color="primary"
