@@ -31,10 +31,11 @@ import { FriendrequestsComponent } from './components/FriendsWithBenefits/friend
 import { CommentsComponent } from './components/feeds/comments/comments.component';
 import { PostHeaderComponent } from './components/feeds/Post-Feed-componentsFolder/post-header/post-header.component';
 import { FeedComponentComponent } from './components/feeds/Post-Feed-componentsFolder/post-feed-component/feed-component.component';
+import { PostToolbarComponent } from './components/feeds/Post-Feed-componentsFolder/post-toolbar/post-toolbar.component';
 import { FriendlistComponent } from './components/FriendsWithBenefits/friendlist/friendlist.component';
 import { FriendpageComponent } from './components/FriendsWithBenefits/friendpage/friendpage.component';
 
-
+// ./components/feeds/post-feed-componentsFolder/post-toolbar/post-toolbar.component
 export function tokenGetter() {
   return localStorage.getItem("jwt");
 }
@@ -64,6 +65,7 @@ export function tokenGetter() {
     FriendrequestsComponent,
     PostHeaderComponent,
     FeedComponentComponent,
+    PostToolbarComponent,
     FriendlistComponent,
     FriendpageComponent,
   ],

@@ -1,14 +1,10 @@
 
-        <div class="postContent">
-            <app-post-header [post]="posts"></app-post-header>
-            <div class="Content">
-                <p>
-                    {{posts.content}}
-                </p>
-            </div>
-            <div class="likeContent">
-                <p class="interatctive" (click)="likePost(posts, i)"><mat-icon class="icon">thumb_up</mat-icon> Like {{likeCount}}</p>
-                <p class="interatctive" (click)="dislikePost(posts, i)"><mat-icon class="icon">thumb_down</mat-icon> Dislike {{dislikeCount}}</p>
-                <p class="interatctive" (click)="goToFullPost(posts.postId)"><mat-icon class="icon">comment</mat-icon> Comments {{commentCount}}</p>
-            </div>
-        </div>
+<div class="postContent">
+    <app-post-header [post]="posts"></app-post-header>
+    <div class="Content">
+        <p>
+            {{posts.content}}
+        </p>
+    </div>
+    <app-post-toolbar [posts]="posts" [i]="i"></app-post-toolbar>
+</div>
