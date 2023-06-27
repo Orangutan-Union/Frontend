@@ -9,4 +9,5 @@ textarea {
 textarea::placeholder{
     padding-left: 10px;
     padding-top: 10px;
+    text-align: center;
 }

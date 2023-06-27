@@ -1,6 +1,7 @@
-<app-nav-bar></app-nav-bar>
-
-<div class="requestContainer">
+<div *ngIf="friendRequests.length === 0" class="NoContent">
+    <h1>No one wants to be friends with you</h1>
+</div>
+<div *ngIf="friendRequests.length > 0" class="requestContainer">
     <div class="requests" *ngFor="let request of friendRequests">
         <span class="requestHeader">
             <b>

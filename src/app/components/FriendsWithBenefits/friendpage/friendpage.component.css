@@ -1,0 +1,20 @@
+.row:after{
+    /* content: ""; */
+    display: table;
+    /* clear: both; */
+    /* height: 50%; */
+}
+
+.friendList{
+    float: left;
+    width: 30%;
+}
+
+.friendRequest{
+    float: left;
+    width: 70%;
+    border-left: 1px solid black;
+    height: 89.4vh;
+    position: relative;
+}
+
