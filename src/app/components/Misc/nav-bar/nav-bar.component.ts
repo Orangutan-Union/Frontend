@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, Subscription, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { FriendRequest } from 'src/app/models/friendrequest';
@@ -12,7 +12,8 @@ import { LoginComponent } from '../../LoginPage/login/login.component';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit {  
+  @Output() userOut: EventEmitter<User> = new EventEmitter<User>();
   search: string = '';
   user: User = new User;
   userId: number = 0;

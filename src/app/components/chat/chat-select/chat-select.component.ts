@@ -11,6 +11,7 @@ import { ChatService } from 'src/app/services/chat.service';
 export class ChatSelectComponent implements OnInit {
   @Output() selectedChat: EventEmitter<Chat> = new EventEmitter<Chat>();
   @Output() chatList: EventEmitter<Chat[]> = new EventEmitter<Chat[]>();
+  userId: number = 0;
   chats: Chat[] = [];
   newChat: NewChat = new NewChat;
   createChatBool: boolean = false;
@@ -47,12 +48,20 @@ export class ChatSelectComponent implements OnInit {
   }
 
   createChatBoolChange() {
-    console.log(this.createChatBool);    
+    console.log(this.createChatBool);
     this.createChatBool = !this.createChatBool
     console.log(this.createChatBool);
   }
 
   createChat() {
+    this.userId = Number(localStorage.getItem('userid'));
+    this.chatService.createGroupChat(this.userId, this.newChat).subscribe(chat => {
+      console.log(chat);
+      console.log(this.chats);
+      this.chats.unshift(chat)
+      console.log(this.chats);
+      this.newChat.chatName = '';
+    })
 
   }
 }
