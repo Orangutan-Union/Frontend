@@ -24,6 +24,8 @@ export class FeedService {
   constructor(private http: HttpClient, private route: Router) { }
 
   getFullPost(id: number): Observable<Post> {
+    console.log("GetFullPost");
+    
     return this.http.get<Post>(this.baseApiUrl + 'Post/' + id)
   }
 
@@ -32,14 +34,20 @@ export class FeedService {
   }
 
   getUserFeed(id: number): Observable<Post[]> {
+    console.log("GetUserFeed");
+    
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/feed/' + id);
   }
 
   getUsersFollowerFeed(id: number): Observable<Post[]> {
+    console.log("GetUserFollowerFeed");
+    
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/followerfeed/' + id);
   }
 
   getUsersFriendFeed(id: number): Observable<Post[]> {
+    console.log("GetUsersFriendFeed");
+    
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/friendfeed/' + id);
   }
 

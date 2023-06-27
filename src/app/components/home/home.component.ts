@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangePassword } from 'src/app/models/changepassword';
@@ -19,17 +20,20 @@ export class HomeComponent implements OnInit {
   formData = new FormData();
   constructor(private authService: AuthService, private route: Router) { }
 
-  ngOnInit(): void {
-   //this.getUser();
-  }
+  ngOnInit(): void {   
+   let FriendsBoolean = localStorage.getItem('FriendBoolean')
+   let FollowerBoolean = localStorage.getItem('FollowerBoolean')
+   this.FollowerBoolean = JSON.parse(FollowerBoolean!)
+   this.FriendsBoolean = JSON.parse(FriendsBoolean!)
+}
+
+  
   FriendsFeed(){
     this.FriendsBoolean = !this.FriendsBoolean
-    console.log("FriendFeed    :" + this.FriendsBoolean);
-    
+    localStorage.setItem('FriendBoolean', this.FriendsBoolean.toString());
   }
   FollowerFeed(){
     this.FollowerBoolean = !this.FollowerBoolean
-    console.log("FollowerFeed    :" + this.FollowerBoolean);
-    
+    localStorage.setItem('FollowerBoolean', this.FollowerBoolean.toString())
   }
 }

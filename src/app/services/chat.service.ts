@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { io, Socket } from "socket.io-client";
 import { environment } from 'src/environments/environment';
 import { Chat } from '../models/chat';
+import { NewChat } from '../models/newChat';
 import { NewMessage } from '../models/newMessage';
 
 const httpOptions = {
@@ -20,17 +21,17 @@ export class ChatService {
   baseApiUrl: string = environment.baseApiUrl;
   public message$: BehaviorSubject<string> = new BehaviorSubject('');
   private socket: Socket;
-  
-  constructor(private http: HttpClient, private route: Router) { 
+
+  constructor(private http: HttpClient, private route: Router) {
     this.socket = io('https://localhost:3000');
-  }   
+  }
 
   joinRoom(roomId: number): void {
     console.log("join room:", roomId);
-    
+
     this.socket.emit('joinRoom', roomId);
   }
-  
+
   leaveRoom(roomId: number): void {
     this.socket.emit('leaveRoom', roomId);
   }
@@ -42,12 +43,12 @@ export class ChatService {
     };
     this.socket.emit('message', messageData)
     console.log("sendService");
-    
+
   }
- 
+
   receiveMessage(): Observable<string> {
     console.log("resiveService");
-    
+
     return new Observable<string>((observer) => {
       this.socket.on('message', (message) => {
         observer.next(message)
@@ -56,7 +57,7 @@ export class ChatService {
   }
 
   receiveRoomJoined(): void {
-    this.socket.on('roomJoined', (roomId) => { console.log('Joined room:', roomId)})
+    this.socket.on('roomJoined', (roomId) => { console.log('Joined room:', roomId) })
   }
 
   getUserChats(id: number): Observable<Chat[]> {
@@ -69,5 +70,9 @@ export class ChatService {
 
   createMessage(message: NewMessage): Observable<NewMessage> {
     return this.http.post<NewMessage>(this.baseApiUrl + 'Message', message, httpOptions);
+  }
+
+  createGroupChat(chat: NewChat): Observable<NewChat> {
+    return this.http.post<NewChat>(this.baseApiUrl + 'Chat/Group', chat, httpOptions)
   }
 }

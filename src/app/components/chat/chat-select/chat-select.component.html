@@ -1,3 +1,14 @@
+<button onclick="createChatBoolChange()" >Create Chat</button>
+<div *ngIf="createChatBool">
+    <form (ngSubmit)="createChat()" #myForm="ngForm">
+        <textarea autosize placeholder="Message" type="text" id="content" name="content" #userName="ngModel"
+        [(ngModel)]="newChat" required>
+    </textarea>
+    <br>
+    <button style="float: right;" type="submit" mat-raised-button color="primary"
+    [disabled]="myForm.invalid || newChat.chatName.trim() == ''">Create</button>
+</form>
+</div>
 <div class="chatList" *ngFor="let chat of chats">
     <div [class.selected]="chat.chatId === selectedChatId" (click)="selectChat(chat.chatId)" >
         <h1>{{chat.chatName}}</h1>
