@@ -43,7 +43,7 @@ export class PostToolbarComponent implements OnInit {
     });
 
     if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
-      this.likeCount++
+      // this.likeCount++
       this.feedService.addLike(this.like).subscribe(data => {
         console.log(data)
         this.getFeed();
@@ -86,7 +86,6 @@ export class PostToolbarComponent implements OnInit {
     });
 
     if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
-      this.dislikeCount++
       this.feedService.addLike(this.like).subscribe(data => {
         console.log(data)
         this.getFeed();
@@ -127,7 +126,7 @@ export class PostToolbarComponent implements OnInit {
 
   getFeed(): void {
     this.userId = Number(localStorage.getItem('userid'));
-    this.feedService.getFullPost(this.userId).subscribe(data => {
+    this.feedService.getFullPost(this.posts.postId).subscribe(data => {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
