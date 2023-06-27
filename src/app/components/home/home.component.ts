@@ -1,6 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChangePassword } from 'src/app/models/changepassword';
 import { User } from 'src/app/models/user';
