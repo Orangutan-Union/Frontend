@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Like } from 'src/app/models/addLike';
 import { FriendFollower } from 'src/app/models/friendfollower';
@@ -37,7 +37,11 @@ export class VisitingProfilComponent implements OnInit {
   TECPoints: number = 0;
   postCount: number = 0;
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute,
-    private authService: AuthService, private ffService: FriendfollowerService, private friendreqService: FriendrequestService) { }
+    private authService: AuthService, private ffService: FriendfollowerService, private friendreqService: FriendrequestService, private cdr: ChangeDetectorRef) { 
+      // setTimeout(() => {
+      //   this.cdr.detectChanges();
+      // })
+    }
 
   ngOnInit(): void {
     this.currentUserId = Number(localStorage.getItem('userid'));
@@ -266,14 +270,18 @@ export class VisitingProfilComponent implements OnInit {
 
   followUser(){
     this.ffService.followUser(this.user.userId).subscribe(res => {
-      window.location.reload();
+      // window.location.reload();
+      this.following = true;
+      this.cdr.detectChanges();
       console.log(res);      
     });
   }
 
   unfollowUser(){
     this.ffService.unfollowUser(this.user.userId).subscribe(res => {
-      window.location.reload();
+      // window.location.reload();
+      this.following = false;
+      this.cdr.detectChanges();
       console.log(res);      
     });
   }
@@ -281,14 +289,20 @@ export class VisitingProfilComponent implements OnInit {
   blockUser(){
     this.ffService.blockUser(this.user.userId).subscribe(res => {
       console.log(res);
-      window.location.reload();      
+      // window.location.reload();
+      this.hasBlocked = true;
+      this.following = false;
+      this.cdr.detectChanges();
     });
   }
 
   unblockUser(){
     this.ffService.unblockUser(this.user.userId).subscribe(res => {
       console.log(res);
-      window.location.reload();
+      // window.location.reload();
+      this.hasBlocked = false;
+      // this.following = false;
+      this.cdr.detectChanges();
     });
   }
 
@@ -297,7 +311,9 @@ export class VisitingProfilComponent implements OnInit {
     request.senderId = Number(localStorage.getItem('userid'));
     request.receiverId = this.user.userId;
     this.friendreqService.sendFriendRequest(request).subscribe(() => {
-      window.location.reload();
+      // window.location.reload();
+      this.sentRequestPending = true;
+      this.cdr.detectChanges();
     });
   }
 
@@ -320,7 +336,9 @@ export class VisitingProfilComponent implements OnInit {
   unfriendUser(){
     this.ffService.unfriendUser(this.user.userId).subscribe(res => {
       console.log(res);
-      window.location.reload();
+      this.friends = false;
+      this.cdr.detectChanges();
+      // window.location.reload();
     });
   }
 
@@ -329,7 +347,10 @@ export class VisitingProfilComponent implements OnInit {
     request.senderId = this.currentUserId;
     request.receiverId = this.user.userId;
     this.friendreqService.declineFriendRequest(request).subscribe(() => {
-      window.location.reload();
+      // window.location.reload();
+      this.sentRequestPending = false;
+      this.receivedRequestPending = false;
+      this.cdr.detectChanges();
     });
   }
 
@@ -338,7 +359,11 @@ export class VisitingProfilComponent implements OnInit {
     request.senderId = this.user.userId;
     request.receiverId = this.currentUserId;
     this.friendreqService.acceptFriendRequest(request).subscribe(() => {
-      window.location.reload();
+      // window.location.reload();
+      this.friends = true
+      this.sentRequestPending = false;
+      this.receivedRequestPending = false;
+      this.cdr.detectChanges();
     });
   }
 }

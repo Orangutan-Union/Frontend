@@ -1,0 +1,19 @@
+<div class="Container">
+    <div class="NoContent" *ngIf="friends.length === 0">
+        <h1>You have 0 friends</h1>
+        <h1>What a loser, lol.</h1>
+    </div>
+    <div *ngIf="friends.length > 0">
+        <div class="friend" *ngFor="let friend of friends">
+            <div class="Content">
+                <img class="ProfilImg" routerLink="/visitingProfil/{{friend.userId}}"
+                    src="{{friend.user.picture.imageUrl}}">
+                <span class="UserName" routerLink="/visitingProfil/{{friend.userId}}">{{friend.user.displayName}}</span>
+                
+            </div>
+            <div class="MessageButton">
+                <mat-icon class="MessageIcon" routerLink="/chat">message</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>

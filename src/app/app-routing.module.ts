@@ -10,7 +10,7 @@ import { FullPostComponent } from './components/feeds/full-post/full-post.compon
 import { VisitingProfilComponent } from './components/Profile/visiting-profil/visiting-profil.component';
 import { ChatComponent } from './components/chat/chat/chat.component';
 import { FriendrequestsComponent } from './components/FriendsWithBenefits/friendrequests/friendrequests.component';
-
+import { FriendpageComponent } from './components/FriendsWithBenefits/friendpage/friendpage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'fullPost/:id', component: FullPostComponent, canActivate:[AuthGuard]},
   { path: 'friendrequests', component: FriendrequestsComponent, canActivate:[AuthGuard]},
   { path: 'visitingProfil/:id', component: VisitingProfilComponent, canActivate:[AuthGuard] },
+  { path: 'friendpage', component: FriendpageComponent, canActivate:[AuthGuard] }
 ]; 
 
 @NgModule({
