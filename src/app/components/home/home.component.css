@@ -27,5 +27,11 @@
 .changeFeedButtons > button{
     margin: 5px 3%;
     width: 100%;
-    
+}
+
+.picked{
+    background-Color: lightblue;
+    border: 1px solid black;
+    height: 19px;
+    border-radius: 3px;
 }
