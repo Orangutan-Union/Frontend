@@ -1,8 +1,8 @@
 <app-nav-bar></app-nav-bar>
 <div class="feed">
   <div class="changeFeedButtons">
-    <button (click)="FriendsFeed()">Friends</button>
-    <button (click)="FollowerFeed()">Follower</button>
+    <button (click)="FriendsFeed()" [ngClass]="{picked: FriendsBoolean}">Friends</button>
+    <button (click)="FollowerFeed()" [ngClass]="{picked: FollowerBoolean}">Follower</button>
   </div>
   <app-create-post></app-create-post>
   <app-friend-feed  *ngIf="FriendsBoolean && !FollowerBoolean ">  </app-friend-feed>

@@ -16,10 +16,14 @@ export class FeedComponent implements OnInit {
   constructor(private feedService: FeedService) { }
 
   ngOnInit(): void {
+    console.log("FeedComponent");
+    
     this.getFeed();    
   }
   
   getFeed(): void {
+    console.log("GetFeed");
+    
     this.userId = Number(localStorage.getItem('userid'));
     this.feedService.getUserFeed(this.userId).subscribe(data => {
       this.posts = data;
