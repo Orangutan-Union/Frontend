@@ -6,5 +6,8 @@
             {{posts.content}}
         </p>
     </div>
+    <div class="PictureContent">
+        <img *ngIf="posts.pictures.length > 0" src="{{posts.pictures[0].imageUrl}}">
+    </div>
     <app-post-toolbar [posts]="posts" [i]="i"></app-post-toolbar>
 </div>

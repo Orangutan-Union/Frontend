@@ -8,6 +8,9 @@
                     {{post.content}}
                 </p>
             </div>
+            <div class="PictureContent">
+                <img *ngIf="post.pictures.length > 0" src="{{post.pictures[0].imageUrl}}">
+            </div>
             <div class="likeContent">
                 <p class="interatctive OnHover" (click)="likePost(post, i)"><mat-icon class="icon">thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
                 <p class="interatctive OnHover" (click)="dislikePost(post, i)"><mat-icon class="icon">thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</p>

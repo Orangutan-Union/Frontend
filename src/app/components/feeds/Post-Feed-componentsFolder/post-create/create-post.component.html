@@ -1,7 +1,14 @@
 <form (ngSubmit)="onSubmit()" #myForm="ngForm">
     <textarea autosize placeholder="Whats on your mind?" type="text" id="content" name="content" #userName="ngModel"
-         [(ngModel)]="post.content" required>
+        [(ngModel)]="post.content" required>
     </textarea>
+    <div class="filecontainer">
+        <label class="file-upload">
+            <input id="file" type="file" (change)="fileChange($any($event).target.files)">
+            <mat-icon>cloud_upload</mat-icon>
+        </label>
+        <span class="filename" *ngIf="file !== undefined">{{file.name}}</span>
+    </div>
     <button style="float: right;" type="submit" mat-raised-button color="primary"
         [disabled]="myForm.invalid || post.content.trim() == ''">Create</button>
 </form>

@@ -43,3 +43,13 @@ p{
     margin: auto 15px;
     vertical-align: bottom;
 }
+
+.PictureContent{
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.PictureContent > img{
+    max-width: 450px;
+    max-height: 450px;
+}

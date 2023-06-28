@@ -53,6 +53,9 @@
                                 {{post.content}}
                             </p>
                         </div>
+                        <div class="PictureContent">
+                            <img *ngIf="post.pictures.length > 0" src="{{post.pictures[0].imageUrl}}">
+                        </div>
                         <div class="likeContent">
                             <p class="interatctive OnHover" *ngIf="post.userId !== currentUserId"(click)="likePost(post, i)"><mat-icon class="icon" id="Icon" >thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
                             <p class="interatctive OnHover" style="color: red" *ngIf="post.userId === currentUserId" (click)="likePost(post, i)"><mat-icon class="icon" id="Icon" >thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
