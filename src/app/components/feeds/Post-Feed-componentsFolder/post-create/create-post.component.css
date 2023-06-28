@@ -11,3 +11,22 @@ textarea::placeholder{
     padding-top: 10px;
     text-align: center;
 }
+
+input[type="file"]{
+    display: none;
+}
+
+.file-upload:hover{
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+.filename{
+    margin-left: 10px;
+    margin-top: 3px;
+    justify-content: center;
+}
+
+.filecontainer{
+    display: flex;
+}
