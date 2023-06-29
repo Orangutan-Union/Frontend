@@ -1,4 +1,4 @@
-<app-nav-bar></app-nav-bar>
+
 
 <div *ngIf="isBlocked">
     <h1 style="text-align: center;vertical-align: middle;line-height: 75vh;">This user has blocked you</h1>
@@ -52,6 +52,9 @@
                             <p> 
                                 {{post.content}}
                             </p>
+                        </div>
+                        <div class="PictureContent">
+                            <img *ngIf="post.pictures.length > 0" src="{{post.pictures[0].imageUrl}}">
                         </div>
                         <div class="likeContent">
                             <p class="interatctive OnHover" *ngIf="post.userId !== currentUserId"(click)="likePost(post, i)"><mat-icon class="icon" id="Icon" >thumb_up</mat-icon> Like {{likeCounter[i]}}</p>

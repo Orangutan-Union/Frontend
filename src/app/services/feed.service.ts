@@ -51,8 +51,8 @@ export class FeedService {
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/friendfeed/' + id);
   }
 
-  addPost(newPost: NewPost): Observable<NewPost> {
-    return this.http.post<NewPost>(this.baseApiUrl + 'Post', newPost, httpOptions)
+  addPost(formData: FormData): Observable<NewPost> {
+    return this.http.post<NewPost>(this.baseApiUrl + 'Post', formData)
   }
 
   updatePost(post: Post): Observable<Post> {
