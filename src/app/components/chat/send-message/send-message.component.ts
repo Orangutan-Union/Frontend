@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { takeUntil } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { Unsub } from 'src/app/classes/unsub';
 import { Chat } from 'src/app/models/chat';
 import { NewMessage } from 'src/app/models/newMessage';
 import { ChatService } from 'src/app/services/chat.service';
@@ -10,7 +12,7 @@ import { ChatSelectComponent } from '../chat-select/chat-select.component';
   templateUrl: './send-message.component.html',
   styleUrls: ['./send-message.component.css']
 })
-export class SendMessageComponent implements OnInit {
+export class SendMessageComponent extends Unsub implements OnInit {
   @Output() chats: EventEmitter<Chat[]> = new EventEmitter<Chat[]>();
   @Input() inChat: Chat = new Chat;
   @Input() chatList: Chat[] = [];
@@ -22,7 +24,7 @@ export class SendMessageComponent implements OnInit {
   newMessage: string = '';
   message: NewMessage = new NewMessage;
 
-  constructor(private chatService: ChatService, private chatSelect: ChatSelectComponent) { }
+  constructor(private chatService: ChatService, private chatSelect: ChatSelectComponent) { super(); }
 
   ngOnInit(): void {
     this.socket = io('http://localhost:3000');
@@ -36,7 +38,7 @@ export class SendMessageComponent implements OnInit {
 
     this.chatService.sendMessage(this.inChat.chatId, this.newMessage);
 
-    this.chatService.createMessage(this.message).subscribe(message => {
+    this.chatService.createMessage(this.message).pipe(takeUntil(this.unsubscribe$)).subscribe(message => {
 
       this.chatList.forEach(chat => {
         if (chat.chatId == this.inChat.chatId)
