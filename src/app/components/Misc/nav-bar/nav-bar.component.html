@@ -11,7 +11,7 @@
         <div class="NotificationContainer">
           <mat-icon routerLink="/friendpage" style="margin-left: 15px;">
             notification_important_icon
-            <div *ngIf="user.receivedFriendRequests.length > 0" class="notifications"></div>
+            <div *ngIf="user.receivedFriendRequests.length > 10" class="notifications"></div>
           </mat-icon>
         </div>
         <mat-icon routerLink="/settings" style="margin-left: 15px;">settings</mat-icon>
@@ -21,6 +21,7 @@
   </div>
   <div class="divider"></div>
 </div>
+
 <span class="SearchResult">
   <ul *ngFor="let user of searchUsers">
     <li>

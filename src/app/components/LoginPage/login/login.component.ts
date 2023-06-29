@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { Unsub } from 'src/app/classes/unsub';
@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent extends Unsub implements OnInit {
 
+  @Output() IsLoggedIn = new EventEmitter<Boolean>();
   invalidLogin: boolean = false;
   login: LoginRequest = new LoginRequest;
   constructor(private authService: AuthService, private router: Router) { super(); }
@@ -30,6 +31,7 @@ export class LoginComponent extends Unsub implements OnInit {
         localStorage.setItem('userid', response.userId.toString());
         this.invalidLogin = false;
         console.log(response);
+        this.IsLoggedIn.emit(this.authService.isLoggedIn())
         this.router.navigate(['/home'])
       },
       error: (err: HttpErrorResponse) => this.invalidLogin = true
