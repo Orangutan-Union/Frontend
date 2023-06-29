@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeavePopupComponent } from './leave-popup.component';
+import { NavBarv2Component } from './nav-barv2.component';
 
-describe('LeavePopupComponent', () => {
-  let component: LeavePopupComponent;
-  let fixture: ComponentFixture<LeavePopupComponent>;
+describe('NavBarv2Component', () => {
+  let component: NavBarv2Component;
+  let fixture: ComponentFixture<NavBarv2Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LeavePopupComponent ]
+      declarations: [ NavBarv2Component ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LeavePopupComponent);
+    fixture = TestBed.createComponent(NavBarv2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

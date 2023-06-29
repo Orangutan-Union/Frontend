@@ -1,19 +1,17 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, Subscription, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { debounceTime, Subject, Subscription, switchMap } from 'rxjs';
 import { FriendRequest } from 'src/app/models/friendrequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FriendrequestService } from 'src/app/services/friendrequest.service';
-import { LoginComponent } from '../../LoginPage/login/login.component';
 
 @Component({
-  selector: 'app-nav-barV2',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  selector: 'app-nav-bar',
+  templateUrl: './nav-barv2.component.html',
+  styleUrls: ['./nav-barv2.component.css']
 })
-export class NavBarComponent implements OnInit {  
-  @Output() userOut: EventEmitter<User> = new EventEmitter<User>();
+export class NavBarv2Component implements OnInit {
   search: string = '';
   user: User = new User;
   userId: number = 0;
@@ -21,7 +19,6 @@ export class NavBarComponent implements OnInit {
   private searchSubscription?: Subscription;
   private readonly searchSubject = new Subject<string | undefined>();
   searchUsers: User[] = [];
-  IsTrue: Boolean = false
 
   constructor(private authService: AuthService, private route: Router, private friendreqService: FriendrequestService) { }
 
@@ -30,27 +27,20 @@ export class NavBarComponent implements OnInit {
     this.searchWithDelay();
   }
 
-  getUser(): void {
+  getUser(): void{
     this.userId = Number(localStorage.getItem('userid'));
-    this.authService.getUserById(this.userId).subscribe({
-      next: (usr => {
-        this.user = usr;
-        console.log('THIS IS ME');
-        
-        
-        console.log(this.user);
-        console.log('THIS IS ME');
-      })
-    });
+    this.authService.getUserById(this.userId).subscribe(data => {
+      this.user = data
+    })
   }
 
-  logOff(): void {
+  logOff(): void{
     this.authService.logout();
   }
 
-  onSearchQueryInput(event: Event) {
+  onSearchQueryInput(event: Event){
     const searchQuery = (event.target as HTMLInputElement).value;
-    if (searchQuery.trim().length > 1) {
+    if (searchQuery.trim().length > 1){
       this.search = searchQuery;
       this.searchSubject.next(searchQuery?.trim());
     }
@@ -60,11 +50,11 @@ export class NavBarComponent implements OnInit {
     }
   }
 
-  searchWithDelay(): void {
+  searchWithDelay(): void{
     this.searchSubscription = this.searchSubject
-      .pipe(
-        debounceTime(500), // Miliseconds after last input before searching starts
-        switchMap(term => this.authService.getUsersBySearch(term!.trim()))
+    .pipe(
+      debounceTime(500),// Miliseconds after last input before searching starts
+      switchMap(term => this.authService.getUsersBySearch(term!.trim()))
       )
       .subscribe(res => {
         if (this.search !== '') { // If statement prevents results from not matching query which could happen if you used backspace fast

@@ -11,7 +11,7 @@
         <div class="NotificationContainer">
           <mat-icon routerLink="/friendpage" style="margin-left: 15px;">
             notification_important_icon
-            <div *ngIf="user.receivedFriendRequests.length > 0" class="notifications"></div>
+            <div *ngIf="user.receivedFriendRequests.length > 10" class="notifications"></div>
           </mat-icon>
         </div>
         <mat-icon routerLink="/settings" style="margin-left: 15px;">settings</mat-icon>
@@ -21,13 +21,19 @@
   </div>
   <div class="divider"></div>
 </div>
+
 <span class="SearchResult">
   <ul *ngFor="let user of searchUsers">
     <li>
       <span class="search-results" (click)="goToProfile(user.userId)">
         <img class="ProfilImg" src="{{user.picture.imageUrl}}">
         <p>{{user.displayName}}</p>
-        <mat-icon *ngIf="isFriend(user.userId)">person</mat-icon>
+        <mat-icon class="search-results-icon"
+          *ngIf="userId !== user.userId && !sentFriendRequestPending(user.userId) && !isFriend(user.userId) && !receivedFriendRequestPending(user.userId)"
+          (click)="sendFriendRequest(user.userId)">person_add_icon</mat-icon>
+        <mat-icon *ngIf="isFriend(user.userId)">personddddd</mat-icon>
+        <button [disabled]="true" *ngIf="userId !== user.userId && sentFriendRequestPending(user.userId)">Sent</button>
+        <button [disabled]="true" *ngIf="userId !== user.userId && receivedFriendRequestPending(user.userId)">Pending</button>
       </span>
     </li>
   </ul>
