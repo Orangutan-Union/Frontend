@@ -10,7 +10,6 @@ export class ChatComponent implements OnInit {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   selectedChat: Chat;
   chatList: Chat[];
-  chats: Chat[];
 
   onChatSelected(chat: Chat) {
     this.selectedChat = chat;
@@ -20,13 +19,19 @@ export class ChatComponent implements OnInit {
     this.chatList = chat;
   }
 
-  onMessageSend(chat: Chat[]) {
-    this.chatList = chat;
-  }
-
   constructor() { }
 
   ngOnInit() {    
   }
+
+  ngAfterViewInit() {
+    this.scrollToBottom();
+  }
+  
+  scrollToBottom(): void {
+    try {
+        this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
 }
 
