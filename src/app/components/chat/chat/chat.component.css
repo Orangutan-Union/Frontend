@@ -24,10 +24,15 @@
     display: grid;
     grid-template-rows: 1fr auto;
   }
+
+  .settings {
+    height: 35px;
+    overflow: hidden;
+  }
   
   .messages {
     overflow-y: auto;
-    height: calc(100% - 30px);
+    height: calc(30px -100% - 30px);
     scroll-behavior: smooth;
   } 
   
