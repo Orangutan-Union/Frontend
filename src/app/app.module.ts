@@ -6,9 +6,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
-import { MatDialogModule} from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/LoginPage/register/register.component';
@@ -37,8 +34,6 @@ import { FeedComponentComponent } from './components/feeds/Post-Feed-componentsF
 import { PostToolbarComponent } from './components/feeds/Post-Feed-componentsFolder/post-toolbar/post-toolbar.component';
 import { FriendlistComponent } from './components/FriendsWithBenefits/friendlist/friendlist.component';
 import { FriendpageComponent } from './components/FriendsWithBenefits/friendpage/friendpage.component';
-import { ChatSettingsBarComponent } from './components/chat/chat-settings-bar/chat-settings-bar.component';
-import { LeavePopupComponent } from './components/chat/leave-popup/leave-popup.component';
 
 // ./components/feeds/post-feed-componentsFolder/post-toolbar/post-toolbar.component
 export function tokenGetter() {
@@ -73,12 +68,8 @@ export function tokenGetter() {
     PostToolbarComponent,
     FriendlistComponent,
     FriendpageComponent,
-    ChatSettingsBarComponent,
-    LeavePopupComponent,
   ],
   imports: [
-    BrowserAnimationsModule,
-    MatDialogModule,
     BrowserModule,
     AppRoutingModule,
     MatIconModule,

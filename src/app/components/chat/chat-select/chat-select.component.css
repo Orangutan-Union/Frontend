@@ -5,18 +5,10 @@
     width: auto;
 }
 
-.chat {
+.chat {    
     font-size: x-large;
 }
 
 .selected {
-    background-color: #59deff;
-    /* Set the background color for the selected chat */
-}
-
-textarea {
-    resize: horizontal;
-    overflow: hidden;
-    width: 100%;
-    min-height: 30px;
-}
+    background-color: #59deff; /* Set the background color for the selected chat */
+  }

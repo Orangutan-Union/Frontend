@@ -24,6 +24,7 @@ export class MessagesComponent implements OnInit {
 
     this.chatService.receiveMessage().subscribe((message: string) => {     
       var messageSplit = message.split('|')
+      console.log("resiveComponent");
       
       this.chat.users.forEach(user => {
         if (user.userId == Number(messageSplit[1])) {
@@ -60,7 +61,7 @@ export class MessagesComponent implements OnInit {
     } else if (isFirstDifferentUser || isLastDifferentUser) {
       classes.push('middleMessage');
     }
-  
+
     return classes;
   }
 }
