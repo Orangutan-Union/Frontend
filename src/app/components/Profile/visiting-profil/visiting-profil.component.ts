@@ -1,22 +1,23 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Unsub } from 'src/app/classes/unsub';
 import { Like } from 'src/app/models/addLike';
 import { FriendFollower } from 'src/app/models/friendfollower';
 import { FriendRequest } from 'src/app/models/friendrequest';
-import { NewComment } from 'src/app/models/newComment';
 import { Post } from 'src/app/models/post';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FeedService } from 'src/app/services/feed.service';
 import { FriendfollowerService } from 'src/app/services/friendfollower.service';
 import { FriendrequestService } from 'src/app/services/friendrequest.service';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-visiting-profil',
   templateUrl: './visiting-profil.component.html',
   styleUrls: ['./visiting-profil.component.css']
 })
-export class VisitingProfilComponent implements OnInit {
+export class VisitingProfilComponent extends Unsub implements OnInit {
   currentUserFollowing: FriendFollower[] = [];
   currentUserId: number = 0;
   user: User = new User;
@@ -37,11 +38,12 @@ export class VisitingProfilComponent implements OnInit {
   TECPoints: number = 0;
   postCount: number = 0;
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute,
-    private authService: AuthService, private ffService: FriendfollowerService, private friendreqService: FriendrequestService, private cdr: ChangeDetectorRef) { }
+    private authService: AuthService, private ffService: FriendfollowerService,
+    private friendreqService: FriendrequestService, private cdr: ChangeDetectorRef) { super();}
 
   ngOnInit(): void {
     this.currentUserId = Number(localStorage.getItem('userid'));
-    this.aRoute.paramMap.subscribe((params) => {
+    this.aRoute.paramMap.pipe(takeUntil(this.unsubscribe$)).subscribe((params) => {
       const id = Number(params.get('id'))
       this.getUser(id);
       this.getUserPosts(id);
@@ -82,7 +84,7 @@ export class VisitingProfilComponent implements OnInit {
 
     if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
       this.likeCounter[i]++
-      this.feedService.addLike(this.like).subscribe(data => {
+      this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         console.log(data)
         this.getUserPosts(this.user.userId);
       })
@@ -102,7 +104,7 @@ export class VisitingProfilComponent implements OnInit {
       this.likeCounter[i]--
     }
 
-    this.feedService.addLike(this.like).subscribe(data => {
+    this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       console.log(data)
     })
   }
@@ -123,7 +125,7 @@ export class VisitingProfilComponent implements OnInit {
 
     if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
       this.dislikeCounter[i]++
-      this.feedService.addLike(this.like).subscribe(data => {
+      this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         console.log(data)
         this.getUserPosts(this.user.userId);
       })
@@ -144,13 +146,13 @@ export class VisitingProfilComponent implements OnInit {
       this.dislikeCounter[i]--
     }
 
-    this.feedService.addLike(this.like).subscribe(data => {
+    this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       console.log(data)
     })
   }
 
   getUserPosts(id: number): void {
-    this.feedService.getUserPosts(id).subscribe(data => {
+    this.feedService.getUserPosts(id).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
@@ -180,7 +182,7 @@ export class VisitingProfilComponent implements OnInit {
   }
 
   getUser(id: number){
-    this.authService.getUserById(id).subscribe(res => {
+    this.authService.getUserById(id).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       this.user = res;
       this.isFriend();      
       this.blockStatus();
@@ -241,7 +243,7 @@ export class VisitingProfilComponent implements OnInit {
   }
 
   getCurrentUserFollowers(){
-    this.ffService.getUserFollowers(Number(localStorage.getItem('userid'))).subscribe(res => {
+    this.ffService.getUserFollowers(Number(localStorage.getItem('userid'))).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       this.currentUserFollowing = res;
       this.isFollowing();
     });
@@ -265,7 +267,7 @@ export class VisitingProfilComponent implements OnInit {
   }
 
   followUser(){
-    this.ffService.followUser(this.user.userId).subscribe(res => {
+    this.ffService.followUser(this.user.userId).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       this.following = true;
       this.cdr.detectChanges();
       console.log(res);      
@@ -273,7 +275,7 @@ export class VisitingProfilComponent implements OnInit {
   }
 
   unfollowUser(){
-    this.ffService.unfollowUser(this.user.userId).subscribe(res => {
+    this.ffService.unfollowUser(this.user.userId).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       this.following = false;
       this.cdr.detectChanges();
       console.log(res);      
@@ -281,7 +283,7 @@ export class VisitingProfilComponent implements OnInit {
   }
 
   blockUser(){
-    this.ffService.blockUser(this.user.userId).subscribe(res => {
+    this.ffService.blockUser(this.user.userId).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       console.log(res);
       this.hasBlocked = true;
       this.following = false;
@@ -290,7 +292,7 @@ export class VisitingProfilComponent implements OnInit {
   }
 
   unblockUser(){
-    this.ffService.unblockUser(this.user.userId).subscribe(res => {
+    this.ffService.unblockUser(this.user.userId).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       console.log(res);
       this.hasBlocked = false;
       this.cdr.detectChanges();
@@ -301,7 +303,7 @@ export class VisitingProfilComponent implements OnInit {
     let request = new FriendRequest;
     request.senderId = Number(localStorage.getItem('userid'));
     request.receiverId = this.user.userId;
-    this.friendreqService.sendFriendRequest(request).subscribe(() => {
+    this.friendreqService.sendFriendRequest(request).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.sentRequestPending = true;
       this.cdr.detectChanges();
     });
@@ -324,7 +326,7 @@ export class VisitingProfilComponent implements OnInit {
   }
 
   unfriendUser(){
-    this.ffService.unfriendUser(this.user.userId).subscribe(res => {
+    this.ffService.unfriendUser(this.user.userId).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       console.log(res);
       this.friends = false;
       this.cdr.detectChanges();
@@ -336,7 +338,7 @@ export class VisitingProfilComponent implements OnInit {
     let request: FriendRequest = new FriendRequest
     request.senderId = this.currentUserId;
     request.receiverId = this.user.userId;
-    this.friendreqService.declineFriendRequest(request).subscribe(() => {
+    this.friendreqService.declineFriendRequest(request).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.sentRequestPending = false;
       this.receivedRequestPending = false;
       this.cdr.detectChanges();
@@ -347,7 +349,7 @@ export class VisitingProfilComponent implements OnInit {
     let request: FriendRequest = new FriendRequest
     request.senderId = this.user.userId;
     request.receiverId = this.currentUserId;
-    this.friendreqService.acceptFriendRequest(request).subscribe(() => {
+    this.friendreqService.acceptFriendRequest(request).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.friends = true
       this.sentRequestPending = false;
       this.receivedRequestPending = false;

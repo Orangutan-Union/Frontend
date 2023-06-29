@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { takeUntil } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { Unsub } from 'src/app/classes/unsub';
 import { Chat } from 'src/app/models/chat';
 import { NewMessage } from 'src/app/models/newMessage';
 import { ChatService } from 'src/app/services/chat.service';
@@ -9,14 +11,14 @@ import { ChatService } from 'src/app/services/chat.service';
   templateUrl: './send-message.component.html',
   styleUrls: ['./send-message.component.css']
 })
-export class SendMessageComponent implements OnInit {
+export class SendMessageComponent extends Unsub implements OnInit {
   private socket: Socket;
   @Input() chat: Chat = new Chat;
 
   newMessage: string = '';
   message: NewMessage = new NewMessage;
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService) { super(); }
 
   ngOnInit(): void {
     this.socket = io('https://localhost:3000');
@@ -32,7 +34,7 @@ export class SendMessageComponent implements OnInit {
 
     this.chatService.sendMessage(this.chat.chatId, this.newMessage);
     
-    this.chatService.createMessage(this.message).subscribe(message => { } );
+    this.chatService.createMessage(this.message).pipe(takeUntil(this.unsubscribe$)).subscribe(message => { } );
     this.newMessage = '';
   }
 }
