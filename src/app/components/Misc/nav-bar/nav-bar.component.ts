@@ -5,7 +5,6 @@ import { FriendRequest } from 'src/app/models/friendrequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FriendrequestService } from 'src/app/services/friendrequest.service';
-import { LoginComponent } from '../../LoginPage/login/login.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -75,34 +74,7 @@ export class NavBarComponent implements OnInit {
     this.searchSubscription?.unsubscribe();
   }
 
-  sendFriendRequest(receiverId: number):void{
-    let request = new FriendRequest;
-    request.senderId = Number(localStorage.getItem('userid'));
-    request.receiverId = receiverId;
-    this.friendreqService.sendFriendRequest(request).subscribe(() => {
-      window.location.reload();
-    });
-  }
 
-  sentFriendRequestPending(receiverId: number): boolean{
-    // Check for friend requests sent by current user.
-    for (const request of this.user.sentFriendRequests) {
-      if (request.receiverId === receiverId) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  receivedFriendRequestPending(senderId: number): boolean{
-    // Check for friend requests received by current user.
-    for (const request of this.user.receivedFriendRequests) {
-      if (request.senderId === senderId) {   
-        return true;
-      }
-    }
-    return false;
-  }
 
   isFriend(receiverId: number): boolean{
     for (const request of this.user.userFriendFollowers) {
