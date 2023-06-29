@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Unsub } from 'src/app/classes/unsub';
 import { Like } from 'src/app/models/addLike';
 import { NewPost } from 'src/app/models/newPost';
 import { Post } from 'src/app/models/post';
 import { FeedService } from 'src/app/services/feed.service';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-profile-feed',
   templateUrl: './profile-feed.component.html',
   styleUrls: ['./profile-feed.component.css']
 })
-export class ProfileFeedComponent implements OnInit {
+export class ProfileFeedComponent extends Unsub implements OnInit {
   editPostId: number = 0;
   userId: number = 0;
   commentCount: number = 0;
@@ -25,14 +27,14 @@ export class ProfileFeedComponent implements OnInit {
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
   
-  constructor(private feedService: FeedService, private route: Router) { }
+  constructor(private feedService: FeedService, private route: Router) { super(); }
 
   ngOnInit(): void {
     this.getUserPosts();
   }
 
   deletePost(i: number): void {
-    this.feedService.deletePost(this.posts[i].postId).subscribe(data => {
+    this.feedService.deletePost(this.posts[i].postId).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       console.log(data);
     })
     this.posts.splice(i, 1);
@@ -40,7 +42,7 @@ export class ProfileFeedComponent implements OnInit {
 
   onSubmit(i: number): void {
     this.posts[i].content = this.newContent;
-    this.feedService.updatePost(this.posts[i]).subscribe(data => {
+    this.feedService.updatePost(this.posts[i]).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
     })
     this.editPostId = 0;
   }
@@ -75,9 +77,8 @@ export class ProfileFeedComponent implements OnInit {
     });
 
     if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
-      console.log('hey there im testing');
       this.likeCounter[i]++
-      this.feedService.addLike(this.like).subscribe(data => {
+      this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         console.log(data)
         this.getUserPosts();
       })
@@ -96,7 +97,7 @@ export class ProfileFeedComponent implements OnInit {
       this.likeCounter[i]--
     }
 
-    this.feedService.addLike(this.like).subscribe(data => {
+    this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       console.log(data)
     })
   }
@@ -117,7 +118,7 @@ export class ProfileFeedComponent implements OnInit {
 
     if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
       this.dislikeCounter[i]++
-      this.feedService.addLike(this.like).subscribe(data => {
+      this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         console.log(data)
         this.getUserPosts();
       })
@@ -138,14 +139,14 @@ export class ProfileFeedComponent implements OnInit {
       this.dislikeCounter[i]--
     }
 
-    this.feedService.addLike(this.like).subscribe(data => {
+    this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       console.log(data)
     })
   }
 
   getUserPosts(): void {
     this.userId = Number(localStorage.getItem('userid'));
-    this.feedService.getUserPosts(this.userId).subscribe(data => {
+    this.feedService.getUserPosts(this.userId).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
