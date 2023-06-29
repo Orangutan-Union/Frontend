@@ -34,6 +34,7 @@ import { FeedComponentComponent } from './components/feeds/Post-Feed-componentsF
 import { PostToolbarComponent } from './components/feeds/Post-Feed-componentsFolder/post-toolbar/post-toolbar.component';
 import { FriendlistComponent } from './components/FriendsWithBenefits/friendlist/friendlist.component';
 import { FriendpageComponent } from './components/FriendsWithBenefits/friendpage/friendpage.component';
+import { NavBarv2Component } from './components/Misc/nav-barv2/nav-barv2.component';
 
 // ./components/feeds/post-feed-componentsFolder/post-toolbar/post-toolbar.component
 export function tokenGetter() {
@@ -68,6 +69,7 @@ export function tokenGetter() {
     PostToolbarComponent,
     FriendlistComponent,
     FriendpageComponent,
+    NavBarv2Component,
   ],
   imports: [
     BrowserModule,

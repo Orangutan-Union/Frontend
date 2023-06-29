@@ -11,6 +11,7 @@ import { VisitingProfilComponent } from './components/Profile/visiting-profil/vi
 import { ChatComponent } from './components/chat/chat/chat.component';
 import { FriendrequestsComponent } from './components/FriendsWithBenefits/friendrequests/friendrequests.component';
 import { FriendpageComponent } from './components/FriendsWithBenefits/friendpage/friendpage.component';
+import { NavBarv2Component } from './components/Misc/nav-barv2/nav-barv2.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'fullPost/:id', component: FullPostComponent, canActivate:[AuthGuard]},
   { path: 'friendrequests', component: FriendrequestsComponent, canActivate:[AuthGuard]},
   { path: 'visitingProfil/:id', component: VisitingProfilComponent, canActivate:[AuthGuard] },
-  { path: 'friendpage', component: FriendpageComponent, canActivate:[AuthGuard] }
+  { path: 'friendpage', component: FriendpageComponent, canActivate:[AuthGuard] },
+  { path: 'navbar', component: NavBarv2Component}
 ]; 
 
 @NgModule({
