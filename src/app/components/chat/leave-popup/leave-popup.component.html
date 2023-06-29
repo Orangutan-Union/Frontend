@@ -1,0 +1,15 @@
+<div class="popup" *ngIf="!chat.isPrivate">
+    <h1 mat-dialog-title>Leave Chat</h1>
+    <div mat-dialog-content>Are you sure you want to leave this chat ({{chat.chatName}})</div>
+    <div> <br>
+        <button mat-button mat-dialog-close>Close</button>
+        <button class="accept" mat-button mat-dialog-close (click)="onAcceptClick()">Accept</button>
+    </div>
+</div>
+<div class="popup" *ngIf="chat.isPrivate">
+    <h1 mat-dialog-title>Leave Chat</h1>
+    <div mat-dialog-content>You cant leave this ({{chat.chatName}}) because it's a private chat</div>
+    <div> <br>
+        <button mat-button mat-dialog-close>Close</button>
+    </div>
+</div>

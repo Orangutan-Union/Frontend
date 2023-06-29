@@ -1,15 +1,18 @@
 <div class="container">
     <div class="chatColumn">
-        <app-chat-select (selectedChat)="onChatSelected($event)" (chatList)="onChatList($event)"#scrollMe></app-chat-select>
+        <app-chat-select (selectedChat)="onChatSelected($event)" (chatList)="onChatList($event)" [inChats]="chats"></app-chat-select>
     </div>
 
     <div class="messageColumn">
         <div class="messageColumnRows">
+            <div class="settings">
+                <app-chat-settings-bar [chat]="selectedChat" [chatList]="chatList"></app-chat-settings-bar>
+            </div>
             <div class="messages" >
-                <app-messages [chat]="selectedChat" [chatList]="chatList" #scrollMe></app-messages>
+                <app-messages [chat]="selectedChat" [chatList]="chatList"></app-messages>
             </div>
             <div class="textbox">
-                <app-send-message [chat]="selectedChat" ></app-send-message>
+                <app-send-message [inChat]="selectedChat" [chatList]="chatList" (chats)="onMessageSend($event)"></app-send-message>
             </div>
         </div>
     </div>
