@@ -1,4 +1,5 @@
 <div class="postContainer">
+
     <div class="posts" *ngFor="let post of posts; let i = index">
         <app-feed-component [posts]="post" [i]="i"></app-feed-component>
     </div>
