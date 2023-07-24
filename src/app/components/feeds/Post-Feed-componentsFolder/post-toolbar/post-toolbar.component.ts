@@ -34,7 +34,7 @@ export class PostToolbarComponent extends Unsub implements OnInit {
     this.like.userId = Number(localStorage.getItem('userid'));
     this.like.postId = post.postId;
     this.like.isLiked = true;
-    
+
     post.likes.forEach(element => {
       if (element.userId == this.like.userId && element.postId == post.postId) {
         this.like.isLiked = !element.isLiked
@@ -46,7 +46,6 @@ export class PostToolbarComponent extends Unsub implements OnInit {
 
     if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
       this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
-        console.log(data)
         this.getFeed();
       })
       return;
@@ -81,8 +80,8 @@ export class PostToolbarComponent extends Unsub implements OnInit {
       if (element.userId == this.like.userId && element.postId == post.postId) {
         this.like.isDisliked = !element.isDisliked
         element.isDisliked = this.like.isDisliked
-        this.like.isLiked = element.isLiked;    
-        element.isLiked = false    
+        this.like.isLiked = element.isLiked;
+        element.isLiked = false
       }
     });
 
@@ -91,16 +90,16 @@ export class PostToolbarComponent extends Unsub implements OnInit {
         this.getFeed();
         this.isDisliked = true
         this.isLiked = false
-        
+
       })
       return;
     }
-    
+
     if (this.like.isLiked == true && this.likeCounter[i] != 0) {
       this.likeCount--
       this.like.isLiked = false;
     }
-    console.log(this.like.isLiked);   
+    console.log(this.like.isLiked);
 
     if (this.like.isDisliked == true) {
       this.dislikeCount++
@@ -133,19 +132,30 @@ export class PostToolbarComponent extends Unsub implements OnInit {
   }
 
   counter(posts: Post): void {
-      posts.likes.forEach(like => {
-        if (like.isLiked == true) { this.likeCount++ 
-        this.isLiked = true
-        this.isDisliked = false
-      }
-        if (like.isDisliked == true) { this.dislikeCount++
-          this.isLiked = false
-          this.isDisliked = true 
+    //Reset counters in case the function is called after onInit
+    this.likeCount = 0;
+    this.dislikeCount = 0;
+    this.commentCount = 0;
+
+    posts.likes.forEach(like => {
+      if (like.isLiked == true) {
+        this.likeCount++
+        if (like.userId === Number(localStorage.getItem('userid'))) {
+          this.isLiked = true
+          this.isDisliked = false
         }
-      });
-      
-      posts.comments.forEach(comment => {
-        this.commentCount++
-      });
+      }
+      if (like.isDisliked == true) {
+        this.dislikeCount++
+        if (like.userId === Number(localStorage.getItem('userid'))) {
+          this.isLiked = false
+          this.isDisliked = true
+        }
+      }
+    });
+
+    posts.comments.forEach(comment => {
+      this.commentCount++
+    });
   }
 }
