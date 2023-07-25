@@ -13,13 +13,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent extends Unsub implements OnInit {
-
-  @Output() IsLoggedIn = new EventEmitter<Boolean>();
+  
   invalidLogin: boolean = false;
   login: LoginRequest = new LoginRequest;
   constructor(private authService: AuthService, private router: Router) { super(); }
 
   ngOnInit(): void {
+    this.authService.displayNavbar(false);
   }
 
   submitLogin(): void{
@@ -31,7 +31,8 @@ export class LoginComponent extends Unsub implements OnInit {
         localStorage.setItem('userid', response.userId.toString());
         this.invalidLogin = false;
         console.log(response);
-        this.IsLoggedIn.emit(this.authService.isLoggedIn())
+        //this.IsLoggedIn.emit(this.authService.isLoggedIn())
+        this.authService.displayNavbar(true);
         this.router.navigate(['/home'])
       },
       error: (err: HttpErrorResponse) => this.invalidLogin = true
