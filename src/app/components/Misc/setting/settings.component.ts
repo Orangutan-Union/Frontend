@@ -20,7 +20,6 @@ export class SettingsComponent extends Unsub implements OnInit {
   user: User = new User;
   userId: number = 0;
   formData = new FormData();
-  gew: any;
   constructor(private authService: AuthService, private route: Router, private picService: PictureService) { super(); }
 
   ngOnInit(): void {
