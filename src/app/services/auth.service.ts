@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginRequest } from '../models/loginrequest';
@@ -19,10 +19,14 @@ const httpOptions={
   providedIn: 'root'
 })
 export class AuthService {
+  @Output() showNavbar: EventEmitter<boolean> = new EventEmitter();
 
   baseApiUrl: string = environment.baseApiUrl;
   constructor(private http: HttpClient, private route: Router) { }
 
+  displayNavbar(show: boolean){
+    this.showNavbar.emit(show);
+  }
 
   register(register: RegisterRequest): Observable<RegisterRequest>{
     return this.http.post<RegisterRequest>(this.baseApiUrl + 'users/register', register, httpOptions)
@@ -32,8 +36,8 @@ export class AuthService {
     return this.http.post<AuthenticatedResponse>(this.baseApiUrl + 'users/login', login, httpOptions);
   }
 
-  uploadImage(id: number, formData: FormData){
-    return this.http.put(this.baseApiUrl + 'users/' + id + '/uploadimage', formData);
+  uploadImage(id: number, formData: FormData): Observable<User>{
+    return this.http.put<User>(this.baseApiUrl + 'users/' + id + '/uploadimage', formData);
   }
 
   getUserById(id: number): Observable<User>{
@@ -79,6 +83,7 @@ export class AuthService {
 
   logout(){
     localStorage.clear();
+    this.displayNavbar(false);
     this.route.navigate(['/login'])
   }
 }

@@ -5,6 +5,8 @@ import { ChangePassword } from 'src/app/models/changepassword';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { takeUntil } from 'rxjs/operators'
+import { PictureService } from 'src/app/services/picture.service';
+import { LoginComponent } from '../../LoginPage/login/login.component';
 
 @Component({
   selector: 'app-settings',
@@ -18,7 +20,7 @@ export class SettingsComponent extends Unsub implements OnInit {
   user: User = new User;
   userId: number = 0;
   formData = new FormData();
-  constructor(private authService: AuthService, private route: Router) { super(); }
+  constructor(private authService: AuthService, private route: Router, private picService: PictureService) { super(); }
 
   ngOnInit(): void {
     this.getUser();
@@ -35,12 +37,14 @@ export class SettingsComponent extends Unsub implements OnInit {
 
   onUpload(){
     console.log("In Upload method");
-    this.authService.uploadImage(Number(localStorage.getItem('userid')), this.formData).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+    this.authService.uploadImage(Number(localStorage.getItem('userid')), this.formData).pipe(takeUntil(this.unsubscribe$)).subscribe(val => {
       this.getUser();
       this.formData.delete('file')
       this.formData.delete('filename')
       this.route.navigate(['/settings'])
+      this.picService.updateNavbarPicture(val.picture.imageUrl);
     });
+    
   }
 
   getUser(): void{

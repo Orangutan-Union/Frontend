@@ -5,6 +5,7 @@ import { FriendRequest } from 'src/app/models/friendrequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FriendrequestService } from 'src/app/services/friendrequest.service';
+import { PictureService } from 'src/app/services/picture.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,18 +20,31 @@ export class NavBarv2Component implements OnInit {
   private searchSubscription?: Subscription;
   private readonly searchSubject = new Subject<string | undefined>();
   searchUsers: User[] = [];
+  imageUrl: string = '';
 
-  constructor(private authService: AuthService, private route: Router, private friendreqService: FriendrequestService) { }
+  constructor(private authService: AuthService, private route: Router,
+     private friendreqService: FriendrequestService, private picService: PictureService) { }
 
   ngOnInit(): void {
     this.getUser();
     this.searchWithDelay();
+    this.imageUrl = this.user.picture.imageUrl;
+    console.log('nsdiofsdiofjsofjsdo');
+    console.log(this.user.picture.imageUrl);
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    
+    console.log(this.imageUrl);
+    
   }
 
   getUser(): void{
     this.userId = Number(localStorage.getItem('userid'));
     this.authService.getUserById(this.userId).subscribe(data => {
       this.user = data
+      this.imageUrl = this.user.picture.imageUrl
+      this.picService.updatedPicture.subscribe(emitted => {
+        this.imageUrl = emitted;      
+      });
     })
   }
 
