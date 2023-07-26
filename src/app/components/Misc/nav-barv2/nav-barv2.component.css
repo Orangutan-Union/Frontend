@@ -55,6 +55,7 @@ ul{
     justify-content: space-evenly;
     display: flex;
     margin: 5px;
+    cursor: pointer;
 }
 
 .ProfilImg{
