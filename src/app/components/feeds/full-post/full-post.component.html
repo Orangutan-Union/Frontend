@@ -1,12 +1,13 @@
 <div class="OuterLayer">
     <span>
-        <div class="postContainer">
-            <div class="posts">
-                <app-feed-component [posts]="post"></app-feed-component>
-            </div>
+        <div class="posts">
+            <app-feed-component [posts]="post"></app-feed-component>
         </div>
     </span>
-    <app-comments [commentLikeCounter]="commentLikeCounter" [commentDislikeCounter]="commentDislikeCounter"></app-comments>
+    <div class="comments">
+        <app-comments [commentLikeCounter]="commentLikeCounter"
+            [commentDislikeCounter]="commentDislikeCounter"></app-comments>
+    </div>
 </div>
 
 
