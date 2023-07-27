@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chat } from 'src/app/models/chat';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-chat',
@@ -23,7 +24,7 @@ export class ChatComponent implements OnInit {
   onMessageSend(chat: Chat[]) {
     this.chatList = chat;
   }
-
+  
   constructor() { }
 
   ngOnInit() {    

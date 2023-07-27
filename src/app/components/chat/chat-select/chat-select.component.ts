@@ -22,13 +22,13 @@ export class ChatSelectComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserChats();
-
   }
 
   getUserChats() {
     this.chatService.getUserChats(Number(localStorage.getItem('userid'))).subscribe(chats => {
       this.chats = chats;
-
+      console.log(chats);
+      
       this.chatList.emit(chats);
     });
   }

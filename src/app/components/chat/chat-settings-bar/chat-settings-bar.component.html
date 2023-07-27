@@ -1,7 +1,7 @@
 <div>
   <div class="bar">
     <span class="ContainerSearch">
-      <input class="TopSeachBar" type="search" placeholder="Name.." (input)="onSearchQueryInput($event)">
+      <input class="TopSeachBar" type="search" placeholder="Name.." [(ngModel)]="search" (input)="onSearchQueryInput($event)">
     </span>
     <button class="leave" (click)="openDialog(chat)">Leave Chat</button>
     <div>
