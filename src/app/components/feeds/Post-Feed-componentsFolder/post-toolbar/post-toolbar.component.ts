@@ -3,13 +3,15 @@ import { Router } from '@angular/router';
 import { Like } from 'src/app/models/addLike';
 import { Post } from 'src/app/models/post';
 import { FeedService } from 'src/app/services/feed.service';
+import { takeUntil } from 'rxjs/operators'
+import { Unsub } from 'src/app/classes/unsub';
 
 @Component({
   selector: 'app-post-toolbar',
   templateUrl: './post-toolbar.component.html',
   styleUrls: ['./post-toolbar.component.css']
 })
-export class PostToolbarComponent implements OnInit {
+export class PostToolbarComponent extends Unsub implements OnInit {
   @Input() posts: Post
   @Input() i: number
   like: Like = new Like;
@@ -22,7 +24,7 @@ export class PostToolbarComponent implements OnInit {
   dislikeCounter: number[] = [];
   isLiked: Boolean = false
   isDisliked: Boolean = false
-  constructor(private feedService: FeedService, private route: Router) { }
+  constructor(private feedService: FeedService, private route: Router) { super(); }
 
   ngOnInit(): void {
     this.counter(this.posts)
@@ -32,7 +34,7 @@ export class PostToolbarComponent implements OnInit {
     this.like.userId = Number(localStorage.getItem('userid'));
     this.like.postId = post.postId;
     this.like.isLiked = true;
-    
+
     post.likes.forEach(element => {
       if (element.userId == this.like.userId && element.postId == post.postId) {
         this.like.isLiked = !element.isLiked
@@ -43,9 +45,7 @@ export class PostToolbarComponent implements OnInit {
     });
 
     if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
-      // this.likeCount++
-      this.feedService.addLike(this.like).subscribe(data => {
-        console.log(data)
+      this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         this.getFeed();
       })
       return;
@@ -66,7 +66,7 @@ export class PostToolbarComponent implements OnInit {
       this.isLiked = false
     }
 
-    this.feedService.addLike(this.like).subscribe(data => {
+    this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       console.log(data)
     })
   }
@@ -80,28 +80,26 @@ export class PostToolbarComponent implements OnInit {
       if (element.userId == this.like.userId && element.postId == post.postId) {
         this.like.isDisliked = !element.isDisliked
         element.isDisliked = this.like.isDisliked
-        this.like.isLiked = element.isLiked;    
-        element.isLiked = false    
+        this.like.isLiked = element.isLiked;
+        element.isLiked = false
       }
     });
 
     if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
-      this.feedService.addLike(this.like).subscribe(data => {
-        console.log(data)
+      this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         this.getFeed();
         this.isDisliked = true
         this.isLiked = false
-        console.log("dislike :   " + this.dislikeCount);
-        
+
       })
       return;
     }
-    
+
     if (this.like.isLiked == true && this.likeCounter[i] != 0) {
       this.likeCount--
       this.like.isLiked = false;
     }
-    console.log(this.like.isLiked);   
+    console.log(this.like.isLiked);
 
     if (this.like.isDisliked == true) {
       this.dislikeCount++
@@ -114,7 +112,7 @@ export class PostToolbarComponent implements OnInit {
       this.isDisliked = false
     }
 
-    this.feedService.addLike(this.like).subscribe(data => {
+    this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       console.log(data)
     })
   }
@@ -126,7 +124,7 @@ export class PostToolbarComponent implements OnInit {
 
   getFeed(): void {
     this.userId = Number(localStorage.getItem('userid'));
-    this.feedService.getFullPost(this.posts.postId).subscribe(data => {
+    this.feedService.getFullPost(this.posts.postId).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
@@ -134,19 +132,30 @@ export class PostToolbarComponent implements OnInit {
   }
 
   counter(posts: Post): void {
-      posts.likes.forEach(like => {
-        if (like.isLiked == true) { this.likeCount++ 
-        this.isLiked = true
-        this.isDisliked = false
-      }
-        if (like.isDisliked == true) { this.dislikeCount++
-          this.isLiked = false
-          this.isDisliked = true 
+    //Reset counters in case the function is called after onInit
+    this.likeCount = 0;
+    this.dislikeCount = 0;
+    this.commentCount = 0;
+
+    posts.likes.forEach(like => {
+      if (like.isLiked == true) {
+        this.likeCount++
+        if (like.userId === Number(localStorage.getItem('userid'))) {
+          this.isLiked = true
+          this.isDisliked = false
         }
-      });
-      
-      posts.comments.forEach(comment => {
-        this.commentCount++
-      });
+      }
+      if (like.isDisliked == true) {
+        this.dislikeCount++
+        if (like.userId === Number(localStorage.getItem('userid'))) {
+          this.isLiked = false
+          this.isDisliked = true
+        }
+      }
+    });
+
+    posts.comments.forEach(comment => {
+      this.commentCount++
+    });
   }
 }

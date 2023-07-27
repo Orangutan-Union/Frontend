@@ -1,14 +1,16 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, SimpleChanges, } from '@angular/core';
+import { Unsub } from 'src/app/classes/unsub';
 import { Chat } from 'src/app/models/chat';
 import { NewChat } from 'src/app/models/newChat';
 import { ChatService } from 'src/app/services/chat.service';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-chat-select',
   templateUrl: './chat-select.component.html',
   styleUrls: ['./chat-select.component.css']
 })
-export class ChatSelectComponent implements OnInit {
+export class ChatSelectComponent extends Unsub implements OnInit {
   @Output() selectedChat: EventEmitter<Chat> = new EventEmitter<Chat>();
   @Output() chatList: EventEmitter<Chat[]> = new EventEmitter<Chat[]>();
   @Input() inChats: Chat[] = [];
@@ -18,14 +20,14 @@ export class ChatSelectComponent implements OnInit {
   createChatBool: boolean = false;
   selectedChatId: number | null = null;
 
-  constructor(private chatService: ChatService, private cdr: ChangeDetectorRef) { }
+  constructor(private chatService: ChatService, private cdr: ChangeDetectorRef) { super(); }
 
   ngOnInit(): void {
     this.getUserChats();
   }
 
   getUserChats() {
-    this.chatService.getUserChats(Number(localStorage.getItem('userid'))).subscribe(chats => {
+    this.chatService.getUserChats(Number(localStorage.getItem('userid'))).pipe(takeUntil(this.unsubscribe$)).subscribe(chats => {
       this.chats = chats;
       console.log(chats);
       
@@ -34,7 +36,7 @@ export class ChatSelectComponent implements OnInit {
   }
 
   selectChat(id: number) {
-    this.chatService.getChatOnId(id).subscribe(chat => {
+    this.chatService.getChatOnId(id).pipe(takeUntil(this.unsubscribe$)).subscribe(chat => {
       const chatId = chat.chatId;
       this.joinRoom(chatId);
       this.selectedChatId = chatId;

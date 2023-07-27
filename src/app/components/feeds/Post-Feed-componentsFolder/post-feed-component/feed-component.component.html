@@ -9,5 +9,6 @@
     <div class="PictureContent">
         <img *ngIf="posts.pictures.length > 0" src="{{posts.pictures[0].imageUrl}}">
     </div>
-    <app-post-toolbar [posts]="posts" [i]="i"></app-post-toolbar>
+    <!-- ngIf below is needed, without it the toolbar component renders before data has loaded -->
+    <app-post-toolbar *ngIf="posts.postId != 0" [posts]="posts"></app-post-toolbar>
 </div>

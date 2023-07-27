@@ -1,13 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Unsub } from 'src/app/classes/unsub';
 import { NewPost } from 'src/app/models/newPost';
 import { FeedService } from 'src/app/services/feed.service';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css']
 })
-export class CreatePostComponent implements OnInit {
+export class CreatePostComponent extends Unsub implements OnInit {
   post: NewPost = new NewPost
   formData = new FormData();
   file: any;
@@ -15,7 +17,7 @@ export class CreatePostComponent implements OnInit {
   @Input() commentCounter: number[] = [];
   @Input() likeCounter: number[] = [];
   @Input() dislikeCounter: number[] = [];
-  constructor(private feedService: FeedService) { }
+  constructor(private feedService: FeedService) { super(); }
 
   ngOnInit(): void {
     console.log(this.posts);
@@ -34,8 +36,8 @@ export class CreatePostComponent implements OnInit {
       this.formData.append('group_id', '');
     }
 
-    this.feedService.addPost(this.formData).subscribe(newPost => {
-      this.feedService.getFullPost(newPost.postId).subscribe(newPost => {
+    this.feedService.addPost(this.formData).pipe(takeUntil(this.unsubscribe$)).subscribe(newPost => {
+      this.feedService.getFullPost(newPost.postId).pipe(takeUntil(this.unsubscribe$)).subscribe(newPost => {
         this.posts.unshift(newPost);
         this.commentCounter.unshift(0);
         this.likeCounter.unshift(0);

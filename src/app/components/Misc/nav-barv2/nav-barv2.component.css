@@ -55,6 +55,7 @@ ul{
     justify-content: space-evenly;
     display: flex;
     margin: 5px;
+    cursor: pointer;
 }
 
 .ProfilImg{
@@ -154,3 +155,37 @@ ul{
         height: 50px;
     }
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .notifications {
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    margin-top: -20px;
+    height: 8px;
+    width: 8px;
+    margin-left: 14px;
+  }

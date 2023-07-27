@@ -3,13 +3,15 @@ import { Chat } from 'src/app/models/chat';
 import { Message } from 'src/app/models/message';
 import { ChatService } from 'src/app/services/chat.service';
 import { ChatSelectComponent } from '../chat-select/chat-select.component';
+import { Unsub } from 'src/app/classes/unsub';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent implements OnInit {
+export class MessagesComponent extends Unsub implements OnInit {
   @Input() chat: Chat = new Chat;
   @Input() chatList: Chat[] = [];
 
@@ -17,12 +19,12 @@ export class MessagesComponent implements OnInit {
   userId: number = 0;
   loggedInUser: number = 0;
 
-  constructor(private chatService: ChatService, private chatSelect: ChatSelectComponent) { }
+  constructor(private chatService: ChatService, private chatSelect: ChatSelectComponent) { super(); }
 
   ngOnInit(): void {
     this.loggedInUser = Number(localStorage.getItem('userid'))
 
-    this.chatService.receiveMessage().subscribe((message: string) => {     
+    this.chatService.receiveMessage().pipe(takeUntil(this.unsubscribe$)).subscribe((message: string) => {     
       var messageSplit = message.split('|')
       
       this.chat.users.forEach(user => {

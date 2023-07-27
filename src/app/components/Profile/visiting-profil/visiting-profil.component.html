@@ -1,4 +1,4 @@
-<app-nav-bar></app-nav-bar>
+<!-- <app-nav-bar></app-nav-bar> -->
 <div *ngIf="isBlocked">
     <h1 style="text-align: center;vertical-align: middle;line-height: 75vh;">This user has blocked you</h1>
 </div>
@@ -30,39 +30,7 @@
             </span>            
             <div class="postContainer">
                 <div class="posts" *ngFor="let post of posts; let i = index">
-                    <div class="postContent">
-                        <span class="PostHeader">
-                            <img class="ProfilImg" routerLink="/visitingProfil/{{post.userId}}" src="{{post.user.picture.imageUrl}}" alt="Profile Image">
-                            <span style=" margin-top: 1%;">
-                                <span style="display: flex;">
-                                    <p style="width: 100%;"> <span> <span class="OnHover">{{post.user.displayName}}</span></span>  
-                                        <i *ngIf="post.group.groupName!=null">
-                                            <b style="color: rgba(0,0,0,0.7);">
-                                                i gruppen:   
-                                                <span class="groupPost OnHover" (click)="goToGroup(post.group.groupId)">{{post.group.groupName}} <span style="color: white;">.</span></span> 
-                                            </b>
-                                        </i> 
-                                    </p>
-                                </span>
-                                <span style="color: rgba(0, 0, 0, 0.7)" type="">{{post.timeStamp | date: 'd/MM/yyyy H:mm'}}</span>
-                            </span>
-                        </span>
-                        <div class="Content">
-                            <p> 
-                                {{post.content}}
-                            </p>
-                        </div>
-                        <div class="PictureContent">
-                            <img *ngIf="post.pictures.length > 0" src="{{post.pictures[0].imageUrl}}">
-                        </div>
-                        <div class="likeContent">
-                            <p class="interatctive OnHover" *ngIf="post.userId !== currentUserId"(click)="likePost(post, i)"><mat-icon class="icon" id="Icon" >thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
-                            <p class="interatctive OnHover" style="color: red" *ngIf="post.userId === currentUserId" (click)="likePost(post, i)"><mat-icon class="icon" id="Icon" >thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
-                            <p class="interatctive OnHover" style="color: red" *ngIf="post.userId === currentUserId" (click)="dislikePost(post, i)"><mat-icon class="icon">thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</p>
-                            <p class="interatctive OnHover" *ngIf="post.userId !== currentUserId"(click)="dislikePost(post, i)"><mat-icon class="icon">thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</p>
-                            <p class="interatctive OnHover" (click)="goToFullPost(post.postId)"><mat-icon class="icon">comment</mat-icon> Comments {{commentCounter[i]}}</p>
-                        </div>
-                    </div>
+                    <app-feed-component [posts]="post" [i]="i"></app-feed-component>
                 </div>
             </div>
         </div>

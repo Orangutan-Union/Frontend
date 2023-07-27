@@ -8,7 +8,7 @@
                 <input class="TopSeachBar" type="search" placeholder="Search.." (input)="onSearchQueryInput($event)">
             </li>
             <li class="ProfilImg_Icons">
-                <img class="ProfilImg" routerLink="/profil" src="{{user.picture.imageUrl}}">
+                <img class="ProfilImg" routerLink="/profil" src="{{imageUrl}}">
                 <span class="Icons" >
                     <!-- Icons for the diffrent routerlinks -->
                     <mat-icon routerLink="/chat">chat</mat-icon>
@@ -17,7 +17,7 @@
                     </mat-icon>
                     <!-- drop Down Menu -->
                     <div class="dropdown">
-                        <mat-icon>more_vert</mat-icon>
+                        <mat-icon style="cursor: default;">more_vert</mat-icon>
                         <div class="dropdown-options">
                             <mat-icon routerLink="/settings">settings</mat-icon>
                             <mat-icon style="border-top: solid 1px black; overflow :hidden" (click)="logOff()">exit_to_app</mat-icon>

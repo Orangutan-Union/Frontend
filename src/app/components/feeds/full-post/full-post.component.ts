@@ -5,13 +5,15 @@ import { Post } from 'src/app/models/post';
 import { Comment } from 'src/app/models/comment';
 import { FeedService } from 'src/app/services/feed.service';
 import { NewComment } from 'src/app/models/newComment';
+import { Unsub } from 'src/app/classes/unsub';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-full-post',
   templateUrl: './full-post.component.html',
   styleUrls: ['./full-post.component.css']
 })
-export class FullPostComponent implements OnInit {
+export class FullPostComponent extends Unsub implements OnInit {
   comment: Comment = new Comment;
   like: Like = new Like;
   newComment: NewComment = new NewComment;
@@ -31,17 +33,17 @@ export class FullPostComponent implements OnInit {
   commentLikeCounter: number[] = [];
   commentDislikeCounter: number[] = [];
   
-  constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { }
+  constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute) { super(); }
 
   ngOnInit(): void {
-    this.aRoute.paramMap.subscribe((params) => {
+    this.aRoute.paramMap.pipe(takeUntil(this.unsubscribe$)).subscribe((params) => {
       const id = Number(params.get('id'))
       this.getFullPost(id);
     });
   }
 
   deletePost(i: number): void {
-    this.feedService.deletComment(this.post.comments[i].commentId).subscribe(data => {
+    this.feedService.deletComment(this.post.comments[i].commentId).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       console.log(data);
     })
     this.post.comments.splice(i, 1);
@@ -59,8 +61,8 @@ export class FullPostComponent implements OnInit {
     this.newComment.userId = Number(localStorage.getItem('userid'));
     this.newComment.postId = this.post.postId;
 
-    this.feedService.addComment(this.newComment).subscribe(newComment => {
-      this.feedService.getCommentById(newComment.commentId).subscribe(comment => {
+    this.feedService.addComment(this.newComment).pipe(takeUntil(this.unsubscribe$)).subscribe(newComment => {
+      this.feedService.getCommentById(newComment.commentId).pipe(takeUntil(this.unsubscribe$)).subscribe(comment => {
         this.post.comments.unshift(comment)
       })
     });
@@ -70,14 +72,7 @@ export class FullPostComponent implements OnInit {
   likePost(post: Post): void {
       this.like.userId = Number(localStorage.getItem('userid'));
       this.like.postId = post.postId;
-      this.like.isLiked = true;
-
-      console.log('============');
-      
-      console.log(this.commentLikeCounter);
-      console.log(this.commentDislikeCounter);
-      console.log('============');
-      
+      this.like.isLiked = true;      
 
       post.likes.forEach(element => {
         if (element.userId == this.like.userId && element.postId == post.postId) {
@@ -89,9 +84,8 @@ export class FullPostComponent implements OnInit {
       });
 
       if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
-        console.log('hey there im testing');
         this.likeCounter[0]++
-        this.feedService.addLike(this.like).subscribe(data => {
+        this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
           console.log(data)
           this.getFullPost(this.post.postId);
         })
@@ -110,7 +104,7 @@ export class FullPostComponent implements OnInit {
         this.likeCounter[0]--
       }
 
-      this.feedService.addLike(this.like).subscribe(data => {
+      this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         console.log(data)
       })
   }
@@ -131,7 +125,7 @@ export class FullPostComponent implements OnInit {
 
       if (post.likes.filter(x => x.userId === this.like.userId).length === 0) {
         this.dislikeCounter[0]++
-        this.feedService.addLike(this.like).subscribe(data => {
+        this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
           console.log(data)
           this.getFullPost(this.post.postId);
         })
@@ -142,7 +136,6 @@ export class FullPostComponent implements OnInit {
         this.likeCounter[0]--
         this.like.isLiked = false;
       }
-      console.log(this.like.isLiked);
 
       if (this.like.isDisliked == true) {
         this.dislikeCounter[0]++
@@ -152,7 +145,7 @@ export class FullPostComponent implements OnInit {
         this.dislikeCounter[0]--
       }
 
-      this.feedService.addLike(this.like).subscribe(data => {
+      this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         console.log(data)
       })
   }
@@ -162,7 +155,7 @@ export class FullPostComponent implements OnInit {
   }
 
   getFullPost(id: number): void {
-    this.feedService.getFullPost(id).subscribe(data => {
+    this.feedService.getFullPost(id).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       this.post = data;
       this.counter(this.post);
       console.log(this.post);
@@ -178,7 +171,6 @@ export class FullPostComponent implements OnInit {
     this.dislikeCounter.push(this.dislikeCount);
 
     post.comments.forEach(comment => {
-      console.log(comment.likes);
       comment.likes.forEach(like => {
         if (like.isLiked == true) { this.commentLikeCount++ }
         if (like.isDisliked == true) { this.commentDislikeCount++ }

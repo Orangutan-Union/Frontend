@@ -1,34 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Unsub } from 'src/app/classes/unsub';
 import { RegisterRequest } from 'src/app/models/registerrequest';
 import { AuthService } from 'src/app/services/auth.service';
-import { PictureService } from 'src/app/services/picture.service';
 import { environment } from 'src/environments/environment';
+import { takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
-
-  formData = new FormData();
-  //Above is for adding an image to the DB for when/if we delete the database.
+export class RegisterComponent extends Unsub implements OnInit {
 
   baseApiUrl: string = environment.baseApiUrl;
   user: RegisterRequest = new RegisterRequest;
   constructor(
     private authService: AuthService, 
-    private router: Router, 
-    private pictureService: PictureService
-    ) { }
+    private router: Router,
+    ) { super(); }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void{
-    this.authService.register(this.user)
+    this.authService.register(this.user).pipe(takeUntil(this.unsubscribe$))
     .subscribe({
       next: (reg => {
         this.user = reg;
@@ -37,18 +34,4 @@ export class RegisterComponent implements OnInit {
       })
     });
   }
-
-  fileChange(files: any) {
-    if (files && files.length > 0) {
-      let file = files[0];
-      this.formData.append('file', file);
-      this.formData.append('filename', file.filename);
-    }
-  }
-
-  onUpload(){
-    console.log("In Upload method");
-    this.pictureService.addPicture(this.formData).subscribe();
-  }
-
 }

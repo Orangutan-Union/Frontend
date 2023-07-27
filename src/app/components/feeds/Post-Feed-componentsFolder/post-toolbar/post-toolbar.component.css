@@ -47,3 +47,7 @@ p{
 .Liked{
     color: lightskyblue
 }
+
+.Disliked{
+    color: rgb(255, 83, 83);
+}
