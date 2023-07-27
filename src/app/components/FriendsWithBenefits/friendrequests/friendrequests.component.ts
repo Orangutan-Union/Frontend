@@ -6,6 +6,7 @@ import { FriendrequestService } from 'src/app/services/friendrequest.service';
 import { takeUntil } from 'rxjs/operators'
 import { User } from 'src/app/models/user';
 import { FriendFollower } from 'src/app/models/friendfollower';
+import { FriendfollowerService } from 'src/app/services/friendfollower.service';
 
 @Component({
   selector: 'app-friendrequests',
@@ -14,13 +15,11 @@ import { FriendFollower } from 'src/app/models/friendfollower';
 })
 export class FriendrequestsComponent extends Unsub implements OnInit {
 
-  @Output() emitter: EventEmitter<FriendFollower> = new EventEmitter<FriendFollower>();
-
   receivedFriendRequests: FriendRequest[] = [];
   sentFriendRequests: FriendRequest[] = [];
   receivedOnly: boolean = true;
   userId: number = 0;
-  constructor(private frService: FriendrequestService, private route: Router) { super(); }
+  constructor(private frService: FriendrequestService, private route: Router, private ffService: FriendfollowerService) { super(); }
 
   ngOnInit(): void {
     this.userId = Number(localStorage.getItem('userid'));
@@ -39,7 +38,10 @@ export class FriendrequestsComponent extends Unsub implements OnInit {
     this.frService.acceptFriendRequest(request).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.receivedFriendRequests = this.receivedFriendRequests.filter(x => x.senderId !== request.senderId);
       friend.user = request.sender;
-      this.emitter.emit(friend)
+      friend.otherUserId = request.receiverId
+      friend.type = 1
+      friend.userId = request.senderId
+      this.ffService.updateFriendList(friend);
     });
   }
 

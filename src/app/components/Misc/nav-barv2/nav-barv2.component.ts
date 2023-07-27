@@ -28,13 +28,7 @@ export class NavBarv2Component implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.searchWithDelay();
-    this.imageUrl = this.user.picture.imageUrl;
-    console.log('nsdiofsdiofjsofjsdo');
-    console.log(this.user.picture.imageUrl);
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-    
-    console.log(this.imageUrl);
-    
+    this.imageUrl = this.user.picture.imageUrl;    
   }
 
   getUser(): void{
