@@ -18,6 +18,10 @@ export class FriendrequestService {
   baseApiUrl: string = environment.baseApiUrl;
   constructor(private http: HttpClient) { }
 
+  getAllRequests(id: number): Observable<FriendRequest[]>{
+    return this.http.get<FriendRequest[]>(this.baseApiUrl + 'friendrequests/all/' + id);
+  }
+
   getReceivedRequests(id: number): Observable<FriendRequest[]>{
     return this.http.get<FriendRequest[]>(this.baseApiUrl + 'friendrequests/received/' + id);
   }

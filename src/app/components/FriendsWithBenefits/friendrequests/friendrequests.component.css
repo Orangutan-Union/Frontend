@@ -80,3 +80,33 @@ p{
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
+
+  .changeFeedButtons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.changeFeedButtons > button{
+    margin: 10px 3%;
+    width: 12.75%;
+    height: 30px;
+}
+
+.picked{
+    background-Color: rgb(73, 138, 235);
+    border: 1px solid black;
+    height: 19px;
+    border-radius: 3px;
+}
+
+.divider{
+    width: 55%;
+    margin: auto;
+}
+
+.cancel-button{
+    height: 30px;
+    padding: 5px;
+    cursor: pointer;
+}

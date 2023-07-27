@@ -11,6 +11,8 @@ import { takeUntil } from 'rxjs/operators'
 })
 export class FriendlistComponent extends Unsub implements OnInit {
 
+  
+
   friends: FriendFollower[] = [];
   constructor(private ffService: FriendfollowerService) { super(); }
 
