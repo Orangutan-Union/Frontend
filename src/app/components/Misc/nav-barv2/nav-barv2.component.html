@@ -2,30 +2,33 @@
     <div class="NavBar">
         <ul>
             <li class="logo_section">
-                <img class="LogoImg"  routerLink="/home" src="../../../assets/Udklip.PNG" alt="">
+                <img class="LogoImg" routerLink="/home" src="../../../assets/Udklip.PNG" alt="">
             </li>
             <li class="SearchBar">
                 <input class="TopSeachBar" type="search" placeholder="Search.." (input)="onSearchQueryInput($event)">
             </li>
             <li class="ProfilImg_Icons">
                 <img class="ProfilImg" routerLink="/profil" src="{{imageUrl}}">
-                <span class="Icons" >
+                <span class="Icons">
                     <!-- Icons for the diffrent routerlinks -->
                     <mat-icon routerLink="/chat">chat</mat-icon>
-                    <mat-icon routerLink="/friendpage">notification_important_icon
-                        <div *ngIf="hasNotification" class="notifications"></div>
-                    </mat-icon>
+                    <div class="NotificationContainer">
+                        <mat-icon routerLink="/friendpage">notification_important_icon
+                            <div *ngIf="hasNotification" class="notifications"></div>
+                        </mat-icon>
+                    </div>
                     <!-- drop Down Menu -->
                     <div class="dropdown">
                         <mat-icon style="cursor: default;">more_vert</mat-icon>
                         <div class="dropdown-options">
                             <mat-icon routerLink="/settings">settings</mat-icon>
-                            <mat-icon style="border-top: solid 1px black; overflow :hidden" (click)="logOff()">exit_to_app</mat-icon>
+                            <mat-icon style="border-top: solid 1px black; overflow :hidden"
+                                (click)="logOff()">exit_to_app</mat-icon>
                         </div>
                     </div>
                 </span>
             </li>
-          </ul>
+        </ul>
     </div>
     <div class="divider"></div>
 </div>
@@ -34,12 +37,12 @@
 
 <div class="SearchResult" [style.display]="searchUsers.length > 0? 'flex' : 'none'">
     <ul *ngFor="let user of searchUsers">
-      <li>
-        <span class="search-results" (click)="goToProfile(user.userId)">
-          <img class="ProfilImg" src="{{user.picture.imageUrl}}">
-          <p>{{user.displayName}}</p>
-          <mat-icon class="FriendsIcon" *ngIf="isFriend(user.userId)">person</mat-icon>
-        </span>
-      </li>
+        <li>
+            <span class="search-results" (click)="goToProfile(user.userId)">
+                <img class="ProfilImg" src="{{user.picture.imageUrl}}">
+                <p>{{user.displayName}}</p>
+                <mat-icon class="FriendsIcon" *ngIf="isFriend(user.userId)">person</mat-icon>
+            </span>
+        </li>
     </ul>
 </div>

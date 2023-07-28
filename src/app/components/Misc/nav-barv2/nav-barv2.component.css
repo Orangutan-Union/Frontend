@@ -189,3 +189,8 @@ ul{
     width: 8px;
     margin-left: 14px;
   }
+
+  .NotificationContainer{
+    position: relative;
+    display: inline-block;
+}
