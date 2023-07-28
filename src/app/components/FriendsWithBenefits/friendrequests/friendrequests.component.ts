@@ -42,12 +42,19 @@ export class FriendrequestsComponent extends Unsub implements OnInit {
       friend.type = 1
       friend.userId = request.senderId
       this.ffService.updateFriendList(friend);
+      if (this.receivedFriendRequests.length === 0) {
+        this.frService.hasNotification.emit(false);
+      }
     });
   }
 
   declineFriendRequest(request: FriendRequest){
     this.frService.declineFriendRequest(request).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
       this.receivedFriendRequests = this.receivedFriendRequests.filter(x => x.senderId !== request.senderId);
+      
+      if (this.receivedFriendRequests.length === 0) {
+        this.frService.hasNotification.emit(false);
+      }
     });
   }
 
