@@ -43,6 +43,8 @@ export class ChatSettingsBarComponent implements OnInit {
   }
 
   resetSearch() {
+    console.log("test");
+    
     this.search = '';
     this.searchUsers = [];
     this.cancelAddToChat();
