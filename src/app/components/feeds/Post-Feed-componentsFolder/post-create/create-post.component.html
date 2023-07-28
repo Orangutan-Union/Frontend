@@ -5,10 +5,11 @@
     <div class="filecontainer">
         <label class="file-upload">
             <input id="file" type="file" (change)="fileChange($any($event).target.files)">
-            <mat-icon>cloud_upload</mat-icon>
+            <mat-icon>add_photo_alternate</mat-icon>
         </label>
         <span class="filename" *ngIf="file !== undefined">{{file.name}}</span>
-    </div>
-    <button style="float: right;" type="submit" mat-raised-button color="primary"
+        <button style="float: right;" type="submit" mat-raised-button color="primary"
         [disabled]="myForm.invalid || post.content.trim() == ''">Create</button>
+    </div>
+    
 </form>

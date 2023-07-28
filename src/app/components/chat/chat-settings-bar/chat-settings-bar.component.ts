@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { debounceTime, filter, Subject, Subscription, switchMap } from 'rxjs';
 import { Chat } from 'src/app/models/chat';
@@ -13,6 +13,7 @@ import { LeavePopupComponent } from '../leave-popup/leave-popup.component';
   styleUrls: ['./chat-settings-bar.component.css']
 })
 export class ChatSettingsBarComponent implements OnInit {
+  @Output() clearSearch: EventEmitter<void> = new EventEmitter<void>();
   @Input() chat: Chat = new Chat;
   @Input() chatList: Chat[] = []
   private searchSubscription?: Subscription;
@@ -34,6 +35,29 @@ export class ChatSettingsBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchWithDelay();
+  }
+
+  ngOnChanges(): void {
+    // Reset search when a new chat is selected
+    this.resetSearch();
+  }
+
+  resetSearch() {
+    this.search = '';
+    this.searchUsers = [];
+    this.cancelAddToChat();
+  }
+
+  getUserClass(user: User) {
+    const classes = ['user'];
+
+    this.chat.users.forEach(element => {
+      if (element.userId == user.userId) {
+        classes.push('selected')
+      }
+    });
+
+    return classes;
   }
 
   openDialog(chat: Chat) {
@@ -83,7 +107,6 @@ export class ChatSettingsBarComponent implements OnInit {
       })
   }
 
-
   addToChat(user: User) {
     if (this.chat.users.filter(x => x.userId == user.userId).length == 0) {
       this.chat.users.push(user);
@@ -94,6 +117,9 @@ export class ChatSettingsBarComponent implements OnInit {
     this.chatLength = Number(localStorage.getItem('chatLength'))
     this.newChatLength = this.chat.users.length
     this.showCancel = true;
+
+    console.log(this.chat.users);
+    
 
     this.showAddButton();
   }
@@ -117,7 +143,9 @@ export class ChatSettingsBarComponent implements OnInit {
   }
 
   saveChat() {
-    this.chatService.addUser(this.chat).subscribe(chat => { })
+    this.chatService.addUser(this.chat).subscribe(chat => {
+      console.log(chat);
+    })
   }
 
   ngOnDestroy(): void {

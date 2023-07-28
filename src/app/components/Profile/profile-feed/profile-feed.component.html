@@ -1,21 +1,6 @@
 <app-create-post [posts]="posts" [commentCounter]="commentCounter" [likeCounter]="likeCounter" [dislikeCounter]="dislikeCounter"></app-create-post>
 <div class="postContainer">
     <div class="posts" *ngFor="let post of posts; let i = index">
-        <div class="postContent">
-            <app-post-header [post]="post"></app-post-header>
-            <div class="Content">
-                <p>
-                    {{post.content}}
-                </p>
-            </div>
-            <div class="PictureContent">
-                <img *ngIf="post.pictures.length > 0" src="{{post.pictures[0].imageUrl}}">
-            </div>
-            <div class="likeContent">
-                <p class="interatctive OnHover" (click)="likePost(post, i)"><mat-icon class="icon">thumb_up</mat-icon> Like {{likeCounter[i]}}</p>
-                <p class="interatctive OnHover" (click)="dislikePost(post, i)"><mat-icon class="icon">thumb_down</mat-icon> Dislike {{dislikeCounter[i]}}</p>
-                <p class="interatctive OnHover" (click)="goToFullPost(post.postId)"><mat-icon class="icon">comment</mat-icon> Comments {{commentCounter[i]}}</p>
-            </div>
-        </div>
+        <app-feed-component [posts]="post" [i]="i"></app-feed-component>
     </div>
 </div>

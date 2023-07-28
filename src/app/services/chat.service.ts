@@ -77,7 +77,7 @@ export class ChatService {
   }
   
   addUser(chat: Chat): Observable<Chat> {
-    return this.http.put<Chat>(this.baseApiUrl + 'Chat/AddUser', chat, httpOptions)
+    return this.http.post<Chat>(this.baseApiUrl + 'Chat/AddUser', chat, httpOptions)
   }
 
   leaveChat(userId: number, chatId: number): Observable<Chat> {

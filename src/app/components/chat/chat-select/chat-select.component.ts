@@ -24,13 +24,13 @@ export class ChatSelectComponent extends Unsub implements OnInit {
 
   ngOnInit(): void {
     this.getUserChats();
-
   }
 
   getUserChats() {
     this.chatService.getUserChats(Number(localStorage.getItem('userid'))).pipe(takeUntil(this.unsubscribe$)).subscribe(chats => {
       this.chats = chats;
-
+      console.log(chats);
+      
       this.chatList.emit(chats);
     });
   }

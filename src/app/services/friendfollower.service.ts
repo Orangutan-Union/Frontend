@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FriendFollower } from '../models/friendfollower';
@@ -15,8 +15,14 @@ const httpOptions={
 })
 export class FriendfollowerService {
 
+  @Output() newFriend: EventEmitter<FriendFollower> = new EventEmitter();
+
   baseApiUrl: string = environment.baseApiUrl;
   constructor(private http: HttpClient) { }
+
+  updateFriendList(friend: FriendFollower){
+    this.newFriend.emit(friend);
+  }
 
   getUserFriends(id: number): Observable<FriendFollower[]>{
     return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/friends');

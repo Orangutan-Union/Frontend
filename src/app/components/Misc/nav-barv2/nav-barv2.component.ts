@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { debounceTime, Subject, Subscription, switchMap } from 'rxjs';
+import { debounceTime, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
+import { Unsub } from 'src/app/classes/unsub';
 import { FriendRequest } from 'src/app/models/friendrequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { FriendrequestService } from 'src/app/services/friendrequest.service';
+import { PictureService } from 'src/app/services/picture.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,6 +14,7 @@ import { FriendrequestService } from 'src/app/services/friendrequest.service';
   styleUrls: ['./nav-barv2.component.css']
 })
 export class NavBarv2Component implements OnInit {
+  hasNotification: boolean;
   search: string = '';
   user: User = new User;
   userId: number = 0;
@@ -19,18 +22,33 @@ export class NavBarv2Component implements OnInit {
   private searchSubscription?: Subscription;
   private readonly searchSubject = new Subject<string | undefined>();
   searchUsers: User[] = [];
+  imageUrl: string = '';
 
-  constructor(private authService: AuthService, private route: Router, private friendreqService: FriendrequestService) { }
+  constructor(private authService: AuthService, private route: Router,
+     private friendreqService: FriendrequestService, private picService: PictureService) { }
 
   ngOnInit(): void {
     this.getUser();
     this.searchWithDelay();
+    this.imageUrl = this.user.picture.imageUrl;    
   }
 
   getUser(): void{
     this.userId = Number(localStorage.getItem('userid'));
     this.authService.getUserById(this.userId).subscribe(data => {
       this.user = data
+      this.imageUrl = this.user.picture.imageUrl
+
+      if (this.user.receivedFriendRequests.length > 0) {
+        this.hasNotification = true;
+      }
+      
+      this.picService.updatedPicture.subscribe(emitted => {
+        this.imageUrl = emitted;      
+      });
+      this.friendreqService.hasNotification.subscribe(emitted => {
+        this.hasNotification = emitted;      
+      });
     })
   }
 
