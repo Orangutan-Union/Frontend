@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { debounceTime, Subject, Subscription, switchMap } from 'rxjs';
+import { debounceTime, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
+import { Unsub } from 'src/app/classes/unsub';
 import { FriendRequest } from 'src/app/models/friendrequest';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,6 +14,7 @@ import { PictureService } from 'src/app/services/picture.service';
   styleUrls: ['./nav-barv2.component.css']
 })
 export class NavBarv2Component implements OnInit {
+  hasNotification: boolean;
   search: string = '';
   user: User = new User;
   userId: number = 0;
@@ -28,13 +30,7 @@ export class NavBarv2Component implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.searchWithDelay();
-    this.imageUrl = this.user.picture.imageUrl;
-    console.log('nsdiofsdiofjsofjsdo');
-    console.log(this.user.picture.imageUrl);
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-    
-    console.log(this.imageUrl);
-    
+    this.imageUrl = this.user.picture.imageUrl;    
   }
 
   getUser(): void{
@@ -42,8 +38,16 @@ export class NavBarv2Component implements OnInit {
     this.authService.getUserById(this.userId).subscribe(data => {
       this.user = data
       this.imageUrl = this.user.picture.imageUrl
+
+      if (this.user.receivedFriendRequests.length > 0) {
+        this.hasNotification = true;
+      }
+      
       this.picService.updatedPicture.subscribe(emitted => {
         this.imageUrl = emitted;      
+      });
+      this.friendreqService.hasNotification.subscribe(emitted => {
+        this.hasNotification = emitted;      
       });
     })
   }

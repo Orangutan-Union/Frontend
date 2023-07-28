@@ -23,7 +23,7 @@ export class ChatService {
   private socket: Socket;
 
   constructor(private http: HttpClient, private route: Router) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://192.168.20.33:83');
   }
 
   joinRoom(roomId: number): void {
