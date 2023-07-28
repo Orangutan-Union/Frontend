@@ -12,6 +12,10 @@ p{
     display: flex;
 }
 
+.PostHeader:hover{
+    background-color: rgb(235, 235, 235);
+    cursor: pointer;
+}
 
 .UserName:hover{
     cursor: pointer;
