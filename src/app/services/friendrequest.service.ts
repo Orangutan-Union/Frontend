@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FriendRequest } from '../models/friendrequest';
@@ -15,8 +15,18 @@ const httpOptions={
 })
 export class FriendrequestService {
 
+  @Output() hasNotification: EventEmitter<boolean> = new EventEmitter();
+
   baseApiUrl: string = environment.baseApiUrl;
   constructor(private http: HttpClient) { }
+
+  updateNotificationDot(notif: boolean){
+    this.hasNotification.emit(notif);
+  }
+
+  getAllRequests(id: number): Observable<FriendRequest[]>{
+    return this.http.get<FriendRequest[]>(this.baseApiUrl + 'friendrequests/all/' + id);
+  }
 
   getReceivedRequests(id: number): Observable<FriendRequest[]>{
     return this.http.get<FriendRequest[]>(this.baseApiUrl + 'friendrequests/received/' + id);

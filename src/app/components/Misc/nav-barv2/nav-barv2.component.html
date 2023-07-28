@@ -13,7 +13,7 @@
                     <!-- Icons for the diffrent routerlinks -->
                     <mat-icon routerLink="/chat">chat</mat-icon>
                     <mat-icon routerLink="/friendpage">notification_important_icon
-                        <div *ngIf="user.receivedFriendRequests.length > 0" class="notifications"></div>
+                        <div *ngIf="hasNotification" class="notifications"></div>
                     </mat-icon>
                     <!-- drop Down Menu -->
                     <div class="dropdown">

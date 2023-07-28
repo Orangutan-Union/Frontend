@@ -1,20 +1,56 @@
-<div *ngIf="friendRequests.length === 0" class="NoContent">
-    <h1>No one wants to be friends with you</h1>
+<div class="changeFeedButtons">
+    <button (click)="receivedOnly = true" [ngClass]="{picked: receivedOnly}"><b>Received</b></button>
+    <button (click)="receivedOnly = false" [ngClass]="{picked: !receivedOnly}"><b>Sent</b></button>
 </div>
-<div *ngIf="friendRequests.length > 0" class="requestContainer">
-    <div class="requests" *ngFor="let request of friendRequests">
-        <span class="requestHeader">
-            <b>
-                <p>Request received:</p>
-            </b>
-            <p>{{request.dateSent | date: 'medium'}}</p>
-        </span>
-        <div class="Content">
-            <img routerLink="/visitingProfil/{{request.senderId}}" src="{{request.sender.picture.imageUrl}}" alt="" class="ProfilImg">
-            <p routerLink="/visitingProfil/{{request.senderId}}" style="font-size: larger;">{{request.sender.displayName}}</p>
-            <div class="actionButtons">
-                <mat-icon (click)="acceptFriendRequest(request)" style="margin-right: 5px;" class="Accept">checkmark</mat-icon>
-                <mat-icon (click)="declineFriendRequest(request)" class="Decline">delete</mat-icon>
+<hr class="divider">
+
+<div *ngIf="receivedOnly">
+    <div *ngIf="receivedFriendRequests.length === 0" class="NoContent">
+        <h1>No one wants to be friends with you</h1>
+    </div>
+    <div *ngIf="receivedFriendRequests.length > 0" class="requestContainer">
+        <div class="requests" *ngFor="let request of receivedFriendRequests">
+            <span class="requestHeader">
+                <b>
+                    <p>Request received:</p>
+                </b>
+                <p>{{request.dateSent | date: 'medium'}}</p>
+            </span>
+            <div class="Content">
+                <img routerLink="/visitingProfil/{{request.senderId}}" src="{{request.sender.picture.imageUrl}}" alt=""
+                    class="ProfilImg">
+                <p routerLink="/visitingProfil/{{request.senderId}}" style="font-size: larger;">
+                    {{request.sender.displayName}}</p>
+                <div class="actionButtons">
+                    <mat-icon (click)="acceptFriendRequest(request)" style="margin-right: 5px;"
+                        class="Accept">checkmark</mat-icon>
+                    <mat-icon (click)="declineFriendRequest(request)" class="Decline">delete</mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!receivedOnly">
+    <div *ngIf="sentFriendRequests.length === 0" class="NoContent">
+        <h1>You have no sent friend requests</h1>
+    </div>
+    <div *ngIf="sentFriendRequests.length > 0" class="requestContainer">
+        <div class="requests" *ngFor="let request of sentFriendRequests">
+            <span class="requestHeader">
+                <b>
+                    <p>Request sent:</p>
+                </b>
+                <p>{{request.dateSent | date: 'medium'}}</p>
+            </span>
+            <div class="Content">
+                <img routerLink="/visitingProfil/{{request.receiverId}}" src="{{request.receiver.picture.imageUrl}}" alt=""
+                    class="ProfilImg">
+                <p routerLink="/visitingProfil/{{request.receiverId}}" style="font-size: larger;">
+                    {{request.receiver.displayName}}</p>
+                <div class="actionButtons">
+                    <button class="cancel-button" (click)="cancelFriendRequest(request)">Cancel</button>
+                </div>
             </div>
         </div>
     </div>

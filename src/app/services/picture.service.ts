@@ -16,11 +16,7 @@ export class PictureService {
     return this.http.post(this.baseApiUrl + 'pictures/', formData);
   }
 
-  updateNavbarPicture(pictureUrl: string){
-    console.log('FROM SERVICE BELOW');
-    
-    console.log(pictureUrl);
-    
+  updateNavbarPicture(pictureUrl: string){    
     this.updatedPicture.emit(pictureUrl);
   }
 }
