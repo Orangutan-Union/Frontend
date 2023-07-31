@@ -52,4 +52,5 @@ p{
 .PictureContent > img{
     max-width: 450px;
     max-height: 450px;
+    cursor: pointer;
 }
