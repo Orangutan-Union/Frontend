@@ -1,0 +1,22 @@
+.row{
+    content: "";
+    clear:both;
+    display: table;
+}
+
+.column{
+    float: left;
+    width: 50%;
+}
+
+.image{
+    height: 115px;
+    width: 115px;
+    border-radius: 15px;
+    margin: 1px 10px 0 1px;
+}
+
+.image:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 1px 1px black;
+}

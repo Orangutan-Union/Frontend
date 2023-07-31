@@ -1,0 +1,16 @@
+<div class="row">
+        <div *ngIf="previewPictures.length === 1">
+            <div class="column" style="width: 100%;">
+                <a href="{{previewPictures[0].imageUrl}}" target="_blank">
+                    <img class="image" src="{{previewPictures[0].imageUrl}}">
+                </a>
+            </div>
+        </div>
+    <div *ngIf="previewPictures.length > 1">
+    <div class="column" *ngFor="let picture of previewPictures">
+        <a href="{{picture.imageUrl}}" target="_blank">
+            <img class="image" src="{{picture.imageUrl}}">
+        </a>
+    </div>
+</div>
+</div>

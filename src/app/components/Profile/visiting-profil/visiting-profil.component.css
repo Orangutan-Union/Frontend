@@ -1,9 +1,3 @@
-.profilFeed{
-    width: 800px;
-    margin: 0 auto;
-    
-}
-
 .OuterLayer{
     margin-top: 5px;
     display: flex;
@@ -23,6 +17,7 @@
     cursor: pointer;
     border: solid 2px black;
     width: 15vw;
+    height: 15vw;
     margin-left: 5px;
     border-radius: 50%;
     object-fit: cover;
@@ -89,4 +84,15 @@ p{
 .PictureContent > img{
     max-width: 450px;
     max-height: 450px;
+}
+
+.image-preview{
+    margin: 298px 0 0 200px;
+    width: 252px;
+    height: 252px;
+}
+
+.profilFeed{
+    width: 800px;
+    margin: 0 auto 0 102px;
 }
