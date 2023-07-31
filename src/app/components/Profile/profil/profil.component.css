@@ -1,11 +1,31 @@
 .profilFeed{
     width: 800px;
-    margin: 0 auto;
-    
+    margin: 0 auto 0 102px;
 }
 
 .OuterLayer{
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
+}
+
+.image-preview{
+    margin: 298px 0 0 200px;
+    width: 252px;
+    height: 252px;
+}
+
+.MainImg{
+    cursor: pointer;
+    border: solid 2px black;
+    width: 15vw;
+    height: 15vw;
+    margin-left: 5px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.postContainer{
+    margin-top: 20px;
 }
