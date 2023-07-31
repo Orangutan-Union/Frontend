@@ -4,6 +4,8 @@ import { Unsub } from 'src/app/classes/unsub';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { takeUntil } from 'rxjs/operators'
+import { Picture } from 'src/app/models/picture';
+import { PictureService } from 'src/app/services/picture.service';
 
 @Component({
   selector: 'app-profil',
@@ -15,7 +17,8 @@ export class ProfilComponent extends Unsub implements OnInit {
   user: User = new User;
   userId: number = 0;
   formData = new FormData();
-  constructor(private authService: AuthService, private route: Router) { super(); }
+  postImages: Picture[] = [];
+  constructor(private authService: AuthService, private route: Router, private picService: PictureService) { super(); }
 
   ngOnInit(): void {
     this.getUser()
@@ -27,6 +30,9 @@ export class ProfilComponent extends Unsub implements OnInit {
       next: (usr => {
         this.user = usr;
         console.log(this.user);
+        this.picService.previewPictures.pipe(takeUntil(this.unsubscribe$)).subscribe(pics => {
+          this.postImages = pics;
+        })
       })
     });
   }
