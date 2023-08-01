@@ -29,8 +29,7 @@ export class ChatSelectComponent extends Unsub implements OnInit {
   getUserChats() {
     this.chatService.getUserChats(Number(localStorage.getItem('userid'))).pipe(takeUntil(this.unsubscribe$)).subscribe(chats => {
       this.chats = chats;
-      console.log(chats);
-      
+      this.selectChat(chats[0].chatId)
       this.chatList.emit(chats);
     });
   }
