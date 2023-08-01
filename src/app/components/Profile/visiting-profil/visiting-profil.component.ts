@@ -11,6 +11,7 @@ import { FeedService } from 'src/app/services/feed.service';
 import { FriendfollowerService } from 'src/app/services/friendfollower.service';
 import { FriendrequestService } from 'src/app/services/friendrequest.service';
 import { takeUntil } from 'rxjs/operators'
+import { Picture } from 'src/app/models/picture';
 
 @Component({
   selector: 'app-visiting-profil',
@@ -37,6 +38,7 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
   dislikeCounter: number[] = [];
   TECPoints: number = 0;
   postCount: number = 0;
+  postImages: Picture[] = [];
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute,
     private authService: AuthService, private ffService: FriendfollowerService,
     private friendreqService: FriendrequestService, private cdr: ChangeDetectorRef) { super();}
@@ -157,6 +159,13 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
       this.counter(this.posts);
       console.log(this.posts);
       this.postCount = this.posts.length
+
+      // Add all images from posts so profile-images component can display them.
+      this.posts.forEach(x => {
+        if (x.pictures.length > 0) {
+          this.postImages.push(x.pictures[0]);
+        }
+      })
       this.TecPointsCount(data)
     })
   }

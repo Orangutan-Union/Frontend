@@ -6,10 +6,16 @@
     <div *ngIf="friends.length > 0">
         <div class="friend" *ngFor="let friend of friends">
             <div class="Content">
+                <div *ngIf="friend.userId !== currentUserId">
                 <img class="ProfilImg" routerLink="/visitingProfil/{{friend.userId}}"
                     src="{{friend.user.picture.imageUrl}}">
                 <span class="UserName" routerLink="/visitingProfil/{{friend.userId}}">{{friend.user.displayName}}</span>
-                
+            </div>
+            <div *ngIf="friend.otherUserId !== currentUserId">
+                <img class="ProfilImg" routerLink="/visitingProfil/{{friend.otherUserId}}"
+                    src="{{friend.otherUser.picture.imageUrl}}">
+                <span class="UserName" routerLink="/visitingProfil/{{friend.otherUserId}}">{{friend.otherUser.displayName}}</span>
+            </div>
             </div>
             <div class="MessageButton">
                 <mat-icon class="MessageIcon" routerLink="/chat">message</mat-icon>

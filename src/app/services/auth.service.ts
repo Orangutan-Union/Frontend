@@ -28,6 +28,8 @@ export class AuthService {
     this.showNavbar.emit(show);
   }
 
+  
+
   register(register: RegisterRequest): Observable<RegisterRequest>{
     return this.http.post<RegisterRequest>(this.baseApiUrl + 'users/register', register, httpOptions)
   }

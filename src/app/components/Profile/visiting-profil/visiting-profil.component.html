@@ -4,7 +4,10 @@
 </div>
 
 <div class="OuterLayer" *ngIf="!isBlocked">
-    <div class="profilFeed">  
+    <div class="image-preview">
+        <app-profile-images *ngIf="postImages.length > 0" [pictures]="postImages"></app-profile-images>
+    </div>
+    <div class="profilFeed">
         <div>
             <span style="display: flex;">
                 <img class="MainImg" src="{{user.picture.imageUrl}}" alt="">
@@ -18,21 +21,26 @@
                         <br>
                         <b>TECPoints:</b> {{TECPoints}}
                     </p>
-                    <button *ngIf="!sentRequestPending && !friends && !hasBlocked && !receivedRequestPending" (click)="sendFriendRequest()">Send Friend Request</button>
+                    <button *ngIf="!sentRequestPending && !friends && !hasBlocked && !receivedRequestPending"
+                        (click)="sendFriendRequest()">Send Friend Request</button>
                     <button *ngIf="sentRequestPending" (click)="cancelFriendRequest()">Cancel Friend Request</button>
-                    <button *ngIf="receivedRequestPending" (click)="acceptFriendRequest()">Accept Friend Request</button>
+                    <button *ngIf="receivedRequestPending" (click)="acceptFriendRequest()">Accept Friend
+                        Request</button>
                     <button *ngIf="!friends && !following && !hasBlocked" (click)="followUser()">Follow</button>
                     <button *ngIf="!friends && following" (click)="unfollowUser()">Unfollow</button>
                     <button *ngIf="!hasBlocked" (click)="blockUser()">Block</button>
                     <button *ngIf="hasBlocked" (click)="unblockUser()">Unblock</button>
                     <button *ngIf="friends" (click)="unfriendUser()">Unfriend</button>
                 </span>
-            </span>            
+            </span>
             <div class="postContainer">
                 <div class="posts" *ngFor="let post of posts; let i = index">
                     <app-feed-component [posts]="post" [i]="i"></app-feed-component>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="TT">
+        Jimmy er bare ikke sej!
     </div>
 </div>

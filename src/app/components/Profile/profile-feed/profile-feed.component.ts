@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Unsub } from 'src/app/classes/unsub';
 import { Like } from 'src/app/models/addLike';
@@ -6,6 +6,10 @@ import { NewPost } from 'src/app/models/newPost';
 import { Post } from 'src/app/models/post';
 import { FeedService } from 'src/app/services/feed.service';
 import { takeUntil } from 'rxjs/operators'
+import { Picture } from 'src/app/models/picture';
+import { PictureService } from 'src/app/services/picture.service';
+import { outputAst } from '@angular/compiler';
+import { NumberValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-feed',
@@ -26,11 +30,24 @@ export class ProfileFeedComponent extends Unsub implements OnInit {
   commentCounter: number[] = [];
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
+  postImages: Picture[] = [];
+  TECPoints: number = 0
+  postCount: number = 0
   
-  constructor(private feedService: FeedService, private route: Router) { super(); }
+  constructor(private feedService: FeedService, private route: Router, private picService: PictureService) { super(); }
 
   ngOnInit(): void {
     this.getUserPosts();
+  }
+
+  TecPointsCount(p: Post[]){    
+    p.forEach( element => {      
+      element.likes.forEach( element => {
+        if(element.isLiked){this.TECPoints += 1}
+        if(element.isDisliked){this.TECPoints -= 1}
+      })
+    });
+    this.feedService.getPoints(this.postCount, this.TECPoints)
   }
 
   deletePost(i: number): void {
@@ -150,6 +167,16 @@ export class ProfileFeedComponent extends Unsub implements OnInit {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
+      this.postCount = this.posts.length
+      
+      // Add all images from posts so profile-images component can display them.
+      this.posts.forEach(x => {
+        if (x.pictures.length > 0) {
+          this.postImages.push(x.pictures[0]);
+        }
+      });
+      this.picService.updatePreviewPictures(this.postImages);
+      this.TecPointsCount(data)
     })
   }
 

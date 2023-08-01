@@ -1,11 +1,49 @@
 .profilFeed{
-    width: 800px;
-    margin: 0 auto;
-    
+    width: 100%;
+    /* margin: 0 auto; */
 }
 
-.OuterLayer{
+/* .OuterLayer{
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
+} */
+
+.OuterLayer{
+    display: grid;
+    margin: 5px;
+    grid-template-columns: 25% 50% 25%;
 }
+
+.image-preview{
+    margin: 80% auto;
+}
+
+.MainImg{
+    cursor: pointer;
+    border: solid 2px black;
+    width: 15vw;
+    height: 15vw;
+    margin-left: 5px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.postContainer{
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+    .OuterLayer{
+        grid-template-columns: 100%;
+    }
+    .image-preview{
+        display: none;
+    }
+    .TT{
+        display: none;
+    }
+  }
+
+  
