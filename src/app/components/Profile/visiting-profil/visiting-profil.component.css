@@ -1,7 +1,7 @@
 .OuterLayer{
-    margin-top: 5px;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    margin: 5px;
+    grid-template-columns: 25% 50% 25%;
 }
 
 .posts{
@@ -87,12 +87,21 @@ p{
 }
 
 .image-preview{
-    margin: 298px 0 0 200px;
-    width: 252px;
-    height: 252px;
+    margin: 80% auto;
 }
 
 .profilFeed{
-    width: 800px;
-    margin: 0 auto 0 102px;
+    width: 100%;
 }
+
+@media only screen and (max-width: 1000px) {
+    .OuterLayer{
+        grid-template-columns: 100%;
+    }
+    .image-preview{
+        display: none;
+    }
+    .TT{
+        display: none;
+    }
+  }
