@@ -6,4 +6,5 @@ export class FriendFollower{
     type: number = 0;
     userId: number = 0;
     user: User = new User;
+    otherUser: User = new User;
 }

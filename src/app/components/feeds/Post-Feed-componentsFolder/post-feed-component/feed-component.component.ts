@@ -16,7 +16,7 @@ export class FeedComponentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    //this.counter(this.posts)
+    
   }
 
 }
