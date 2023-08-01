@@ -17,9 +17,6 @@ export class FeedComponentComponent implements OnInit {
 
   ngOnInit(): void {
     //this.counter(this.posts)
-    if (this.posts.userId === 2 && this.posts.pictures.length > 0) {
-      this.posts.pictures[0].imageUrl = "https://res.cloudinary.com/dm52kqhd4/image/upload/v1688042479/t1htf6u5uc0tsxu1m9bh.png";
-    }
   }
 
 }

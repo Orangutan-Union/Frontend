@@ -15,7 +15,7 @@
     
     width: 25vw;
     height: 25vw;
-    border-radius: 50% 50px;
+    border-radius: 50%;
     object-fit: cover;
     object-position: center;
     border: 1px solid black;

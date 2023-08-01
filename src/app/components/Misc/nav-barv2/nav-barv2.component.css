@@ -1,6 +1,6 @@
 .OuterLayer{
 
-    /* background:linear-gradient(to top, #557B83, white); */
+    background: whitesmoke;
 }
 .NavBar{
     display: flex;
