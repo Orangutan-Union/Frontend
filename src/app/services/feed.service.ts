@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -20,8 +20,18 @@ const httpOptions = {
 })
 export class FeedService {
 
+  TECPointsPreview: number = 0
+  @Output() TECPoints = new EventEmitter<number>();
+  @Output() postCount = new EventEmitter<number>();
+
   baseApiUrl: string = environment.baseApiUrl;
   constructor(private http: HttpClient, private route: Router) { }
+
+  getPoints(post: number, polints: number): void{
+    this.TECPoints.emit(polints)
+    this.postCount.emit(post)
+  }
+
 
   getFullPost(id: number): Observable<Post> {
     console.log("GetFullPost");

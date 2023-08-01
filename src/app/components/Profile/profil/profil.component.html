@@ -11,11 +11,15 @@
                     <b>Name:</b> {{user.displayName}}
                     <br>
                     <br>
+                    <b>Posts:</b> {{postCount}}
+                    <br>
+                    <br>
+                    <b>TECPoints:</b> {{TECPoints}}
                 </p>
             </span>
         </span>
         <div class="postContainer">
-            <app-profile-feed></app-profile-feed>
+            <app-profile-feed (TECPoints)="TECPoints" (postCount)="postCount"></app-profile-feed>
         </div>
     </div>
     <div class="TT">
