@@ -27,7 +27,7 @@ export class SendMessageComponent extends Unsub implements OnInit {
   constructor(private chatService: ChatService, private chatSelect: ChatSelectComponent) { super(); }
 
   ngOnInit(): void {
-    this.socket = io('http://192.168.20.33:83');
+    this.socket = io('http://localhost:3000');
   }
 
   sendMessage() {

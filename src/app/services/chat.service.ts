@@ -23,7 +23,7 @@ export class ChatService {
   private socket: Socket;
 
   constructor(private http: HttpClient, private route: Router) {
-    this.socket = io('http://192.168.20.33:83');
+    this.socket = io('http://localhost:3000');
   }
 
   joinRoom(roomId: number): void {
@@ -42,13 +42,9 @@ export class ChatService {
       content: message
     };
     this.socket.emit('message', messageData)
-    console.log("sendService");
-
   }
 
   receiveMessage(): Observable<string> {
-    console.log("resiveService");
-
     return new Observable<string>((observer) => {
       this.socket.on('message', (message) => {
         observer.next(message)
