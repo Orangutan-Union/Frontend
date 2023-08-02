@@ -10,7 +10,7 @@
             <img src="{{posts.pictures[0].imageUrl}}">
         </a>
         <vg-player style="justify-content: center;" *ngIf="fileExtension === 'mp4'">
-            <video style="max-width: 400px;" [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" controls>
+            <video [preload]="'metadata'" style="max-width: 400px;" [vgMedia]="$any(media)" #media id="singleVideo" controls>
                 <source src="{{posts.pictures[0].imageUrl}}" type="video/mp4">
             </video>
         </vg-player>
