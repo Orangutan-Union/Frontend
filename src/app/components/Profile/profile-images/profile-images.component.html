@@ -1,12 +1,12 @@
 <div class="row">
     <h2 style="text-align: center; font-weight: bold; text-decoration: underline;">Image Preview</h2>
-    <div *ngIf="previewPictures.length === 1">
+    <!-- <div *ngIf="previewPictures.length === 1">
         <div class="column" style="width: 100%;">
             <a href="{{previewPictures[0].imageUrl}}" target="_blank">
                 <img class="image" src="{{previewPictures[0].imageUrl}}">
             </a>
         </div>
-    </div>
+    </div> -->
     <div *ngIf="previewPictures.length > 1">
         <div class="column" *ngFor="let picture of previewPictures; let i = index" >
                 <img class="image hover-shadow cursor" src="{{picture.imageUrl}}" (click)="openModal();currentSlide(i + 1)">
@@ -14,9 +14,10 @@
         <div id="imgModal" class="slide-modal">
             <span class="close cursor" (click)="closeModal()">&times;</span>
             <div class="slide-modal-content">
-                <div class="img-slides" *ngFor="let image of previewPictures; let i = index" style="height: 100%;">
-                    <img src="{{image.imageUrl}}" style="margin-top: auto">
+                <div class="img-slides" *ngFor="let image of pictures; let i = index" style="object-fit: contain;">
+                    <img src="{{image.imageUrl}}">
                 </div>
+            
                 <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
                 <a class="next" (click)="plusSlides(1)">&#10095;</a>
             </div>

@@ -26,7 +26,7 @@ export class ProfileImagesComponent implements OnInit {
   slideIndex = 0;
 
   openModal() {
-    document.getElementById('imgModal')!.style.display = "block";
+    document.getElementById('imgModal')!.style.display = "flex";
    }
    closeModal() {
     document.getElementById('imgModal')!.style.display = "none";
