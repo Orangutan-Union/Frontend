@@ -4,5 +4,5 @@
 </textarea>
     <br>
     <button style="float: right;" type="submit" mat-raised-button color="primary"
-        [disabled]="myForm.invalid || newMessage.trim() == ''">Create</button>
+        [disabled]="myForm.invalid || newMessage.trim() == '' || this.blocking">Create</button>
 </form>

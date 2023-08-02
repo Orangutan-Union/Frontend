@@ -252,7 +252,7 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
   }
 
   getCurrentUserFollowers(){
-    this.ffService.getUserFollowers(Number(localStorage.getItem('userid'))).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
+    this.ffService.getUserFollowing(Number(localStorage.getItem('userid'))).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       this.currentUserFollowing = res;
       this.isFollowing();
     });
