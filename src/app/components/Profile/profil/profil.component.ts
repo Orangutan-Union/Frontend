@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Unsub } from 'src/app/classes/unsub';
 import { User } from 'src/app/models/user';
@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { takeUntil } from 'rxjs/operators'
 import { Picture } from 'src/app/models/picture';
 import { PictureService } from 'src/app/services/picture.service';
+import { FeedService } from 'src/app/services/feed.service';
 
 @Component({
   selector: 'app-profil',
@@ -18,10 +19,18 @@ export class ProfilComponent extends Unsub implements OnInit {
   userId: number = 0;
   formData = new FormData();
   postImages: Picture[] = [];
-  constructor(private authService: AuthService, private route: Router, private picService: PictureService) { super(); }
+  TECPoints: number = 0;
+  postCount: number = 0;
+  constructor(private authService: AuthService, private route: Router, private picService: PictureService, private feedService: FeedService) { super(); }
 
   ngOnInit(): void {
     this.getUser()
+    this.feedService.TECPoints.subscribe(data =>{
+      this.TECPoints = data
+    })
+    this.feedService.postCount.subscribe(data => {
+      this.postCount = data
+    })    
   }
 
   getUser(): void{
@@ -35,6 +44,7 @@ export class ProfilComponent extends Unsub implements OnInit {
         })
       })
     });
+    
   }
 
 }

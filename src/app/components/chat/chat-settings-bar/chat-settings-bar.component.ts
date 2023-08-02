@@ -25,7 +25,8 @@ export class ChatSettingsBarComponent implements OnInit {
   showAdd: boolean = false;
   showCancel: boolean = false
   userId: number = 0;
-  popupBool: boolean = false
+  popupBool: boolean = false;
+  firstLoad: number = 0;
 
   constructor(
     private authService: AuthService,
@@ -34,20 +35,27 @@ export class ChatSettingsBarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.searchWithDelay();
+    this.searchWithDelay();    
   }
 
   ngOnChanges(): void {
-    // Reset search when a new chat is selected
-    this.resetSearch();
+    // Reset search when a new chat is selected and not just when the page is loaded
+    if (this.firstLoad >= 2)
+    {
+      this.resetSearch();
+    }    
+    this.firstLoad++
   }
 
   resetSearch() {
-    console.log("test");
     
     this.search = '';
     this.searchUsers = [];
-    this.cancelAddToChat();
+    if (this.firstLoad == 9999999)
+    {
+      this.cancelAddToChat();
+      
+    }
   }
 
   getUserClass(user: User) {
@@ -119,14 +127,12 @@ export class ChatSettingsBarComponent implements OnInit {
     this.chatLength = Number(localStorage.getItem('chatLength'))
     this.newChatLength = this.chat.users.length
     this.showCancel = true;
-
-    console.log(this.chat.users);
     
-
     this.showAddButton();
   }
 
   cancelAddToChat() {
+    
     this.chat.users = this.chat.users.slice(0, this.chatLength);
     this.newChatLength = this.chat.users.length
     this.showCancel = false;
@@ -146,7 +152,6 @@ export class ChatSettingsBarComponent implements OnInit {
 
   saveChat() {
     this.chatService.addUser(this.chat).subscribe(chat => {
-      console.log(chat);
     })
   }
 
