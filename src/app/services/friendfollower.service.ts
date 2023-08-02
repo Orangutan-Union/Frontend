@@ -33,8 +33,20 @@ export class FriendfollowerService {
     return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/followers');
   }
 
+  getUserFollowing(id: number): Observable<FriendFollower[]>{
+    return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/following');
+  }
+
   getBlockedUsers(id: number): Observable<FriendFollower[]>{
     return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/blocked');
+  }
+
+  getBlockingUsers(id: number): Observable<FriendFollower[]>{
+    return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/blocking');
+  }
+
+  getBlockUserChat(userId: number, otherUserId: number): Observable<FriendFollower>{    
+    return this.http.get<FriendFollower>(this.baseApiUrl + 'friendfollowers/' + userId + "/" + otherUserId + '/blockedUserChat');
   }
 
   followUser(targetId: number): Observable<FriendFollower>{
