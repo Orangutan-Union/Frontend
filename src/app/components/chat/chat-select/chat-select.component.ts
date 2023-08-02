@@ -24,14 +24,25 @@ export class ChatSelectComponent extends Unsub implements OnInit {
 
   ngOnInit(): void {
     this.getUserChats();
+    console.log("HEj");
+    
   }
 
   getUserChats() {
     this.chatService.getUserChats(Number(localStorage.getItem('userid'))).pipe(takeUntil(this.unsubscribe$)).subscribe(chats => {
       this.chats = chats;
       this.selectChat(chats[0].chatId)
-      this.chatList.emit(chats);
+      this.chatList.emit(chats);    
+      console.log(chats);
+      
+
+      // chats.forEach(element => {
+      //   console.log(element.users.length);
+      //   console.log("Hej");
+        
+      //  }); 
     });
+
   }
 
   selectChat(id: number) {
@@ -40,7 +51,7 @@ export class ChatSelectComponent extends Unsub implements OnInit {
       this.joinRoom(chatId);
       this.selectedChatId = chatId;
       this.selectedChat.emit(chat);
-      localStorage.setItem('chatLength', chat.users.length.toString());
+      localStorage.setItem('chatLength', chat.users.length.toString());      
     });
   }
 

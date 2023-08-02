@@ -1,4 +1,4 @@
-<form (ngSubmit)="sendMessage()" #myForm="ngForm">
+<form (ngSubmit)="sendMessage()" #myForm="ngForm" (keyup)="sendMessage()">
     <textarea autosize placeholder="Message" type="text" id="content" name="content" #userName="ngModel"
         [(ngModel)]="newMessage" required>
 </textarea>
