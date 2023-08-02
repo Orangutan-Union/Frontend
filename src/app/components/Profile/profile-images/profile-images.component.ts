@@ -10,16 +10,24 @@ export class ProfileImagesComponent implements OnInit {
 
   @Input() pictures: Picture[] = [];
   previewPictures: Picture[] = [];
+  imageExtensions: string[] = ['jpg','png','jpeg','gif'];
+  actualPictures: Picture[] = [];
   constructor() { }
 
-  ngOnInit(): void {
-    console.log('before',this.pictures);
+  ngOnInit(): void {    
+    console.log('before',this.previewPictures);
     
-    if (this.pictures.length > 4) {
-      this.previewPictures = this.pictures.slice(0, 4);      
-    }
-    else{
-      this.previewPictures = this.pictures;
+
+    this.pictures.forEach(x => {
+      // Check if extension is an image
+      let ext = x.imageUrl.split('.').pop();
+      if (ext !== undefined && this.imageExtensions.includes(ext)) {
+        this.actualPictures.push(x);
+      }
+    });
+
+    if (this.actualPictures.length > 4) {
+      this.previewPictures = this.actualPictures.slice(0, 4);      
     }
   }
 

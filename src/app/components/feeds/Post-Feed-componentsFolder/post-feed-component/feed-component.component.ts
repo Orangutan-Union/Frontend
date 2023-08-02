@@ -12,11 +12,16 @@ import { FeedService } from 'src/app/services/feed.service';
 export class FeedComponentComponent implements OnInit {
   @Input() posts: Post
   @Input() i: number
-
+  fileExtension: string | undefined = '';
+  pictureExtensions: string[] = ['jpg','png','jpeg','gif'];
   constructor() { }
 
   ngOnInit(): void {
-    
+    if (this.posts.pictures.length > 0) {
+      this.fileExtension = this.posts.pictures[0].imageUrl.split('.').pop();
+      console.log(this.fileExtension);
+      
+    }
   }
 
 }
