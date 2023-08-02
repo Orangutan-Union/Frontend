@@ -3,6 +3,7 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FriendFollower } from '../models/friendfollower';
+import { NewFriendFollower } from '../models/newFriendFollower';
 
 const httpOptions={
   headers: new HttpHeaders({
@@ -32,12 +33,24 @@ export class FriendfollowerService {
     return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/followers');
   }
 
+  getUserFollowing(id: number): Observable<FriendFollower[]>{
+    return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/following');
+  }
+
   getBlockedUsers(id: number): Observable<FriendFollower[]>{
     return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/blocked');
   }
 
+  getBlockingUsers(id: number): Observable<FriendFollower[]>{
+    return this.http.get<FriendFollower[]>(this.baseApiUrl + 'friendfollowers/' + id + '/blocking');
+  }
+
+  getBlockUserChat(userId: number, otherUserId: number): Observable<FriendFollower>{    
+    return this.http.get<FriendFollower>(this.baseApiUrl + 'friendfollowers/' + userId + "/" + otherUserId + '/blockedUserChat');
+  }
+
   followUser(targetId: number): Observable<FriendFollower>{
-    let friendFollower = new FriendFollower;
+    let friendFollower = new NewFriendFollower;
     friendFollower.userId = Number(localStorage.getItem('userid'));
     friendFollower.otherUserId = targetId;
     return this.http.post<FriendFollower>(this.baseApiUrl + 'friendfollowers/follow', friendFollower, httpOptions);

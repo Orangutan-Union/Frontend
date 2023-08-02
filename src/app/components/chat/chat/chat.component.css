@@ -7,6 +7,7 @@
   }
   
   .chatColumn {
+    outline: 1px solid black;
     display: grid;
     grid-auto-rows: minmax(100px, auto);
     overflow-y: auto;

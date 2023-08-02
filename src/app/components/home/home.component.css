@@ -22,11 +22,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    
 }
 
 .changeFeedButtons > button{
     margin: 5px 3%;
-    width: 100%;
+    width: 100px;
 }
 
 .picked{

@@ -11,6 +11,8 @@
 </div>
 <div class="chatList" *ngFor="let chat of chats">
     <div [class.selected]="chat.chatId === selectedChatId" (click)="selectChat(chat.chatId)" >
+        <img *ngIf="chat.users.length > 2" src="../../../../assets/StockGroupImage.png" alt="Stock image of the groupchat!">
+        <img *ngIf="chat.users[0].picture.imageUrl && chat.users.length === 2" src="{{chat.users[0].picture.imageUrl}}" alt="">
         <h1>{{chat.chatName}}</h1>
     </div>
 </div>

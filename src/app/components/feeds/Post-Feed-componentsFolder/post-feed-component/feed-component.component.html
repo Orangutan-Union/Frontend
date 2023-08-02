@@ -6,9 +6,14 @@
         </p>
     </div>
     <div class="PictureContent" *ngIf="posts.pictures.length > 0">
-        <a href="{{posts.pictures[0].imageUrl}}" target="_blank">
+        <a *ngIf="pictureExtensions.includes(fileExtension!)" href="{{posts.pictures[0].imageUrl}}" target="_blank">
             <img src="{{posts.pictures[0].imageUrl}}">
         </a>
+        <vg-player style="justify-content: center;" *ngIf="fileExtension === 'mp4'">
+            <video [preload]="'metadata'" style="max-width: 400px;" [vgMedia]="$any(media)" #media id="singleVideo" controls>
+                <source src="{{posts.pictures[0].imageUrl}}" type="video/mp4">
+            </video>
+        </vg-player>
     </div>
     <!-- ngIf below is needed, without it the toolbar component renders before data has loaded -->
     <app-post-toolbar *ngIf="posts.postId != 0" [posts]="posts"></app-post-toolbar>
