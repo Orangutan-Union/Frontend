@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { GroupHomeComponent } from './group-home.component';
+
+describe('GroupHomeComponent', () => {
+  let component: GroupHomeComponent;
+  let fixture: ComponentFixture<GroupHomeComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ GroupHomeComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(GroupHomeComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

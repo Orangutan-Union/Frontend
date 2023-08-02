@@ -41,6 +41,7 @@ import { NavBarv2Component } from './components/Misc/nav-barv2/nav-barv2.compone
 import { ChatSettingsBarComponent } from './components/chat/chat-settings-bar/chat-settings-bar.component';
 import { LeavePopupComponent } from './components/chat/leave-popup/leave-popup.component';
 import { ProfileImagesComponent } from './components/Profile/profile-images/profile-images.component';
+import { GroupHomeComponent } from './components/group/group-home/group-home.component';
 
 // ./components/feeds/post-feed-componentsFolder/post-toolbar/post-toolbar.component
 export function tokenGetter() {
@@ -79,6 +80,7 @@ export function tokenGetter() {
     ChatSettingsBarComponent,
     LeavePopupComponent,
     ProfileImagesComponent,
+    GroupHomeComponent,
   ],
   imports: [
     BrowserModule,
