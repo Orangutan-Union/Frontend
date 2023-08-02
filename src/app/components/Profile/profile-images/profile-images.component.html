@@ -11,7 +11,7 @@
         <div class="column" *ngFor="let picture of previewPictures; let i = index" >
                 <img class="image hover-shadow cursor" src="{{picture.imageUrl}}" (click)="openModal();currentSlide(i + 1)">
         </div>
-        <div id="imgModal" class="slide-modal">
+        <div id="imgModal" class="slide-modal" >
             <span class="close cursor" (click)="closeModal()">&times;</span>
             <div class="slide-modal-content">
                 <div class="img-slides" *ngFor="let image of pictures; let i = index" style="object-fit: contain;">

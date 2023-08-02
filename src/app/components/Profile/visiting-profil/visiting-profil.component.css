@@ -22,6 +22,8 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
+    min-width: 119px;
+    min-height: 119px;
 }
 
 p{
