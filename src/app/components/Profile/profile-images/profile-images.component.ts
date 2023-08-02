@@ -23,6 +23,14 @@ export class ProfileImagesComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit(){
+    window.onmousedown = evt =>{
+      if ((<Element>evt.target).id === "imgModal"){
+        this.closeModal()
+      }
+    }
+  }
+
   slideIndex = 0;
 
   openModal() {
