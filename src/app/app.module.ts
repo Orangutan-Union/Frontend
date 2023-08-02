@@ -41,6 +41,10 @@ import { NavBarv2Component } from './components/Misc/nav-barv2/nav-barv2.compone
 import { ChatSettingsBarComponent } from './components/chat/chat-settings-bar/chat-settings-bar.component';
 import { LeavePopupComponent } from './components/chat/leave-popup/leave-popup.component';
 import { ProfileImagesComponent } from './components/Profile/profile-images/profile-images.component';
+import {VgCoreModule} from '@videogular/ngx-videogular/core';
+import {VgControlsModule} from '@videogular/ngx-videogular/controls';
+import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
+import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 
 // ./components/feeds/post-feed-componentsFolder/post-toolbar/post-toolbar.component
 export function tokenGetter() {
@@ -89,6 +93,10 @@ export function tokenGetter() {
     AutosizeModule,
     MatDialogModule,
     BrowserAnimationsModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
