@@ -5,7 +5,7 @@ import { Unsub } from 'src/app/classes/unsub';
 import { Chat } from 'src/app/models/chat';
 import { NewMessage } from 'src/app/models/newMessage';
 import { ChatService } from 'src/app/services/chat.service';
-import { ChatSelectComponent } from '../chat-select/chat-select.component';
+import { FriendfollowerService } from 'src/app/services/friendfollower.service';
 
 @Component({
   selector: 'app-send-message',
@@ -19,15 +19,34 @@ export class SendMessageComponent extends Unsub implements OnInit {
   private socket: Socket;
   chat: Chat = new Chat;
   index: number = 0;
-  
+  blocking: boolean = false;
+
 
   newMessage: string = '';
   message: NewMessage = new NewMessage;
 
-  constructor(private chatService: ChatService, private chatSelect: ChatSelectComponent) { super(); }
+  constructor(private chatService: ChatService, private friendFollower: FriendfollowerService) { super(); }
 
   ngOnInit(): void {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://localhost:3000');    
+  }
+
+  ngOnChanges(): void {
+    this.getBlockedChats();    
+  }
+
+  getBlockedChats() {
+    this.friendFollower.getBlockUserChat(this.inChat.users[0].userId, this.inChat.users[1].userId).pipe(takeUntil(this.unsubscribe$))
+    .subscribe(blocking => {
+      if (blocking != null && this.inChat.isPrivate == true)
+      {
+        this.blocking = true
+      }
+      else
+      {
+        this.blocking = false        
+      }      
+    });
   }
 
   sendMessage() {
@@ -41,8 +60,7 @@ export class SendMessageComponent extends Unsub implements OnInit {
     this.chatService.createMessage(this.message).pipe(takeUntil(this.unsubscribe$)).subscribe(message => {
 
       this.chatList.forEach(chat => {
-        if (chat.chatId == this.inChat.chatId)
-        {
+        if (chat.chatId == this.inChat.chatId) {
           this.chat = this.chatList[this.index]
           this.chatList.splice(this.index, 1)
         }
