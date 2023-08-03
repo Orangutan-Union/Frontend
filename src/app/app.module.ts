@@ -46,6 +46,7 @@ import {VgCoreModule} from '@videogular/ngx-videogular/core';
 import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
+import { ProfileFriendsComponent } from './components/Profile/profile-friends/profile-friends.component';
 
 // ./components/feeds/post-feed-componentsFolder/post-toolbar/post-toolbar.component
 export function tokenGetter() {
@@ -85,6 +86,7 @@ export function tokenGetter() {
     LeavePopupComponent,
     ProfileImagesComponent,
     GroupHomeComponent,
+    ProfileFriendsComponent,
   ],
   imports: [
     BrowserModule,

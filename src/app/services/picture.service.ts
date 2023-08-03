@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Picture } from '../models/picture';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class PictureService {
 
   addPicture(formData: FormData){
     return this.http.post(this.baseApiUrl + 'pictures/', formData);
+  }
+
+  getUserPostsPictures(id: number):Observable<Picture[]>{
+    return this.http.get<Picture[]>(this.baseApiUrl + 'pictures/user/' + id);
   }
 
   updateNavbarPicture(pictureUrl: string){    

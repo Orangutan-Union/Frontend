@@ -1,13 +1,6 @@
-<div class="row">
+<div *ngIf="actualPictures.length > 0" class="row">
     <h2 style="text-align: center; font-weight: bold; text-decoration: underline;">Image Preview</h2>
-    <!-- <div *ngIf="previewPictures.length === 1">
-        <div class="column" style="width: 100%;">
-            <a href="{{previewPictures[0].imageUrl}}" target="_blank">
-                <img class="image" src="{{previewPictures[0].imageUrl}}">
-            </a>
-        </div>
-    </div> -->
-    <div *ngIf="previewPictures.length > 1">
+    <div>
         <div class="column" *ngFor="let picture of previewPictures; let i = index" >
                 <img class="image hover-shadow cursor" src="{{picture.imageUrl}}" (click)="openModal();currentSlide(i + 1)">
         </div>
