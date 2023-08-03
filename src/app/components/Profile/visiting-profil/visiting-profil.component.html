@@ -5,7 +5,7 @@
 
 <div class="OuterLayer" *ngIf="!isBlocked">
     <div class="image-preview">
-        <app-profile-images *ngIf="postImages.length > 0" [pictures]="postImages"></app-profile-images>
+        <app-profile-images *ngIf="userId !== 0 || userId !== undefined" [userId]="userId"></app-profile-images>
     </div>
     <div class="profilFeed">
         <div>

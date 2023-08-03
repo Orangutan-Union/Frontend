@@ -1,7 +1,7 @@
 <!-- <app-nav-bar></app-nav-bar> -->
 <div class="OuterLayer">
     <div class="image-preview">
-        <app-profile-images *ngIf="postImages.length > 0" [pictures]="postImages"></app-profile-images>
+        <app-profile-images *ngIf="userId !== 0 || userId !== undefined" [userId]="userId"></app-profile-images>
     </div>
     <div class="profilFeed">
         <span style="display: flex;">
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="TT">
-        Jimmy er bare ikke sej!
-
+        Jeppe er dum!
+        <app-profile-friends></app-profile-friends>
     </div>
 </div>

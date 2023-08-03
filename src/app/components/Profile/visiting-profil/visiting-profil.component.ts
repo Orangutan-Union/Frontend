@@ -22,6 +22,7 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
   currentUserFollowing: FriendFollower[] = [];
   currentUserId: number = 0;
   user: User = new User;
+  userId: number = 0;
   friends: boolean = false;
   following: boolean = false;
   hasBlocked: boolean = false;
@@ -38,7 +39,6 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
   dislikeCounter: number[] = [];
   TECPoints: number = 0;
   postCount: number = 0;
-  postImages: Picture[] = [];
   constructor(private feedService: FeedService, private route: Router, private aRoute: ActivatedRoute,
     private authService: AuthService, private ffService: FriendfollowerService,
     private friendreqService: FriendrequestService, private cdr: ChangeDetectorRef) { super();}
@@ -46,9 +46,9 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
   ngOnInit(): void {
     this.currentUserId = Number(localStorage.getItem('userid'));
     this.aRoute.paramMap.pipe(takeUntil(this.unsubscribe$)).subscribe((params) => {
-      const id = Number(params.get('id'))
-      this.getUser(id);
-      this.getUserPosts(id);
+      this.userId = Number(params.get('id'))
+      this.getUser(this.userId);
+      this.getUserPosts(this.userId);
       this.getCurrentUserFollowers();
     });
   }
@@ -160,12 +160,12 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
       console.log(this.posts);
       this.postCount = this.posts.length
 
-      // Add all images from posts so profile-images component can display them.
-      this.posts.forEach(x => {
-        if (x.pictures.length > 0) {
-          this.postImages.push(x.pictures[0]);
-        }
-      })
+      // // Add all images from posts so profile-images component can display them.
+      // this.posts.forEach(x => {
+      //   if (x.pictures.length > 0) {
+      //     this.postImages.push(x.pictures[0]);
+      //   }
+      // })
       this.TecPointsCount(data)
     })
   }
