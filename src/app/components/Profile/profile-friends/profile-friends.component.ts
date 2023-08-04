@@ -21,7 +21,7 @@ export class ProfileFriendsComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges){
     if (!changes['friendFollowers'].firstChange || !changes['otherFriendFollowers'].firstChange) {
-      this.ngOnInit();
+      this.gatherUsers();
     }
   }
 
