@@ -19,15 +19,12 @@ export class ProfileImagesComponent extends Unsub implements OnInit {
   constructor(private picService: PictureService) { super(); }
 
   ngOnInit(): void {
-    this.getPostPictures();
-    console.log('USERID HERE',this.userId);
-    
+    this.getPostPictures();    
   }
 
   getPostPictures(){
     this.picService.getUserPostsPictures(this.userId).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       this.pictures = res;
-      console.log('getUserPostsPictures',this.pictures);
       this.filterFiles();
     })
   }
@@ -46,7 +43,7 @@ export class ProfileImagesComponent extends Unsub implements OnInit {
     }
     else{
       this.previewPictures = this.actualPictures;
-    }
+    }    
   }
 
   ngAfterViewInit(){

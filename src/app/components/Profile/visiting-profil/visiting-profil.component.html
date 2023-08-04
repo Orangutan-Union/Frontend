@@ -41,6 +41,9 @@
         </div>
     </div>
     <div class="TT">
-        Jimmy er bare ikke sej!
+        <div class="friends-preview" *ngIf="user.userFriendFollowers.length > 0 || user.otherUserFriendFollowers.length > 0">
+            <app-profile-friends [friendFollowers]="user.userFriendFollowers"
+                [otherFriendFollowers]="user.otherUserFriendFollowers"></app-profile-friends>
+        </div>
     </div>
 </div>

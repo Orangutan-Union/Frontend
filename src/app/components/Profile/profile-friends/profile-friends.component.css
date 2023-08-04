@@ -1,0 +1,22 @@
+.row{
+    margin: 0 auto;
+}
+
+.column{
+    width: 23.75%;
+    margin: 5px 1.25%;
+    float: left;
+    overflow: hidden;
+}
+
+.image{
+    width: 95%;
+    aspect-ratio: 1/1;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.image:hover{
+    cursor: pointer;
+    outline: 1px solid black;
+}

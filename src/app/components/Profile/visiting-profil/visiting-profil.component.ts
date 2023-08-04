@@ -49,7 +49,7 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
       this.userId = Number(params.get('id'))
       this.getUser(this.userId);
       this.getUserPosts(this.userId);
-      this.getCurrentUserFollowers();
+      this.getCurrentUserFollowers();      
     });
   }
 
@@ -157,15 +157,7 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
     this.feedService.getUserPosts(id).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       this.posts = data;
       this.counter(this.posts);
-      console.log(this.posts);
       this.postCount = this.posts.length
-
-      // // Add all images from posts so profile-images component can display them.
-      // this.posts.forEach(x => {
-      //   if (x.pictures.length > 0) {
-      //     this.postImages.push(x.pictures[0]);
-      //   }
-      // })
       this.TecPointsCount(data)
     })
   }

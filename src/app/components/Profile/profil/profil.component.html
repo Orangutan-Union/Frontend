@@ -23,7 +23,9 @@
         </div>
     </div>
     <div class="TT">
-        Jeppe er dum!
-        <app-profile-friends></app-profile-friends>
+        <div class="friends-preview" *ngIf="user.userFriendFollowers.length > 0 || user.otherUserFriendFollowers.length > 0">
+            <app-profile-friends [friendFollowers]="user.userFriendFollowers"
+                [otherFriendFollowers]="user.otherUserFriendFollowers"></app-profile-friends>
+        </div>
     </div>
 </div>
