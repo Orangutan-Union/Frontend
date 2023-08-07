@@ -43,7 +43,10 @@ export class ProfilComponent extends Unsub implements OnInit {
           this.postImages = pics;
         })
       })
-    });
+    });    
+  }
+
+  goToGroupSelect() {
     
   }
 

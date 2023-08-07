@@ -12,6 +12,8 @@ import { ChatComponent } from './components/chat/chat/chat.component';
 import { FriendrequestsComponent } from './components/FriendsWithBenefits/friendrequests/friendrequests.component';
 import { FriendpageComponent } from './components/FriendsWithBenefits/friendpage/friendpage.component';
 import { NavBarv2Component } from './components/Misc/nav-barv2/nav-barv2.component';
+import { GroupHomeComponent } from './components/group/group-home/group-home.component';
+import { GroupSelectComponent } from './components/group/group-select/group-select.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,9 +25,12 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard]},
   { path: 'fullPost/:id', component: FullPostComponent, canActivate:[AuthGuard]},
   { path: 'friendrequests', component: FriendrequestsComponent, canActivate:[AuthGuard]},
-  { path: 'visitingProfil/:id', component: VisitingProfilComponent, canActivate:[AuthGuard] },
-  { path: 'friendpage', component: FriendpageComponent, canActivate:[AuthGuard] },
-  { path: 'navbar', component: NavBarv2Component}
+  { path: 'visitingProfil/:id', component: VisitingProfilComponent, canActivate:[AuthGuard]},
+  { path: 'friendpage', component: FriendpageComponent, canActivate:[AuthGuard]},
+  { path: 'navbar', component: NavBarv2Component},
+  { path: 'groupHome/:id', component: GroupHomeComponent, canActivate:[AuthGuard]},
+  { path: 'groupSelect', component: GroupSelectComponent, canActivate:[AuthGuard]},
+  
 ]; 
 
 @NgModule({

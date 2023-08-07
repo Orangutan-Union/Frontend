@@ -1,1 +1,30 @@
-<p>group-home works!</p>
+<!-- <app-nav-bar></app-nav-bar> -->
+<div class="OuterLayer">
+    <div class="image-preview">
+        <!-- <app-profile-images *ngIf="postImages.length > 0" [pictures]="postImages"></app-profile-images> -->
+    </div>
+    <div class="profilFeed">
+        <span style="display: flex;">
+            <img class="MainImg" src="{{group.picture.imageUrl}}" alt="">
+            <span style="display: flex; margin-left: 50px; align-items: center;">
+                <p>
+                    <b>Name:</b> {{group.groupName}}
+                    <br>
+                    <br>
+                    <!-- <b>Posts:</b> {{postCount}}
+                    <br>
+                    <br>
+                    <b>TECPoints:</b> {{TECPoints}} -->
+                </p>
+            </span>
+        </span>
+        <div class="postContainer">
+            <app-group-feed *ngIf="groupId != undefined" [groupId]="groupId"></app-group-feed>
+        </div>
+    </div>
+    <div class="TT">
+        Jimmy er bare ikke sej!
+        <br>
+        <button routerLink="/groupSelect">Groups </button>
+    </div>
+</div>

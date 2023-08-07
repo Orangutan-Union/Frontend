@@ -47,6 +47,8 @@ export class ChatSelectComponent extends Unsub implements OnInit {
 
   selectChat(id: number) {
     this.chatService.getChatOnId(id).pipe(takeUntil(this.unsubscribe$)).subscribe(chat => {
+      console.log(chat);
+      
       const chatId = chat.chatId;
       this.joinRoom(chatId);
       this.selectedChatId = chatId;

@@ -12,7 +12,7 @@
                 <app-messages [chat]="selectedChat" [chatList]="chatList"></app-messages>
             </div>
             <div class="textbox">
-                <app-send-message *ngIf="selectedChat != undefined" [inChat]="selectedChat" [chatList]="chatList" (chats)="onMessageSend($event)"></app-send-message>
+                <app-send-message *ngIf="selectedChat != undefined && chatList != undefined" [inChat]="selectedChat" [chatList]="chatList" (chats)="onMessageSend($event)"></app-send-message>
             </div>
         </div>
     </div>

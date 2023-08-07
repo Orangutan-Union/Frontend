@@ -1,0 +1,19 @@
+.groupList {
+    background-color: #f2f2f2;
+    height: auto;
+    width: auto;
+    outline: 1px solid grey;
+}
+
+.groupList > div{
+    display: flex;
+    flex-direction: row;
+    float: left;
+    width: 100%;
+    gap: 5%;
+}
+
+img{
+    width: 50px;
+    border-radius: 50%;
+}
