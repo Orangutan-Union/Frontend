@@ -1,14 +1,20 @@
-<div>
+
+<div id="messages" #myDiv> 
     <div *ngIf="chat != undefined">
         <div class="messageList" *ngFor="let message of chat.messages; let i = index">
-            <div
-                [ngClass]="{'users': message.user.userId == loggedInUser, 'others': message.user.userId != loggedInUser}">
+            <div [ngClass]="{'users': message.user.userId == loggedInUser, 'others': message.user.userId != loggedInUser}">
                 <div *ngIf="i === 0 || chat.messages[i - 1].user.displayName !== message.user.displayName">
-                    <img class="ProfilImg" src="{{message.user.picture.imageUrl}}">
-                    {{message.user.displayName}}</div>
-                <li [ngClass]="getMessageClasses(message, i)">
+                    {{message.user.displayName}}
+
+                </div>
+                <p [ngClass]="getMessageClasses(message, i)">
                     {{message.content}}
-                </li>
+                    {{i}}
+                    {{chat.messages.length-1}}
+                </p>
+                <div *ngIf="i === chat.messages.length-1||chat.messages[i + 1].user.displayName !== message.user.displayName ">
+                    <img class="ProfilImg" src="{{message.user.picture.imageUrl}}">
+                </div>
             </div>
         </div>
     </div>

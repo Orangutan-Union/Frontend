@@ -13,7 +13,6 @@ import { FriendfollowerService } from 'src/app/services/friendfollower.service';
   styleUrls: ['./send-message.component.css']
 })
 export class SendMessageComponent extends Unsub implements OnInit {
-  @Output() chats: EventEmitter<Chat[]> = new EventEmitter<Chat[]>();
   @Input() inChat: Chat = new Chat;
   @Input() chatList: Chat[] = [];
   private socket: Socket;
@@ -29,11 +28,26 @@ export class SendMessageComponent extends Unsub implements OnInit {
 
   ngOnInit(): void {
     this.socket = io('http://localhost:3000');    
+    this.PressEnter()
   }
 
   ngOnChanges(): void {
     this.getBlockedChats();    
   }
+
+  PressEnter(): void{
+    var input = document.getElementById("content")
+
+    input?.addEventListener("keypress", e =>{
+      if(e.key === "Enter" && !e.shiftKey){
+        e.preventDefault();
+        if(this.newMessage.trim() !== ''){
+        this.sendMessage();
+      }
+      }
+    })
+  }
+
 
   getBlockedChats() {
     this.friendFollower.getBlockUserChat(this.inChat.users[0].userId, this.inChat.users[1].userId).pipe(takeUntil(this.unsubscribe$))
@@ -60,8 +74,9 @@ export class SendMessageComponent extends Unsub implements OnInit {
     this.chatService.createMessage(this.message).pipe(takeUntil(this.unsubscribe$)).subscribe(message => {
 
       this.chatList.forEach(chat => {
-        if (chat.chatId == this.inChat.chatId) {
+        if (chat.chatId == this.inChat.chatId) { 
           this.chat = this.chatList[this.index]
+          this.chat.lastMessageSent = message.timeStamp
           this.chatList.splice(this.index, 1)
         }
         this.index++
@@ -69,7 +84,6 @@ export class SendMessageComponent extends Unsub implements OnInit {
       this.index = 0;
 
       this.chatList.unshift(this.chat);
-      this.chats.emit(this.chatList);
     });
     this.newMessage = '';
   }

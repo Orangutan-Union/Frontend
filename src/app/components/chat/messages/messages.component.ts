@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Chat } from 'src/app/models/chat';
 import { Message } from 'src/app/models/message';
 import { ChatService } from 'src/app/services/chat.service';
-import { ChatSelectComponent } from '../chat-select/chat-select.component';
 import { Unsub } from 'src/app/classes/unsub';
 import { takeUntil } from 'rxjs/operators'
 
@@ -19,18 +18,37 @@ export class MessagesComponent extends Unsub implements OnInit {
   userId: number = 0;
   loggedInUser: number = 0;
 
-  constructor(private chatService: ChatService, private chatSelect: ChatSelectComponent) { super(); }
+  constructor(private chatService: ChatService) { super(); }
 
   ngOnInit(): void {
     this.loggedInUser = Number(localStorage.getItem('userid'))
 
-    this.chatService.receiveMessage().pipe(takeUntil(this.unsubscribe$)).subscribe((message: string) => {     
-      var messageSplit = message.split('|')
+    this.chatService.receiveMessage().pipe(takeUntil(this.unsubscribe$)).subscribe((message: string) => {   
+
+      var messageSplit = message.split('|')  
+      var dummyID = messageSplit.pop();
       
+      var dummyMessage: string = ""
+      messageSplit.forEach(e => {
+        if (messageSplit.length > 1){
+          if(messageSplit[messageSplit.length-1] === e){
+            dummyMessage += e
+          }
+          else{
+            dummyMessage += e + "|"
+          }
+        }
+        else{
+            dummyMessage += e
+          } 
+      });
+
       this.chat.users.forEach(user => {
-        if (user.userId == Number(messageSplit[1])) {
-          const newMessage = new Message();
-          newMessage.content = messageSplit[0];
+        if (user.userId == Number(dummyID)) {
+          
+          const newMessage = new Message();          
+          newMessage.content = dummyMessage;
+
           newMessage.user = user;
           
           newMessage.user.picture = user.picture;
@@ -39,9 +57,6 @@ export class MessagesComponent extends Unsub implements OnInit {
       });
       window.scroll(0, document.documentElement.scrollHeight)
     });
-  }
-
-  ngOnChanges(): void {
   }
 
   getMessageClasses(message: Message, index: number) {
@@ -55,11 +70,14 @@ export class MessagesComponent extends Unsub implements OnInit {
     if ((isFirstMessage && isLastDifferentUser) || (isLastMessage && isFirstDifferentUser)
       || (isFirstDifferentUser && isLastDifferentUser) || (isFirstMessage && isLastMessage)) {
       classes.push('onlyMessage');
-    } else if (isFirstMessage || isFirstDifferentUser) {
+    } 
+    else if (isFirstMessage || isFirstDifferentUser) {
       classes.push('firstMessage');
-    } else if (isLastMessage || isLastDifferentUser) {
+    } 
+    else if (isLastMessage || isLastDifferentUser) {
       classes.push('lastMessage');
-    } else if (isFirstDifferentUser || isLastDifferentUser) {
+    } 
+    else if (isFirstDifferentUser || isLastDifferentUser) {
       classes.push('middleMessage');
     }
   

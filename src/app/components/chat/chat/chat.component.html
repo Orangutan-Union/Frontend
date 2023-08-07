@@ -1,19 +1,21 @@
 <!-- <app-nav-bar></app-nav-bar> -->
 <div class="container">
     <div class="chatColumn">
-        <app-chat-select (selectedChat)="onChatSelected($event)" (chatList)="onChatList($event)" [inChats]="chats"></app-chat-select>
+        <app-chat-select (selectedChat)="onChatSelected($event)" (chatList)="onChatList($event)" [createChatBool]="createChatBool"></app-chat-select>
+        <button class="CreateChat" (click)="createChatBoolChange()" >	<mat-icon style="color: white;">add</mat-icon></button>
     </div>
     <div class="messageColumn">
         <div class="messageColumnRows">
             <div class="settings">
-                <app-chat-settings-bar [chat]="selectedChat" [chatList]="chatList" ></app-chat-settings-bar>
+                <app-chat-settings-bar  [chat]="selectedChat" [chatList]="chatList" ></app-chat-settings-bar>
             </div>
-            <div class="messages" >
-                <app-messages [chat]="selectedChat" [chatList]="chatList"></app-messages>
+            <div class="messages" id="messages" >
+                <app-messages autofocus #MyDiv [chat]="selectedChat" [chatList]="chatList"></app-messages>
             </div>
             <div class="textbox">
-                <app-send-message *ngIf="selectedChat != undefined" [inChat]="selectedChat" [chatList]="chatList" (chats)="onMessageSend($event)"></app-send-message>
+                <app-send-message *ngIf="selectedChat != undefined" [inChat]="selectedChat" [chatList]="chatList"></app-send-message>
             </div>
         </div>
     </div>
 </div>
+

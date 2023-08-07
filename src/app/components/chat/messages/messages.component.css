@@ -11,24 +11,18 @@
 .users {
     float: right;
     width: 52.5%;
+    display: flex;
+}
+.users > div > img{
+    float: right;
 }
 
 .usersMessages {
-    background-color: lawngreen;
+    background-color: rgb(57, 103, 231);
 }
 
-.usersMessages.firstMessage {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.usersMessages.lastMessage {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.usersMessages.onlyMessage {
-    border-radius: 10px;
+.usersMessages {
+    border-radius: 5px;
 }
 
 .others {
@@ -37,20 +31,18 @@
 }
 
 .othersMessages {
-
-    background-color: red;
+    background-color: rgba(81, 98, 143, 0.281);
 }
 
-.othersMessages.firstMessage {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+p{
+    color: white;
+    width: 100%;
+    margin: 0;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
-.othersMessages.lastMessage {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.othersMessages.onlyMessage {
-    border-radius: 10px;
+.othersMessages {
+    border-radius: 5px;
 }
