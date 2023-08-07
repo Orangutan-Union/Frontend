@@ -1,7 +1,7 @@
 <div *ngIf="userFriends.length > 0" class="row">
-    <h2 style="text-align: center; font-weight: bold; text-decoration: underline;">Friends</h2>
+    <h2 class="popup-button" (click)="openDialog()">Friends</h2>
     <div>
-        <div class="column" *ngFor="let user of userFriends; let i = index">
+        <div class="column" *ngFor="let user of userFriends.slice(0, 8); let i = index">
                 <img class="image hover-shadow cursor" src="{{user.picture.imageUrl}}" routerLink="/visitingProfil/{{user.userId}}">
         </div>
     </div>

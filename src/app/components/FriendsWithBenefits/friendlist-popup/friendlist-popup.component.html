@@ -1,0 +1,18 @@
+<div class="popup" #myId style="overflow: hidden;">
+    <div mat-dialog-title>
+        <h1 style="text-align: center;margin-bottom: 0;">Friends</h1>
+    </div>
+    <mat-dialog-content style="overflow-y: auto;">
+        <div *ngFor="let friend of friends">
+            <div class="container">
+                <span class="row">
+                    <img class="profile-pic" src="{{friend.picture.imageUrl}}">
+                    <p mat-dialog-close (click)="navigate(friend.userId)" class="friend-name">{{friend.displayName}}</p>
+                </span>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions style="justify-content: space-around;">
+        <button mat-dialog-close="true">Close</button>
+    </mat-dialog-actions>
+</div>

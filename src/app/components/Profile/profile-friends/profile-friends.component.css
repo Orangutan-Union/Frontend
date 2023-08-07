@@ -20,3 +20,14 @@
     cursor: pointer;
     outline: 1px solid black;
 }
+
+.popup-button{
+    text-align: center;
+    font-weight: bold;
+    /* text-decoration: underline; */
+    cursor: pointer;
+}
+
+.popup-button:hover{
+    text-decoration: underline;
+}

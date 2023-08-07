@@ -47,6 +47,7 @@ import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { ProfileFriendsComponent } from './components/Profile/profile-friends/profile-friends.component';
+import { FriendlistPopupComponent } from './components/FriendsWithBenefits/friendlist-popup/friendlist-popup.component';
 
 // ./components/feeds/post-feed-componentsFolder/post-toolbar/post-toolbar.component
 export function tokenGetter() {
@@ -87,6 +88,7 @@ export function tokenGetter() {
     ProfileImagesComponent,
     GroupHomeComponent,
     ProfileFriendsComponent,
+    FriendlistPopupComponent,
   ],
   imports: [
     BrowserModule,

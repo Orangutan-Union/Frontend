@@ -1,7 +1,9 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FriendFollower } from 'src/app/models/friendfollower';
 import { User } from 'src/app/models/user';
+import { FriendlistPopupComponent } from '../../FriendsWithBenefits/friendlist-popup/friendlist-popup.component';
 
 @Component({
   selector: 'app-profile-friends',
@@ -13,7 +15,7 @@ export class ProfileFriendsComponent implements OnInit {
   @Input() friendFollowers: FriendFollower[];
   @Input() otherFriendFollowers: FriendFollower[] = [];
   userFriends: User[] = [];
-  constructor(private route: Router) { }
+  constructor(private route: Router, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.gatherUsers();
@@ -46,6 +48,13 @@ export class ProfileFriendsComponent implements OnInit {
 
   goToUserProfile(id: number){
     this.route.navigate(['/visitingProfil/', id])
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(FriendlistPopupComponent, {
+      autoFocus: false,
+      data: { friends: this.userFriends }
+    });
   }
 
 }
