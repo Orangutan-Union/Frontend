@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { Unsub } from 'src/app/classes/unsub';
 import { Picture } from 'src/app/models/picture';
@@ -19,15 +19,21 @@ export class ProfileImagesComponent extends Unsub implements OnInit {
   constructor(private picService: PictureService) { super(); }
 
   ngOnInit(): void {
-    this.getPostPictures();
-    console.log('USERID HERE',this.userId);
-    
+    this.getPostPictures(this.userId);
   }
 
-  getPostPictures(){
-    this.picService.getUserPostsPictures(this.userId).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
+  ngOnChanges(changes: SimpleChanges){
+    if (!changes['userId'].firstChange) {
+      this.getPostPictures(this.userId);
+    }
+  }
+
+  getPostPictures(id: number){
+    this.pictures = [];
+    this.previewPictures = [];
+    this.actualPictures = [];
+    this.picService.getUserPostsPictures(id).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       this.pictures = res;
-      console.log('getUserPostsPictures',this.pictures);
       this.filterFiles();
     })
   }
@@ -46,7 +52,7 @@ export class ProfileImagesComponent extends Unsub implements OnInit {
     }
     else{
       this.previewPictures = this.actualPictures;
-    }
+    }    
   }
 
   ngAfterViewInit(){
