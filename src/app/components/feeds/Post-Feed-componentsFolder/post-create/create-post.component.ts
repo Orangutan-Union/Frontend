@@ -20,7 +20,7 @@ export class CreatePostComponent extends Unsub implements OnInit {
   constructor(private feedService: FeedService) { super(); }
 
   ngOnInit(): void {
-    console.log(this.posts);
+    
   }
 
   onSubmit(): void {

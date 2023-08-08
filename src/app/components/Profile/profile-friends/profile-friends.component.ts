@@ -42,7 +42,6 @@ export class ProfileFriendsComponent implements OnInit {
       }
     }
     this.userFriends.sort((a, b) => a.displayName.localeCompare(b.displayName));
-    console.log('userFriends',this.userFriends);
     
   }
 

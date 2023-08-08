@@ -2,7 +2,7 @@
     <h2 class="popup-button" (click)="openDialog()">Friends</h2>
     <div>
         <div class="column" *ngFor="let user of userFriends.slice(0, 8); let i = index">
-                <img class="image hover-shadow cursor" src="{{user.picture.imageUrl}}" routerLink="/visitingProfil/{{user.userId}}">
+                <img matTooltip="{{user.displayName}}" class="image hover-shadow cursor" src="{{user.picture.imageUrl}}" routerLink="/visitingProfil/{{user.userId}}">
         </div>
     </div>
 </div>
