@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs';
 import { Like } from 'src/app/models/addLike';
@@ -22,12 +22,23 @@ export class GroupFeedComponent extends Unsub implements OnInit {
   commentCounter: number[] = [];
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
+  TECPoints: number = 0
+  postCount: number = 0
+
   constructor(private feedService: FeedService, private route: Router) { super(); }
 
-  ngOnInit(): void {    
-    this.getGroupFeed();    
-    console.log(this.groupId);
-    
+  ngOnInit(): void {
+    this.getGroupFeed();
+  }
+
+  TecPointsCount(p: Post[]) {
+    p.forEach(element => {
+      element.likes.forEach(element => {
+        if (element.isLiked) { this.TECPoints += 1 }
+        if (element.isDisliked) { this.TECPoints -= 1 }
+      })
+    });
+    this.feedService.getPoints(this.postCount, this.TECPoints)
   }
 
   likePost(post: Post, i: number): void {
@@ -79,8 +90,8 @@ export class GroupFeedComponent extends Unsub implements OnInit {
       if (element.userId == this.like.userId && element.postId == post.postId) {
         this.like.isDisliked = !element.isDisliked
         element.isDisliked = this.like.isDisliked
-        this.like.isLiked = element.isLiked;    
-        element.isLiked = false    
+        this.like.isLiked = element.isLiked;
+        element.isLiked = false
       }
     });
 
@@ -92,7 +103,7 @@ export class GroupFeedComponent extends Unsub implements OnInit {
       })
       return;
     }
-    
+
     if (this.like.isLiked == true && this.likeCounter[i] != 0) {
       this.likeCounter[i]--
       this.like.isLiked = false;
@@ -125,6 +136,8 @@ export class GroupFeedComponent extends Unsub implements OnInit {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
+      this.postCount = this.posts.length
+      this.TecPointsCount(data)
     })
   }
 
@@ -136,7 +149,7 @@ export class GroupFeedComponent extends Unsub implements OnInit {
       });
       this.likeCounter.push(this.likeCount);
       this.dislikeCounter.push(this.dislikeCount);
-      
+
       post.comments.forEach(comment => {
         this.commentCount++
       });
