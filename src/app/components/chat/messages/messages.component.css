@@ -8,7 +8,13 @@
 
 .messageContent{
     display: grid;
-    grid-template-columns: 90% 1000px;
+    grid-template-columns: auto 50px;
+}
+
+.messageContentOthers{
+    display: grid;
+    grid-template-columns: 50px auto;
+    
 }
 
 .users {
@@ -30,12 +36,11 @@
 
 .usersMessages {
     border-radius: 15px;
-    margin-right: 45px;
 }
 
 .others {
     float: left;
-    width: 52.5%;
+    /* width: 52.5%; */
 }
 
 .othersMessages {

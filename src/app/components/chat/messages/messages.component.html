@@ -1,24 +1,35 @@
-<div id="messages" #myDiv> 
+<div id="messages" #myDiv > 
     <div *ngIf="chat != undefined">
         <div class="messageList" *ngFor="let message of chat.messages; let i = index">
             <div [ngClass]="{'users': message.user.userId == loggedInUser, 'others': message.user.userId != loggedInUser}">
-                <!-- <div *ngIf="i === 0 || chat.messages[i - 1].user.displayName !== message.user.displayName">
+                <div *ngIf="i === 0 || chat.messages[i - 1].user.displayName !== message.user.displayName" style="margin-right: 50px;">
                     {{message.user.displayName}}
-                </div> -->
+                </div>
 
-                <div class="messageContent">
+                <div *ngIf="message.user.userId == loggedInUser; else Jimmy" class='messageContent' >
                     <p [ngClass]="getMessageClasses(message, i)">
                         {{message.content}}
                     </p>
                     <div>
-                        <!-- hejsa -->
                         <img *ngIf="i === chat.messages.length-1||chat.messages[i + 1].user.displayName !== message.user.displayName " class="ProfilImg" src="{{message.user.picture.imageUrl}}">
                     </div>
                 </div>
+
+                <ng-template  #Jimmy>
+                    <div class="messageContentOthers">
+                        <div>
+                            <img *ngIf="i === chat.messages.length-1||chat.messages[i + 1].user.displayName !== message.user.displayName " class="ProfilImg" src="{{message.user.picture.imageUrl}}">
+                        </div>
+                        <p [ngClass]="getMessageClasses(message, i)">
+                            {{message.content}}
+                        </p>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>
 </div>
+
 
 
 
