@@ -1,44 +1,83 @@
 .container {
     display: grid;
-    grid-template-columns: minmax(auto, 25%) 75%;
+    grid-template-columns: minmax(270px, 25%) 75%;
     grid-gap: 10px;
     overflow: hidden;
     height: 89vh;
   }
   
-  .chatColumn {
-    outline: 1px solid black;
-    display: grid;
-    grid-auto-rows: minmax(100px, auto);
-    overflow-y: auto;
-  }
-  
-  .messageColumn {
-    display: grid;
-    grid-auto-rows: minmax(100px, auto);
-    width: 90%;
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  .messageColumnRows {
-    display: grid;
-    grid-template-rows: 1fr auto;
-  }
+.chatColumn {
+  position: relative;
+  margin-left: 5px;
+  /* outline: 1px solid black; */
+  border-right: solid black 1px;
+  display: grid;
+  grid-auto-rows: minmax(100px, auto);
+  overflow-y: auto;
+}
 
-  .settings {
-    height: 35px;
-    overflow: hidden;
+.messageColumn {
+  display: grid;
+  grid-auto-rows: minmax(100px, auto);
+  /* width: 90%; */
+  height: 100%;
+  overflow: hidden;
+}
+
+.messageColumnRows {
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.settings {
+  height: 35px;
+  overflow: hidden;
+}
+
+.messages {
+  overflow-y: auto;
+  height: calc(100%);
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column-reverse;
+} 
+
+.textBox {
+  position: sticky;
+  bottom: 0;
+}
+
+
+@media only screen and (max-width: 800px) {
+  .chatColumn{
+    display: none;
+  }    
+  .container {
+    display: grid;
+    grid-template-columns: 100%;
   }
+}
+.CreateChat{
+  border-radius: 50%;
+  border: none;
+  background-color: deepskyblue;
+  height: 50px;
+  min-height: 40px;
+  width: 50px;
+  min-width: 40px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  border: 1px solid grey;
+}
+
+.CreateChat:hover{
+  cursor: pointer;
+  width: 55px;
+  height: 55px;
+  min-width: 45px;
+  min-height: 45px;
+  bottom: 7.5px;
+  left: 7.5px;
   
-  .messages {
-    overflow-y: auto;
-    height: calc(30px -100% - 30px);
-    scroll-behavior: smooth;
-  } 
-  
-  .textBox {
-    position: sticky;
-    bottom: 0;
-  }
-  
+  box-shadow: 0 0 0 5px  rgba(0, 0, 0, 0.1);
+}

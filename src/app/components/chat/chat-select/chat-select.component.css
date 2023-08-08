@@ -1,8 +1,11 @@
 .chatList {
-    background-color: #f2f2f2;
+    position: relative;
+    /* background-color: #f2f2f2; */
     height: auto;
     width: auto;
-    outline: 1px solid grey;
+    /* outline: 1px solid grey; */
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .chatList > div{
@@ -11,6 +14,11 @@
     float: left;
     width: 100%;
     gap: 5%;
+    align-items: center;
+}
+
+.chatList > div > p{
+    /* margin-top: 20px; */
 }
 
 .chat {
@@ -18,7 +26,13 @@
 }
 
 .selected {
-    background-color: #59deff;
+    padding: 4px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: #d3d7d8;
     /* Set the background color for the selected chat */
 }
 
@@ -29,7 +43,36 @@ textarea {
     min-height: 30px;
 }
 
-img{
+img{    
+    height: 50px;
     width: 50px;
+    min-height: 50px;
+    min-width: 50px;
     border-radius: 50%;
+}
+
+
+.Texts{
+    margin: 0;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.privateOrGroup{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 0.5rem;
+}
+
+.lastMessage{
+    position: absolute;
+    right: 10px;
+    top: 25px;
+    font-size: 0.6rem;
+}
+
+.chatSelect:hover{
+    background-color: #d3d7d8;
+    border-radius: 10px;
 }
