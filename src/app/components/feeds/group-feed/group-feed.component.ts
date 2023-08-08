@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { takeUntil } from 'rxjs';
 import { Like } from 'src/app/models/addLike';
 import { Post } from 'src/app/models/post';
 import { FeedService } from 'src/app/services/feed.service';
-import { takeUntil } from 'rxjs/operators'
 import { Unsub } from 'src/app/classes/unsub';
 
 @Component({
-  selector: 'app-follower-feed',
-  templateUrl: './follower-feed.component.html',
-  styleUrls: ['./follower-feed.component.css']
+  selector: 'app-group-feed',
+  templateUrl: './group-feed.component.html',
+  styleUrls: ['./group-feed.component.css']
 })
-export class FollowerFeedComponent extends Unsub implements OnInit {
+export class GroupFeedComponent extends Unsub implements OnInit {
+  @Input() groupId: number;
   posts: Post[] = [];
   like: Like = new Like;
   userId: number = 0;
@@ -21,10 +22,23 @@ export class FollowerFeedComponent extends Unsub implements OnInit {
   commentCounter: number[] = [];
   likeCounter: number[] = [];
   dislikeCounter: number[] = [];
+  TECPoints: number = 0
+  postCount: number = 0
+
   constructor(private feedService: FeedService, private route: Router) { super(); }
 
   ngOnInit(): void {
-    this.getFollowerFeed();    
+    this.getGroupFeed();
+  }
+
+  TecPointsCount(p: Post[]) {
+    p.forEach(element => {
+      element.likes.forEach(element => {
+        if (element.isLiked) { this.TECPoints += 1 }
+        if (element.isDisliked) { this.TECPoints -= 1 }
+      })
+    });
+    this.feedService.getPoints(this.postCount, this.TECPoints)
   }
 
   likePost(post: Post, i: number): void {
@@ -45,7 +59,7 @@ export class FollowerFeedComponent extends Unsub implements OnInit {
       this.likeCounter[i]++
       this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         console.log(data)
-        this.getFollowerFeed();
+        this.getGroupFeed();
       })
       return;
     }
@@ -76,8 +90,8 @@ export class FollowerFeedComponent extends Unsub implements OnInit {
       if (element.userId == this.like.userId && element.postId == post.postId) {
         this.like.isDisliked = !element.isDisliked
         element.isDisliked = this.like.isDisliked
-        this.like.isLiked = element.isLiked;    
-        element.isLiked = false    
+        this.like.isLiked = element.isLiked;
+        element.isLiked = false
       }
     });
 
@@ -85,15 +99,15 @@ export class FollowerFeedComponent extends Unsub implements OnInit {
       this.dislikeCounter[i]++
       this.feedService.addLike(this.like).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
         console.log(data)
-        this.getFollowerFeed();
+        this.getGroupFeed();
       })
       return;
     }
-    
+
     if (this.like.isLiked == true && this.likeCounter[i] != 0) {
       this.likeCounter[i]--
       this.like.isLiked = false;
-    }   
+    }
 
     if (this.like.isDisliked == true) {
       this.dislikeCounter[i]++
@@ -112,16 +126,18 @@ export class FollowerFeedComponent extends Unsub implements OnInit {
     this.route.navigate(['/fullPost/', id])
   }
 
-  goToGroup(groupId: number) {
-    this.route.navigate([['/groupHome/', groupId]])
+  goToGroup(id: number) {
+    this.route.navigate([])
   }
 
-  getFollowerFeed(): void {
+  getGroupFeed(): void {
     this.userId = Number(localStorage.getItem('userid'));
-    this.feedService.getUsersFollowerFeed(this.userId).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
+    this.feedService.getGroupPosts(this.groupId).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       this.posts = data;
       this.counter(this.posts);
       console.log(this.posts);
+      this.postCount = this.posts.length
+      this.TecPointsCount(data)
     })
   }
 
@@ -133,7 +149,7 @@ export class FollowerFeedComponent extends Unsub implements OnInit {
       });
       this.likeCounter.push(this.likeCount);
       this.dislikeCounter.push(this.dislikeCount);
-      
+
       post.comments.forEach(comment => {
         this.commentCount++
       });
@@ -144,4 +160,6 @@ export class FollowerFeedComponent extends Unsub implements OnInit {
       this.commentCount = 0;
     });
   }
+
+
 }

@@ -39,6 +39,10 @@ export class FeedService {
     return this.http.get<Post>(this.baseApiUrl + 'Post/' + id)
   }
 
+  getGroupPosts(id: number): Observable<Post[]> {
+    return this.http.get<Post[]>(this.baseApiUrl + 'Post/groupPosts' + id);
+  }
+
   getUserPosts(id: number): Observable<Post[]> {
     return this.http.get<Post[]>(this.baseApiUrl + 'Post/user/' + id);
   }

@@ -25,10 +25,10 @@ export class ProfilComponent extends Unsub implements OnInit {
 
   ngOnInit(): void {
     this.getUser()
-    this.feedService.TECPoints.subscribe(data =>{
+    this.feedService.TECPoints.pipe(takeUntil(this.unsubscribe$)).subscribe(data =>{
       this.TECPoints = data
     })
-    this.feedService.postCount.subscribe(data => {
+    this.feedService.postCount.pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       this.postCount = data
     })    
   }
@@ -42,7 +42,10 @@ export class ProfilComponent extends Unsub implements OnInit {
           this.postImages = pics;
         })
       })
-    });
+    });    
+  }
+
+  goToGroupSelect() {
     
   }
 

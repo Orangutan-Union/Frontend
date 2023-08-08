@@ -150,8 +150,8 @@ export class FullPostComponent extends Unsub implements OnInit {
       })
   }
 
-  goToGroup(id: number) {
-    this.route.navigate([])
+  goToGroup(groupId: number) {
+    this.route.navigate([['/groupHome/', groupId]])
   }
 
   getFullPost(id: number): void {

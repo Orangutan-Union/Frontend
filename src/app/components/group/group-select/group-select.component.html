@@ -1,0 +1,17 @@
+<button (click)="createGroupBoolChange()" >Create Group</button>
+<div *ngIf="createGroupBool">
+    <form (ngSubmit)="createGroup()" #myForm="ngForm">
+        <textarea autosize placeholder="Group Name" type="text" id="groupName" name="groupName" #userName="ngModel"
+        [(ngModel)]="newGroup.groupName" required>
+    </textarea>
+    <br>
+    <button style="float: right;" type="submit" mat-raised-button color="primary"
+    [disabled]="myForm.invalid || newGroup.groupName.trim() == ''">Create</button>
+</form>
+</div>
+<div class="groupList" *ngFor="let group of groups">
+    <div *ngIf="group.groupId != null" (click)="selectGroup(group.groupId)" >
+        <img src="{{group.picture.imageUrl}}">
+        <h1>{{group.groupName}}</h1>
+    </div>
+</div>
