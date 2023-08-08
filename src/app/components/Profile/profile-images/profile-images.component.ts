@@ -1,23 +1,44 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { takeUntil } from 'rxjs';
+import { Unsub } from 'src/app/classes/unsub';
 import { Picture } from 'src/app/models/picture';
+import { PictureService } from 'src/app/services/picture.service';
 
 @Component({
   selector: 'app-profile-images',
   templateUrl: './profile-images.component.html',
   styleUrls: ['./profile-images.component.css']
 })
-export class ProfileImagesComponent implements OnInit {
+export class ProfileImagesComponent extends Unsub implements OnInit {
 
-  @Input() pictures: Picture[] = [];
+  @Input() userId: number;
+  pictures: Picture[] = [];
   previewPictures: Picture[] = [];
   imageExtensions: string[] = ['jpg','png','jpeg','gif'];
   actualPictures: Picture[] = [];
-  constructor() { }
+  constructor(private picService: PictureService) { super(); }
 
-  ngOnInit(): void {    
-    console.log('before',this.previewPictures);
-    
+  ngOnInit(): void {
+    this.getPostPictures(this.userId);
+  }
 
+  ngOnChanges(changes: SimpleChanges){
+    if (!changes['userId'].firstChange) {
+      this.getPostPictures(this.userId);
+    }
+  }
+
+  getPostPictures(id: number){
+    this.pictures = [];
+    this.previewPictures = [];
+    this.actualPictures = [];
+    this.picService.getUserPostsPictures(id).pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
+      this.pictures = res;
+      this.filterFiles();
+    })
+  }
+
+  filterFiles(){
     this.pictures.forEach(x => {
       // Check if extension is an image
       let ext = x.imageUrl.split('.').pop();
@@ -29,6 +50,9 @@ export class ProfileImagesComponent implements OnInit {
     if (this.actualPictures.length > 4) {
       this.previewPictures = this.actualPictures.slice(0, 4);      
     }
+    else{
+      this.previewPictures = this.actualPictures;
+    }    
   }
 
   ngAfterViewInit(){

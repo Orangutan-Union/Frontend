@@ -38,7 +38,6 @@ export class ProfilComponent extends Unsub implements OnInit {
     this.authService.getUserById(this.userId).pipe(takeUntil(this.unsubscribe$)).subscribe({
       next: (usr => {
         this.user = usr;
-        console.log(this.user);
         this.picService.previewPictures.pipe(takeUntil(this.unsubscribe$)).subscribe(pics => {
           this.postImages = pics;
         })

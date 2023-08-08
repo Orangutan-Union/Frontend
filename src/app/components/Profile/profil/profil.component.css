@@ -12,10 +12,14 @@
 .OuterLayer{
     display: grid;
     margin: 5px;
-    grid-template-columns: 25% 50% 25%;
+    grid-template-columns: 20% 60% 20%;
 }
 
 .image-preview{
+    margin: 80% auto;
+}
+
+.TT{
     margin: 80% auto;
 }
 

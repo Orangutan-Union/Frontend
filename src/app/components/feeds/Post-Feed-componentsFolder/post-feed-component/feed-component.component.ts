@@ -19,8 +19,6 @@ export class FeedComponentComponent implements OnInit {
   ngOnInit(): void {
     if (this.posts.pictures.length > 0) {
       this.fileExtension = this.posts.pictures[0].imageUrl.split('.').pop();
-      console.log(this.fileExtension);
-      
     }
   }
 

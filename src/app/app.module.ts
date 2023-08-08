@@ -7,6 +7,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -46,6 +47,8 @@ import {VgCoreModule} from '@videogular/ngx-videogular/core';
 import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
+import { ProfileFriendsComponent } from './components/Profile/profile-friends/profile-friends.component';
+import { FriendlistPopupComponent } from './components/FriendsWithBenefits/friendlist-popup/friendlist-popup.component';
 import { GroupSelectComponent } from './components/group/group-select/group-select.component';
 import { GroupFeedComponent } from './components/feeds/group-feed/group-feed.component';
 
@@ -87,6 +90,8 @@ export function tokenGetter() {
     LeavePopupComponent,
     ProfileImagesComponent,
     GroupHomeComponent,
+    ProfileFriendsComponent,
+    FriendlistPopupComponent,
     GroupSelectComponent,
     GroupFeedComponent,
   ],
@@ -103,6 +108,7 @@ export function tokenGetter() {
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
+    MatTooltipModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

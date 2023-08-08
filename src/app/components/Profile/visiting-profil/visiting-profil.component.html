@@ -5,7 +5,7 @@
 
 <div class="OuterLayer" *ngIf="!isBlocked">
     <div class="image-preview">
-        <app-profile-images *ngIf="postImages.length > 0" [pictures]="postImages"></app-profile-images>
+        <app-profile-images *ngIf="userId !== 0 || userId !== undefined" [userId]="userId"></app-profile-images>
     </div>
     <div class="profilFeed">
         <div>
@@ -41,6 +41,9 @@
         </div>
     </div>
     <div class="TT">
-        Jimmy er bare ikke sej!
+        <div class="friends-preview" *ngIf="user.userFriendFollowers.length > 0 || user.otherUserFriendFollowers.length > 0">
+            <app-profile-friends [friendFollowers]="user.userFriendFollowers"
+                [otherFriendFollowers]="user.otherUserFriendFollowers"></app-profile-friends>
+        </div>
     </div>
 </div>

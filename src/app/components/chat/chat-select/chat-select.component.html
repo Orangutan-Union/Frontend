@@ -1,4 +1,3 @@
-<button (click)="createChatBoolChange()" >Create Chat</button>
 <div *ngIf="createChatBool">
     <form (ngSubmit)="createChat()" #myForm="ngForm">
         <textarea autosize placeholder="Chat Name" type="text" id="chatName" name="chatName" #userName="ngModel"
@@ -9,10 +8,48 @@
     [disabled]="myForm.invalid || newChat.chatName.trim() == ''">Create</button>
 </form>
 </div>
+
 <div class="chatList" *ngFor="let chat of chats">
-    <div [class.selected]="chat.chatId === selectedChatId" (click)="selectChat(chat.chatId)" >
-        <img *ngIf="chat.users.length > 2" src="../../../../assets/StockGroupImage.png" alt="Stock image of the groupchat!">
-        <img *ngIf="chat.users[0].picture.imageUrl && chat.users.length === 2" src="{{chat.users[0].picture.imageUrl}}" alt="">
-        <h1>{{chat.chatName}}</h1>
+    <div [class.chatSelect]="chat.chatId !== selectedChatId" [class.selected]="chat.chatId === selectedChatId" (click)="selectChat(chat.chatId)" >
+        
+        <!-- valgmulighederne for hvilke billed der skal vælges -->
+        <img *ngIf="chat.users.length > 1 && !chat.isPrivate" src="../../../../assets/StockGroupImage.png" alt="Stock image of the groupchat! with more than 2 people in">
+
+        <img *ngIf="userIdChecker != chat.users[0].userId && chat.isPrivate; else privateImage" src="{{chat.users[0].picture.imageUrl}}" alt="Users profil picture, for private chat">
+        
+        <ng-template #privateImage >
+            <img *ngIf="chat.isPrivate" src="{{chat.users[1].picture.imageUrl}}" alt="Users profil picture, for private chat">
+        </ng-template>
+
+        <!-- valgmulighed for hvilke tekst der skal vælges -->
+        <p class="Texts" *ngIf="!chat.isPrivate; else privateUserName">{{chat.chatName}}</p> 
+
+        <ng-template #privateUserName>
+            <p  *ngIf="userIdChecker != chat.users[0].userId && chat.isPrivate && chat.users.length === 2; else privateName;" class="Texts" >{{chat.users[0].displayName}}</p>        
+        </ng-template>
+
+        <ng-template #privateName >
+            <p *ngIf="chat.isPrivate" class="Texts" >{{chat.users[1].displayName}}</p>        
+        </ng-template>
+
+        <ng-template #groupName>
+            <p>{{chat.chatName}}</p>
+        </ng-template>
+
+        <p class="lastMessage" *ngIf="(chat.lastMessageSent | date: 'shortDate':'dk') === (time| date: 'shortDate':'dk') else lastMessageDate">{{chat.lastMessageSent | date: 'HH:mm'}}</p>
+   
+        <ng-template #lastMessageDate>
+            <p class="lastMessage"> {{chat.lastMessageSent | date: 'd/MM/yy'}}</p>
+        </ng-template>
+
+        <p class="privateOrGroup" *ngIf="chat.isPrivate; else Group">Private chat</p>
+
+        <ng-template #Group>
+            <p class="privateOrGroup">
+                Group chat
+            </p>
+        </ng-template>
     </div>
 </div>
+
+<!-- <button (click)="createChatBoolChange()" >Create Chat</button> -->
