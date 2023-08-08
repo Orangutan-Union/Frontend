@@ -21,16 +21,19 @@
                         <br>
                         <b>TECPoints:</b> {{TECPoints}}
                     </p>
-                    <button *ngIf="!sentRequestPending && !friends && !hasBlocked && !receivedRequestPending"
-                        (click)="sendFriendRequest()">Send Friend Request</button>
-                    <button *ngIf="sentRequestPending" (click)="cancelFriendRequest()">Cancel Friend Request</button>
-                    <button *ngIf="receivedRequestPending" (click)="acceptFriendRequest()">Accept Friend
-                        Request</button>
-                    <button *ngIf="!friends && !following && !hasBlocked" (click)="followUser()">Follow</button>
-                    <button *ngIf="!friends && following" (click)="unfollowUser()">Unfollow</button>
-                    <button *ngIf="!hasBlocked" (click)="blockUser()">Block</button>
-                    <button *ngIf="hasBlocked" (click)="unblockUser()">Unblock</button>
-                    <button *ngIf="friends" (click)="unfriendUser()">Unfriend</button>
+                    <div *ngIf="currentUserId !== userId">
+                        <button *ngIf="!sentRequestPending && !friends && !hasBlocked && !receivedRequestPending"
+                            (click)="sendFriendRequest()">Send Friend Request</button>
+                        <button *ngIf="sentRequestPending" (click)="cancelFriendRequest()">Cancel Friend
+                            Request</button>
+                        <button *ngIf="receivedRequestPending" (click)="acceptFriendRequest()">Accept Friend
+                            Request</button>
+                        <button *ngIf="!friends && !following && !hasBlocked" (click)="followUser()">Follow</button>
+                        <button *ngIf="!friends && following" (click)="unfollowUser()">Unfollow</button>
+                        <button *ngIf="!hasBlocked" (click)="blockUser()">Block</button>
+                        <button *ngIf="hasBlocked" (click)="unblockUser()">Unblock</button>
+                        <button *ngIf="friends" (click)="unfriendUser()">Unfriend</button>
+                    </div>
                 </span>
             </span>
             <div class="postContainer">
@@ -41,7 +44,8 @@
         </div>
     </div>
     <div class="TT">
-        <div class="friends-preview" *ngIf="user.userFriendFollowers.length > 0 || user.otherUserFriendFollowers.length > 0">
+        <div class="friends-preview"
+            *ngIf="user.userFriendFollowers.length > 0 || user.otherUserFriendFollowers.length > 0">
             <app-profile-friends [friendFollowers]="user.userFriendFollowers"
                 [otherFriendFollowers]="user.otherUserFriendFollowers"></app-profile-friends>
         </div>

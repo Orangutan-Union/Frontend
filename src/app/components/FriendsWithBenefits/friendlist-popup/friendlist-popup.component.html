@@ -1,8 +1,8 @@
-<div class="popup" #myId style="overflow: hidden;">
+<div class="popup" #myId style="overflow-y: hidden">
     <div mat-dialog-title>
         <h1 style="text-align: center;margin-bottom: 0;">Friends</h1>
     </div>
-    <mat-dialog-content style="overflow-y: auto;">
+    <mat-dialog-content style="max-height: 450px;">
         <div *ngFor="let friend of friends">
             <div class="container">
                 <span class="row">

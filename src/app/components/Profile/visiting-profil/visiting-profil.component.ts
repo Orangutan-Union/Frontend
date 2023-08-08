@@ -53,7 +53,8 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
     });
   }
 
-  TecPointsCount(p: Post[]){    
+  TecPointsCount(p: Post[]){   
+    this.TECPoints = 0; 
     p.forEach( element => {      
       element.likes.forEach( element => {
         if(element.isLiked){this.TECPoints += 1}
@@ -154,6 +155,7 @@ export class VisitingProfilComponent extends Unsub implements OnInit {
   }
 
   getUserPosts(id: number): void {
+    this.postCount = 0;
     this.feedService.getUserPosts(id).pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
       this.posts = data;
       this.counter(this.posts);
