@@ -4,17 +4,24 @@
 .messageList {
     height: fit-content;
     margin: 5px;
-    /* display: flex; */
-    flex-direction: column-reverse;
+}
+
+.messageContent{
+    display: grid;
+    grid-template-columns: 90% 1000px;
 }
 
 .users {
     float: right;
-    width: 52.5%;
-    display: flex;
+    /* width: 52.5%; */
+    /* display: flex; */
 }
 .users > div > img{
     float: right;
+}
+
+.ProfilImg{
+    margin-top: 20px;
 }
 
 .usersMessages {
@@ -22,7 +29,8 @@
 }
 
 .usersMessages {
-    border-radius: 5px;
+    border-radius: 15px;
+    margin-right: 45px;
 }
 
 .others {
@@ -38,11 +46,25 @@ p{
     color: white;
     width: 100%;
     margin: 0;
-    padding-left: 5px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 10px;
 }
 
 .othersMessages {
     border-radius: 5px;
+}
+
+.usersMessages.firstMessage {
+    /* border-top-left-radius: 10px; */
+    border-top-right-radius: 10px;
+}
+
+.usersMessages.lastMessage {
+    display: flex;
+    margin-right: 0px;
+    /* border-bottom-left-radius: 10px; */
+    border-bottom-right-radius: 0px;
+}
+
+.usersMessages.onlyMessage {
+    border-radius: 10px;
 }

@@ -19,7 +19,7 @@
 .messageColumn {
   display: grid;
   grid-auto-rows: minmax(100px, auto);
-  width: 90%;
+  /* width: 90%; */
   height: 100%;
   overflow: hidden;
 }
