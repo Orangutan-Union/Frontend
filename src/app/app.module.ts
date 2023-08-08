@@ -49,6 +49,8 @@ import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { ProfileFriendsComponent } from './components/Profile/profile-friends/profile-friends.component';
 import { FriendlistPopupComponent } from './components/FriendsWithBenefits/friendlist-popup/friendlist-popup.component';
+import { GroupSelectComponent } from './components/group/group-select/group-select.component';
+import { GroupFeedComponent } from './components/feeds/group-feed/group-feed.component';
 
 // ./components/feeds/post-feed-componentsFolder/post-toolbar/post-toolbar.component
 export function tokenGetter() {
@@ -90,6 +92,8 @@ export function tokenGetter() {
     GroupHomeComponent,
     ProfileFriendsComponent,
     FriendlistPopupComponent,
+    GroupSelectComponent,
+    GroupFeedComponent,
   ],
   imports: [
     BrowserModule,

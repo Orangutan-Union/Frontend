@@ -112,8 +112,8 @@ export class FriendFeedComponent extends Unsub implements OnInit {
     this.route.navigate(['/fullPost/', id])
   }
 
-  goToGroup(id: number) {
-    this.route.navigate([])
+  goToGroup(groupId: number) {
+    this.route.navigate([['/groupHome/', groupId]])
   }
 
   getFriendFeed(): void {

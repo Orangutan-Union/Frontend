@@ -13,6 +13,7 @@ export class CreatePostComponent extends Unsub implements OnInit {
   post: NewPost = new NewPost
   formData = new FormData();
   file: any;
+  @Input() groupId: number;
   @Input() posts: any[] = [];
   @Input() commentCounter: number[] = [];
   @Input() likeCounter: number[] = [];
@@ -23,19 +24,23 @@ export class CreatePostComponent extends Unsub implements OnInit {
     
   }
 
-  onSubmit(): void {
+  onSubmit(): void {    
     this.post.userId = Number(localStorage.getItem('userid'));
     this.formData.append('user_id', this.post.userId.toString());
     this.formData.append('content', this.post.content);
     this.formData.append('longitude', this.post.longtitude.toString());
     this.formData.append('latitude', this.post.latitude.toString());
-    if (this.post.groupId !== null) {
-      this.formData.append('group_id', this.post.groupId!.toString());
+    console.log(this.groupId);
+    
+    if (this.groupId !== null && this.groupId !== undefined) {
+      this.formData.append('group_id', this.groupId!.toString());
     }
     else {
       this.formData.append('group_id', '');
     }
-
+    console.log(this.formData);
+    
+    
     this.feedService.addPost(this.formData).pipe(takeUntil(this.unsubscribe$)).subscribe(newPost => {
       this.feedService.getFullPost(newPost.postId).pipe(takeUntil(this.unsubscribe$)).subscribe(newPost => {
         this.posts.unshift(newPost);
